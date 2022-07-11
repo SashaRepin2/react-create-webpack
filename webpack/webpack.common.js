@@ -1,38 +1,35 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  mode: "development",
-  entry: ["@babel/polyfill", path.resolve(__dirname, "./src/index.tsx")],
+  entry: [path.resolve(__dirname, "..", "./src/index.tsx")],
+
   output: {
+    path: path.resolve(__dirname, "..", "./build"),
     filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "./build"),
+    clean: true,
   },
+
   resolve: {
     extensions: [".js", ".ts", ".tsx"],
   },
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, "./public/index.html"),
-    }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-    }),
-  ],
+
   optimization: {
     splitChunks: {
       chunks: "all",
     },
   },
-  devServer: {
-    host: "localhost",
-    port: 4200,
-    hot: true,
-    open: true,
-  },
+
+  plugins: [
+    new HTMLWebpackPlugin({
+      template: path.resolve(__dirname, "..", "./public/index.html"),
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+    }),
+  ],
+
   module: {
     rules: [
       { test: /\.css$/, use: [MiniCssExtractPlugin.loader, "css-loader"] },
@@ -41,8 +38,12 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        use: ["file-loader"],
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(png|ico|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
       },
       {
         test: /\.(ts|js)x?$/,
