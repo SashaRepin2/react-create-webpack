@@ -22,7 +22,7 @@ const Task: React.FC<ItemProps> = ({
 }) => {
   return (
     <Draggable draggableId={task.id.toString()} index={index}>
-      {(provided, snapshot) => (
+      {(provided) => (
         <Container
           ref={provided.innerRef}
           {...provided.draggableProps}

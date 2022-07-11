@@ -86,7 +86,7 @@ const List: React.FC<ListProps> = ({ list }) => {
         />
       </Box>
       <Droppable droppableId={list.id.toString()}>
-        {(provided, snapshot) => (
+        {(provided) => (
           <Stack
             sx={{
               minWidth: "300px",
