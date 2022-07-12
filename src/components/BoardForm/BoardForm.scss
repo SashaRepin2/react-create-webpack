@@ -1,37 +1,37 @@
 .board_form {
-  max-width: 350px !important;
-  max-height: 300px;
+    max-width: 350px !important;
+    max-height: 300px;
 
-  .MuiAccordion-root {
-    border-radius: 5px !important;
-    overflow: hidden;
+    .MuiAccordion-root {
+        border-radius: 5px !important;
+        overflow: hidden;
 
-    .MuiAccordionSummary-root {
-      color: #fff;
-      background-color: #8458b3;
+        .MuiAccordionSummary-root {
+            color: #fff;
+            background-color: #8458b3;
 
-      .MuiAccordionSummary-content {
-        align-items: center;
-      }
+            .MuiAccordionSummary-content {
+                align-items: center;
+            }
 
-      .MuiSvgIcon-root {
-        margin-right: 15px;
-      }
+            .MuiSvgIcon-root {
+                margin-right: 15px;
+            }
+        }
     }
-  }
 
-  .MuiAccordionDetails-root {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+    .MuiAccordionDetails-root {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-  &__options {
-    margin-top: 10px;
+    &__options {
+        margin-top: 10px;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-  }
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
 }

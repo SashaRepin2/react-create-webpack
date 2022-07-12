@@ -10,13 +10,13 @@ import "./styles/index.scss";
 import Loader from "./components/UI/Loader/Loader";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+    document.getElementById("root") as HTMLElement
 );
 
 root.render(
-  <Provider store={store}>
-    <PersistGate loading={<Loader />} persistor={persistor}>
-      <App />
-    </PersistGate>
-  </Provider>
+    <Provider store={store}>
+        <PersistGate loading={<Loader />} persistor={persistor}>
+            <App />
+        </PersistGate>
+    </Provider>
 );

@@ -1,11 +1,11 @@
 export enum Statuses {
-  COMPLETE,
-  UNCOMPLETE,
+    COMPLETE,
+    UNCOMPLETE,
 }
 
 export interface ITask {
-  id: number;
-  title: string;
-  status: Statuses;
-  listId: number;
+    id: number;
+    title: string;
+    status: Statuses;
+    listId: number;
 }

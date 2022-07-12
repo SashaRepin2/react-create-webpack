@@ -1,5 +1,5 @@
 export interface IList {
-  id: number;
-  title: string;
-  boardId: number;
+    id: number;
+    title: string;
+    boardId: number;
 }
