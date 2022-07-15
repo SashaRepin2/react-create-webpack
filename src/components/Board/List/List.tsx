@@ -90,7 +90,7 @@ const List: React.FC<ListProps> = ({ list }) => {
                     }}
                 />
             </Box>
-            <Droppable droppableId={list.id.toString()}>
+            <Droppable droppableId={list.id.toString()} type={"TASKS"}>
                 {(provided) => (
                     <Stack
                         sx={{
@@ -112,6 +112,7 @@ const List: React.FC<ListProps> = ({ list }) => {
                                 onDeleteHandler={DeleteTask}
                             />
                         ))}
+                        {provided.placeholder}
                     </Stack>
                 )}
             </Droppable>

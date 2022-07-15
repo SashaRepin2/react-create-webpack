@@ -42,6 +42,8 @@ const ListsGroup: React.FC<IListsGroup> = ({ boardId }) => {
 
     return (
         <DragDropContext onDragEnd={onDragEndHandler}>
+            {/* <Droppable droppableId={boardId.toString()} type={"TASKS"}>
+                {(provided) => ( */}
             <Stack
                 className="asd"
                 direction={"row"}
@@ -70,6 +72,8 @@ const ListsGroup: React.FC<IListsGroup> = ({ boardId }) => {
                     </Typography>
                 )}
             </Stack>
+            {/* )} */}
+            {/* </Droppable> */}
         </DragDropContext>
     );
 };
