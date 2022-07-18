@@ -11,7 +11,7 @@ interface AddListProps {
     listId: number;
 }
 
-const AddList: React.FC<AddListProps> = ({ listId }) => {
+const AddTask: React.FC<AddListProps> = ({ listId }) => {
     const dispatch = useAppDispatch();
     const { addTask } = TaskSlice.actions;
     const { addListTask } = ListSlice.actions;
@@ -50,4 +50,4 @@ const AddList: React.FC<AddListProps> = ({ listId }) => {
     );
 };
 
-export default React.memo(AddList);
+export default React.memo(AddTask);

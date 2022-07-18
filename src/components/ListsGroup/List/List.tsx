@@ -8,7 +8,7 @@ import useAppSelector from "../../../hooks/useAppSelector";
 import { IList } from "../../../interfaces/IList";
 import { ITask, Statuses } from "../../../interfaces/ITask";
 import { TaskSlice } from "../../../store/reducers/TaskSlice";
-import AddList from "./AddList/AddList";
+import AddList from "./AddList/AddTask";
 
 interface ListProps {
     list: IList;

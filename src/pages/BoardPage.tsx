@@ -11,18 +11,17 @@ import { ListsGroup } from "../components";
 import { BoardSlice } from "../store/reducers/BoardSlice";
 
 const BoardPage: React.FC = () => {
+    const dispatch = useAppDispatch();
     const { boardId } = useParams<Params>();
     const { addList } = ListSlice.actions;
     const { addBoardList } = BoardSlice.actions;
-    const dispatch = useAppDispatch();
+    const [inputValue, setInputValue] = React.useState<string>("");
 
     const board = useAppSelector((state) => {
         if (boardId) {
             return state.boardReducer.boards.find((board) => board.id === +boardId);
         }
     });
-
-    const [inputValue, setInputValue] = React.useState<string>("");
 
     function onAddListHandler() {
         if (board && inputValue) {
