@@ -1,15 +1,14 @@
 import React from "react";
-import { Box, InputBase, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import Task from "./Task/Task";
 
 import useAppDispatch from "../../../hooks/useAppDispatch";
-
+import useAppSelector from "../../../hooks/useAppSelector";
 import { IList } from "../../../interfaces/IList";
 import { ITask, Statuses } from "../../../interfaces/ITask";
 import { TaskSlice } from "../../../store/reducers/TaskSlice";
-import Task from "./Task/Task";
-import useAppSelector from "../../../hooks/useAppSelector";
-import { ListSlice } from "../../../store/reducers/ListSlice";
+import AddList from "./AddList/AddList";
 
 interface ListProps {
     list: IList;
@@ -19,21 +18,11 @@ interface ListProps {
 
 const List: React.FC<ListProps> = ({ list, index }) => {
     const dispatch = useAppDispatch();
-    const { addTask, deleteTask, changeStatus } = TaskSlice.actions;
-    const { addListTask } = ListSlice.actions;
+    const { deleteTask, changeStatus } = TaskSlice.actions;
 
     const tasks = useAppSelector((state) => {
-        // state.taskReducer.tasks.filter((task) => task.listId === list.id)
         const listTasks = state.taskReducer.tasks.filter((task) =>
             list.sequenceTasks.includes(task.id)
-        );
-
-        console.log(
-            listTasks.sort(
-                (prevTask: ITask, nextTask: ITask) =>
-                    list.sequenceTasks.indexOf(prevTask.id) -
-                    list.sequenceTasks.indexOf(nextTask.id)
-            )
         );
 
         return listTasks.sort(
@@ -42,30 +31,13 @@ const List: React.FC<ListProps> = ({ list, index }) => {
         );
     });
 
-    const [inputValue, setInputValue] = React.useState<string>("");
-
-    function onKeyDownHandler(event: React.KeyboardEvent<HTMLInputElement>) {
-        if (event.code === "Enter") {
-            if (inputValue) {
-                const task = {
-                    id: Date.now(),
-                    title: inputValue,
-                    status: Statuses.UNCOMPLETE,
-                };
-                dispatch(addTask(task));
-                dispatch(addListTask({ listId: list.id, taskId: task.id }));
-                setInputValue("");
-            }
-        }
-    }
-
-    function CompleteTask(taskId: number) {
+    const CompleteTask = React.useCallback((taskId: number) => {
         dispatch(changeStatus({ taskId: taskId, newStatus: Statuses.COMPLETE }));
-    }
+    }, []);
 
-    function DeleteTask(taskId: number) {
+    const DeleteTask = React.useCallback((taskId: number) => {
         dispatch(deleteTask(taskId));
-    }
+    }, []);
 
     return (
         <Draggable draggableId={list.id.toString()} index={index}>
@@ -77,7 +49,7 @@ const List: React.FC<ListProps> = ({ list, index }) => {
                     sx={{
                         bgcolor: "#8458b3",
                         borderRadius: "10px",
-                        minHeight: "500px",
+                        height: "fit-content",
                         maxWidth: "400px",
                     }}
                 >
@@ -95,20 +67,7 @@ const List: React.FC<ListProps> = ({ list, index }) => {
                         <Typography variant={"h6"} sx={{ color: "#fff", marginBottom: "10px" }}>
                             {list.title}
                         </Typography>
-                        <InputBase
-                            value={inputValue}
-                            placeholder={"Название задания"}
-                            onChange={(e) => setInputValue(e.target.value)}
-                            onKeyDown={onKeyDownHandler}
-                            sx={{
-                                input: {
-                                    color: "#fff",
-                                    bgcolor: "#5600b2",
-                                    borderRadius: "15px",
-                                    padding: "5px 8px",
-                                },
-                            }}
-                        />
+                        <AddList listId={list.id} />
                     </Box>
                     <Droppable droppableId={list.id.toString()} type={"TASKS"}>
                         {(provided) => (

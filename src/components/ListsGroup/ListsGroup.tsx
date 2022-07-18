@@ -1,15 +1,15 @@
 import React from "react";
 import { Stack, Typography } from "@mui/material";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import List from "../List/List";
+import List from "./List/List";
 
-import useAppDispatch from "../../../hooks/useAppDispatch";
-import useAppSelector from "../../../hooks/useAppSelector";
+import useAppDispatch from "../../hooks/useAppDispatch";
+import useAppSelector from "../../hooks/useAppSelector";
 
-import { IBoard } from "../../../interfaces/IBoard";
-import { IList } from "../../../interfaces/IList";
-import { ListSlice } from "../../../store/reducers/ListSlice";
-import { BoardSlice } from "../../../store/reducers/BoardSlice";
+import { IBoard } from "../../interfaces/IBoard";
+import { IList } from "../../interfaces/IList";
+import { ListSlice } from "../../store/reducers/ListSlice";
+import { BoardSlice } from "../../store/reducers/BoardSlice";
 
 interface IListsGroup {
     board: IBoard;
@@ -61,17 +61,15 @@ const ListsGroup: React.FC<IListsGroup> = ({ board }) => {
             <Droppable droppableId={board.id.toString()} type={"LISTS"} direction={"horizontal"}>
                 {(provided) => (
                     <Stack
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                        className="asd"
                         direction={"row"}
                         justifyContent={"flex-start"}
-                        alignItems={"stretch"}
                         spacing={2}
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
                         sx={{
                             margin: "15px 0",
                             width: "100%",
-                            minHeight: "300px",
+                            minHeight: "500px",
                             overflowX: "auto",
                             paddingBottom: "15px",
                         }}
