@@ -9,9 +9,7 @@ import App from "./App";
 import "./styles/index.scss";
 import Loader from "./components/UI/Loader/Loader";
 
-const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
     <Provider store={store}>

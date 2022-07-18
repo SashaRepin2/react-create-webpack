@@ -7,26 +7,25 @@ import SearchFilter from "../components/UI/SearchFilter/SearchFilter";
 import { BoardForm, Board } from "../components";
 
 const HomePage: React.FC = () => {
-    const { boards } = useAppSelector((state) => state.boardReducer);
-    const [isExpanded, setIsExpanded] = React.useState<boolean>(false);
-    const [filteredBoards, setFilteredBoards] =
-        React.useState<IBoard[]>(boards);
+    const boards = useAppSelector((state) => state.boardReducer.boards);
+    const [filteredBoards, setFilteredBoards] = React.useState<IBoard[]>(boards);
+
     const [filterValue, setFilterValue] = React.useState<string>("");
     const debouncedValue = useDebounce(filterValue, 500);
 
-    const handleExpanded = React.useCallback(() => {
+    const [isExpanded, setIsExpanded] = React.useState<boolean>(false);
+
+    const onChangeFormExpanded = React.useCallback(() => {
         setIsExpanded(!isExpanded);
     }, [isExpanded]);
 
-    function onChangeFilterValue(value: string) {
+    const onChangeFilterValue = React.useCallback((value: string) => {
         setFilterValue(value);
-    }
+    }, []);
 
     React.useEffect(() => {
         setFilteredBoards(
-            boards.filter((board) =>
-                board.title.toLocaleLowerCase().includes(debouncedValue)
-            )
+            boards.filter((board) => board.title.toLocaleLowerCase().includes(debouncedValue))
         );
     }, [debouncedValue, boards]);
 
@@ -41,10 +40,7 @@ const HomePage: React.FC = () => {
             }}
         >
             <Container>
-                <BoardForm
-                    isExpanded={isExpanded}
-                    setIsExpanded={handleExpanded}
-                />
+                <BoardForm isExpanded={isExpanded} setIsExpanded={onChangeFormExpanded} />
             </Container>
             <Container
                 sx={{
@@ -57,10 +53,7 @@ const HomePage: React.FC = () => {
                     boxShadow: 4,
                 }}
             >
-                <SearchFilter
-                    inputValue={filterValue}
-                    onChangeHandler={onChangeFilterValue}
-                />
+                <SearchFilter inputValue={filterValue} onChangeHandler={onChangeFilterValue} />
                 <Stack
                     direction="column"
                     justifyContent="flex-start"
@@ -69,9 +62,7 @@ const HomePage: React.FC = () => {
                     sx={{ padding: "15px 0" }}
                 >
                     {filteredBoards.length ? (
-                        filteredBoards.map((board) => (
-                            <Board key={board.id} board={board} />
-                        ))
+                        filteredBoards.map((board) => <Board key={board.id} board={board} />)
                     ) : (
                         <Typography
                             variant={"h5"}

@@ -1,45 +1,40 @@
 import React from "react";
 import { Params, useParams } from "react-router-dom";
-
 import useAppSelector from "../hooks/useAppSelector";
 import useAppDispatch from "../hooks/useAppDispatch";
 import { ListSlice } from "../store/reducers/ListSlice";
 
-import {
-    Box,
-    Container,
-    IconButton,
-    InputBase,
-    Typography,
-} from "@mui/material";
+import { Box, Container, IconButton, InputBase, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import NotFoundPage from "./NotFoundPage";
 import { ListsGroup } from "../components";
+import { BoardSlice } from "../store/reducers/BoardSlice";
 
 const BoardPage: React.FC = () => {
     const { boardId } = useParams<Params>();
     const { addList } = ListSlice.actions;
+    const { addBoardList } = BoardSlice.actions;
     const dispatch = useAppDispatch();
 
     const board = useAppSelector((state) => {
         if (boardId) {
-            return state.boardReducer.boards.find(
-                (board) => board.id === +boardId
-            );
+            return state.boardReducer.boards.find((board) => board.id === +boardId);
         }
     });
 
     const [inputValue, setInputValue] = React.useState<string>("");
 
     function onAddListHandler() {
-        if (board && inputValue)
-            dispatch(
-                addList({
-                    id: Date.now(),
-                    title: inputValue,
-                    boardId: board.id,
-                })
-            );
+        if (board && inputValue) {
+            const list = {
+                id: Date.now(),
+                title: inputValue,
+                sequenceTasks: [],
+            };
+
+            dispatch(addList(list));
+            dispatch(addBoardList({ listId: list.id, boardId: board.id }));
+        }
         setInputValue("");
     }
 
@@ -118,7 +113,7 @@ const BoardPage: React.FC = () => {
                     padding: "15px 0",
                 }}
             >
-                <ListsGroup boardId={board.id} />
+                <ListsGroup board={board} />
             </Container>
         </Container>
     );
