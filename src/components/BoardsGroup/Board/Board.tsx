@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
-import { BoardSlice } from "../../store/reducers/BoardSlice";
+import useAppDispatch from "../../../hooks/useAppDispatch";
+import { BoardSlice } from "../../../store/reducers/BoardSlice";
 
-import { IBoard } from "../../interfaces/IBoard";
+import { IBoard } from "../../../interfaces/IBoard";
 
 interface BoardProps {
     board: IBoard;

@@ -3,7 +3,7 @@ import React from "react";
 import useAppSelector from "../../hooks/useAppSelector";
 import useDebounce from "../../hooks/useDebounce";
 import { IBoard } from "../../interfaces/IBoard";
-import Board from "../Board/Board";
+import Board from "./Board/Board";
 import SearchFilter from "../UI/SearchFilter/SearchFilter";
 
 const BoardsGroup: React.FC = () => {
