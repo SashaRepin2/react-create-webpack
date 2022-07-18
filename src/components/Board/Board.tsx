@@ -16,7 +16,8 @@ const Board: React.FC<BoardProps> = ({ board }) => {
     const dispatch = useAppDispatch();
     const { deleteBoard } = BoardSlice.actions;
 
-    function onDeleteBoardHandler() {
+    function onDeleteBoardHandler(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
         dispatch(deleteBoard(board.id));
     }
 
