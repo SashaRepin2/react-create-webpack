@@ -7,11 +7,11 @@ import { ListSlice } from "../../../../store/reducers/ListSlice";
 import { TaskSlice } from "../../../../store/reducers/TaskSlice";
 import { Statuses } from "../../../../interfaces/ITask";
 
-interface AddListProps {
+interface AddTaskProps {
     listId: number;
 }
 
-const AddTask: React.FC<AddListProps> = ({ listId }) => {
+const AddTask: React.FC<AddTaskProps> = ({ listId }) => {
     const dispatch = useAppDispatch();
     const { addTask } = TaskSlice.actions;
     const { addListTask } = ListSlice.actions;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import List from "./List/List";
 
@@ -10,6 +10,7 @@ import { IBoard } from "../../interfaces/IBoard";
 import { IList } from "../../interfaces/IList";
 import { ListSlice } from "../../store/reducers/ListSlice";
 import { BoardSlice } from "../../store/reducers/BoardSlice";
+import { TaskSlice } from "../../store/reducers/TaskSlice";
 
 interface IListsGroup {
     board: IBoard;
@@ -17,8 +18,9 @@ interface IListsGroup {
 
 const ListsGroup: React.FC<IListsGroup> = ({ board }) => {
     const dispatch = useAppDispatch();
-    const { moveTask } = ListSlice.actions;
-    const { moveList } = BoardSlice.actions;
+    const { deleteListTasks } = TaskSlice.actions;
+    const { moveTask, deleteList } = ListSlice.actions;
+    const { moveList, deleteListFromBoard } = BoardSlice.actions;
     const lists = useAppSelector((state) => {
         const boardLists = state.listReducer.lists.filter((list) =>
             board.sequenceLists.includes(list.id)
@@ -45,8 +47,6 @@ const ListsGroup: React.FC<IListsGroup> = ({ board }) => {
 
         if (type === "TASKS") {
             if (newIndex !== oldIndex || fromListId !== toListId) {
-                console.log(fromListId, " ", toListId);
-                console.log(oldIndex, " ", newIndex);
                 dispatch(moveTask({ oldIndex, newIndex, fromListId, toListId }));
             }
         }
@@ -54,6 +54,14 @@ const ListsGroup: React.FC<IListsGroup> = ({ board }) => {
         if (type === "LISTS") {
             dispatch(moveList({ oldIndex, newIndex, boardId: board.id }));
         }
+    }
+
+    function onDeleteListHandler(list: IList) {
+        // ??????
+        console.log(list);
+        dispatch(deleteListFromBoard({ boardId: board.id, listId: list.id }));
+        dispatch(deleteListTasks(list.sequenceTasks));
+        dispatch(deleteList(list.id));
     }
 
     return (
@@ -74,21 +82,16 @@ const ListsGroup: React.FC<IListsGroup> = ({ board }) => {
                             paddingBottom: "15px",
                         }}
                     >
-                        {lists.length ? (
+                        {lists &&
                             lists.map((list, index) => (
-                                <List index={index} list={list} key={list.id} />
-                            ))
-                        ) : (
-                            <Typography
-                                variant={"h5"}
-                                sx={{
-                                    color: "#fff",
-                                    margin: "0 auto",
-                                }}
-                            >
-                                Добавьте список
-                            </Typography>
-                        )}
+                                <List
+                                    index={index}
+                                    list={list}
+                                    key={list.id}
+                                    onDeleteHandler={onDeleteListHandler}
+                                />
+                            ))}
+                        {provided.placeholder}
                     </Stack>
                 )}
             </Droppable>

@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Task from "./Task/Task";
 
@@ -8,15 +9,15 @@ import useAppSelector from "../../../hooks/useAppSelector";
 import { IList } from "../../../interfaces/IList";
 import { ITask, Statuses } from "../../../interfaces/ITask";
 import { TaskSlice } from "../../../store/reducers/TaskSlice";
-import AddList from "./AddList/AddTask";
+import AddList from "./AddTask/AddTask";
 
 interface ListProps {
     list: IList;
     index: number;
-    onDeleteHandler?: (id: number) => void;
+    onDeleteHandler: (list: IList) => void;
 }
 
-const List: React.FC<ListProps> = ({ list, index }) => {
+const List: React.FC<ListProps> = ({ list, index, onDeleteHandler }) => {
     const dispatch = useAppDispatch();
     const { deleteTask, changeStatus } = TaskSlice.actions;
 
@@ -56,6 +57,7 @@ const List: React.FC<ListProps> = ({ list, index }) => {
                     <Box
                         sx={{
                             display: "flex",
+                            position: "relative",
                             flexDirection: "column",
                             justifyContent: "flex-start",
                             alignItems: "center",
@@ -64,6 +66,14 @@ const List: React.FC<ListProps> = ({ list, index }) => {
                             borderRadius: "10px 10px 0 0",
                         }}
                     >
+                        <IconButton
+                            onClick={() => {
+                                onDeleteHandler(list);
+                            }}
+                            sx={{ position: "absolute", right: "5px", top: "5px", color: "red" }}
+                        >
+                            <DeleteIcon />
+                        </IconButton>
                         <Typography variant={"h6"} sx={{ color: "#fff", marginBottom: "10px" }}>
                             {list.title}
                         </Typography>
