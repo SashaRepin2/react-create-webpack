@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
+import useAppDispatch from "../../../hooks/useAppDispatch";
+import { BoardSlice } from "../../../store/reducers/BoardSlice";
 
-import { IBoard } from "../../interfaces/IBoard";
-import { BoardSlice } from "../../store/reducers/BoardSlice";
+import { IBoard } from "../../../interfaces/IBoard";
 
 interface BoardProps {
     board: IBoard;
@@ -16,8 +16,8 @@ const Board: React.FC<BoardProps> = ({ board }) => {
     const dispatch = useAppDispatch();
     const { deleteBoard } = BoardSlice.actions;
 
-    function onDeleteHandler(e: React.MouseEvent<HTMLButtonElement>) {
-        e.preventDefault();
+    function onDeleteBoardHandler(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
         dispatch(deleteBoard(board.id));
     }
 
@@ -36,12 +36,10 @@ const Board: React.FC<BoardProps> = ({ board }) => {
                 }}
             >
                 <Typography variant={"h6"} sx={{ color: "#fff" }}>
-                    {board.title.length > 15
-                        ? board.title.slice(0, 15) + "..."
-                        : board.title}
+                    {board.title.length > 15 ? board.title.slice(0, 15) + "..." : board.title}
                 </Typography>
                 <Box>
-                    <IconButton onClick={onDeleteHandler}>
+                    <IconButton onClick={onDeleteBoardHandler}>
                         <DeleteIcon />
                     </IconButton>
                 </Box>

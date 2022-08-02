@@ -31,7 +31,7 @@ const BoardForm: React.FC<BoardFormProps> = ({ isExpanded, setIsExpanded }) => {
                 addBoard({
                     id: Date.now(),
                     title: inputValue,
-                    created: Date.now(),
+                    sequenceLists: [],
                 })
             );
             setInputValue("");
@@ -46,11 +46,7 @@ const BoardForm: React.FC<BoardFormProps> = ({ isExpanded, setIsExpanded }) => {
 
     return (
         <Box className={"board_form"}>
-            <Accordion
-                expanded={isExpanded}
-                onChange={setIsExpanded}
-                sx={{ boxShadow: 4 }}
-            >
+            <Accordion expanded={isExpanded} onChange={setIsExpanded} sx={{ boxShadow: 4 }}>
                 <AccordionSummary className={"board_form__header"}>
                     <AddBoxIcon />
                     <Typography variant={"h5"}>Добавить доску</Typography>
@@ -64,18 +60,10 @@ const BoardForm: React.FC<BoardFormProps> = ({ isExpanded, setIsExpanded }) => {
                         }}
                     />
                     <Box className="board_form__options">
-                        <Button
-                            variant="contained"
-                            color="error"
-                            onClick={onCancelHandler}
-                        >
+                        <Button variant="contained" color="error" onClick={onCancelHandler}>
                             Отмена
                         </Button>
-                        <Button
-                            variant="contained"
-                            color="success"
-                            onClick={onSubmitHanlder}
-                        >
+                        <Button variant="contained" color="success" onClick={onSubmitHanlder}>
                             Сохранить
                         </Button>
                     </Box>

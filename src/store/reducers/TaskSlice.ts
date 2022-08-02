@@ -29,23 +29,18 @@ export const TaskSlice = createSlice({
                 task.status = newStatus;
             }
         },
-        deleteTask(state, action: PayloadAction<number>) {
-            state.tasks = state.tasks.filter(
-                (task) => task.id !== action.payload
-            );
+        deleteListTasks(state, action: PayloadAction<number[]>) {
+            state.tasks = state.tasks.filter((task) => !action.payload.includes(task.id));
         },
-        moveTask(
-            state,
-            action: PayloadAction<{
-                taskId: number;
-                listId: number;
-            }>
-        ) {
-            const { taskId, listId } = action.payload;
-            const task = state.tasks.find((task) => task.id === taskId);
+        deleteTask(state, action: PayloadAction<number>) {
+            state.tasks = state.tasks.filter((task) => task.id !== action.payload);
+        },
+        updateTaskTitle(state, action: PayloadAction<{ idTask: number; newTitle: string }>) {
+            const { idTask, newTitle } = action.payload;
+            const task = state.tasks.find((task) => task.id === idTask);
 
             if (task) {
-                task.listId = listId;
+                task.title = newTitle;
             }
         },
     },

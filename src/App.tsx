@@ -1,15 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import BackButton from "./components/UI/BackButton/BackButton";
 import Loader from "./components/UI/Loader/Loader";
+import Header from "./components/Header/Header";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
-const BoardPage = lazy(() => import("./pages/BoardPage"));
-const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const HomePage = React.lazy(() => import("./pages/HomePage"));
+const BoardPage = React.lazy(() => import("./pages/BoardPage"));
+const NotFoundPage = React.lazy(() => import("./pages/NotFoundPage"));
 
 function App() {
     return (
         <BrowserRouter>
+            <Header />
             <div className="App">
                 <BackButton />
                 <Suspense fallback={<Loader />}>
