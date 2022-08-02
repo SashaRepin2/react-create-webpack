@@ -49,6 +49,7 @@ export const BoardSlice = createSlice({
         },
         deleteListFromBoard(state, action: PayloadAction<{ boardId: number; listId: number }>) {
             const { boardId, listId } = action.payload;
+
             const board = state.boards.find((board) => board.id === boardId);
 
             if (board) {

@@ -42,7 +42,7 @@ const List: React.FC<ListProps> = ({ list, index, onDeleteHandler }) => {
 
     return (
         <Draggable draggableId={list.id.toString()} index={index}>
-            {(provided) => (
+            {(provided, snapshot) => (
                 <Box
                     ref={provided.innerRef}
                     {...provided.draggableProps}

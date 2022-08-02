@@ -58,7 +58,6 @@ const ListsGroup: React.FC<IListsGroup> = ({ board }) => {
 
     function onDeleteListHandler(list: IList) {
         // ??????
-        console.log(list);
         dispatch(deleteListFromBoard({ boardId: board.id, listId: list.id }));
         dispatch(deleteListTasks(list.sequenceTasks));
         dispatch(deleteList(list.id));
