@@ -5,18 +5,21 @@ import Loader from "./components/UI/Loader/Loader";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const BoardPage = lazy(() => import("./pages/BoardPage"));
-const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
     return (
         <BrowserRouter>
             <div className="App">
-                <BackButton />
                 <Suspense fallback={<Loader />}>
+                    <BackButton />
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route path="boards" element={<HomePage />} />
-                        <Route path="boards/:boardId" element={<BoardPage />} />
+                        <Route path="/boards" element={<HomePage />} />
+                        <Route
+                            path="/boards/:boardId"
+                            element={<BoardPage />}
+                        />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                 </Suspense>
