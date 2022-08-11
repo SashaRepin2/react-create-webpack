@@ -17,7 +17,11 @@ interface SideMenuProps {
 
 const SideMenu: React.FC<SideMenuProps> = ({ isOpen, toggleDrawer }) => {
     const list = () => (
-        <Box sx={{ width: 250 }} role="presentation" onKeyDown={toggleDrawer(false)}>
+        <Box
+            sx={{ width: 250 }}
+            role="presentation"
+            onKeyDown={toggleDrawer(false)}
+        >
             <List>
                 <ListItem>
                     <ListItemText
@@ -31,7 +35,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, toggleDrawer }) => {
                     />
                 </ListItem>
                 {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-                    <ListItem key={text} disablePadding>
+                    <ListItem
+                        key={text}
+                        disablePadding
+                    >
                         <ListItemButton>
                             <ListItemIcon>
                                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -44,7 +51,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, toggleDrawer }) => {
             <Divider />
             <List>
                 {["All mail", "Trash", "Spam"].map((text: string, index) => (
-                    <ListItem key={text} disablePadding>
+                    <ListItem
+                        key={text}
+                        disablePadding
+                    >
                         <ListItemButton>
                             <ListItemIcon>
                                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -58,7 +68,11 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, toggleDrawer }) => {
     );
 
     return (
-        <Drawer anchor={"left"} open={isOpen} onClose={toggleDrawer(false)}>
+        <Drawer
+            anchor={"left"}
+            open={isOpen}
+            onClose={toggleDrawer(false)}
+        >
             {list()}
         </Drawer>
     );

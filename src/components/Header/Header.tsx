@@ -48,7 +48,10 @@ const Header: React.FC = () => {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <SideMenu isOpen={isOpenMenu} toggleDrawer={toggleDrawer} />
+            <SideMenu
+                isOpen={isOpenMenu}
+                toggleDrawer={toggleDrawer}
+            />
         </React.Fragment>
     );
 };
