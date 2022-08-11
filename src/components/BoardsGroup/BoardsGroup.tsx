@@ -24,7 +24,10 @@ const BoardsGroup: React.FC = () => {
 
     return (
         <React.Fragment>
-            <SearchFilter inputValue={filterValue} onChangeHandler={onChangeFilterValue} />
+            <SearchFilter
+                inputValue={filterValue}
+                onChangeHandler={onChangeFilterValue}
+            />
             <Stack
                 direction="column"
                 justifyContent="flex-start"
@@ -33,7 +36,12 @@ const BoardsGroup: React.FC = () => {
                 sx={{ padding: "15px 0" }}
             >
                 {filteredBoards.length ? (
-                    filteredBoards.map((board) => <Board key={board.id} board={board} />)
+                    filteredBoards.map((board) => (
+                        <Board
+                            key={board.id}
+                            board={board}
+                        />
+                    ))
                 ) : (
                     <Typography
                         variant={"h5"}

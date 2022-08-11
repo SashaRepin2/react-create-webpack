@@ -22,7 +22,10 @@ const Board: React.FC<BoardProps> = ({ board }) => {
     }
 
     return (
-        <Link to={`/boards/${board.id}`} style={{ textDecoration: "none" }}>
+        <Link
+            to={`/boards/${board.id}`}
+            style={{ textDecoration: "none" }}
+        >
             <Container
                 sx={{
                     display: "flex",
@@ -35,7 +38,10 @@ const Board: React.FC<BoardProps> = ({ board }) => {
                     },
                 }}
             >
-                <Typography variant={"h6"} sx={{ color: "#fff" }}>
+                <Typography
+                    variant={"h6"}
+                    sx={{ color: "#fff" }}
+                >
                     {board.title.length > 15 ? board.title.slice(0, 15) + "..." : board.title}
                 </Typography>
                 <Box>

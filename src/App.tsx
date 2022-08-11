@@ -16,10 +16,22 @@ function App() {
                 <BackButton />
                 <Suspense fallback={<Loader />}>
                     <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="boards" element={<HomePage />} />
-                        <Route path="boards/:boardId" element={<BoardPage />} />
-                        <Route path="*" element={<NotFoundPage />} />
+                        <Route
+                            path="/"
+                            element={<HomePage />}
+                        />
+                        <Route
+                            path="boards"
+                            element={<HomePage />}
+                        />
+                        <Route
+                            path="boards/:boardId"
+                            element={<BoardPage />}
+                        />
+                        <Route
+                            path="*"
+                            element={<NotFoundPage />}
+                        />
                     </Routes>
                 </Suspense>
             </div>
