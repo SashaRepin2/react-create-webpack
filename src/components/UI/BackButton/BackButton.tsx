@@ -2,12 +2,13 @@ import React from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
+import { LINKS_BOARDS_PAGE } from "../../../consts/links";
 
 const BackButton: React.FC = () => {
     return (
         <Link
-            to={"boards"}
-            id="back-button"
+            to={LINKS_BOARDS_PAGE}
+            className="back-button"
             style={{
                 position: "absolute",
                 bottom: "25px",

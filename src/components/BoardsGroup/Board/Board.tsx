@@ -7,6 +7,7 @@ import useAppDispatch from "../../../hooks/useAppDispatch";
 import { BoardSlice } from "../../../store/reducers/BoardSlice";
 
 import { IBoard } from "../../../interfaces/IBoard";
+import { LINKS_BOARD_PAGE } from "../../../consts/links";
 
 interface BoardProps {
     board: IBoard;
@@ -23,7 +24,7 @@ const Board: React.FC<BoardProps> = ({ board }) => {
 
     return (
         <Link
-            to={`/boards/${board.id}`}
+            to={LINKS_BOARD_PAGE.replace(":boardId", board.id.toString())}
             style={{ textDecoration: "none" }}
         >
             <Container

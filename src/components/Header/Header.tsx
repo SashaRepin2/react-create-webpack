@@ -7,8 +7,6 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import SideMenu from "./SideMenu/SideMenu";
 
-// interface AppBarProps {}
-
 const Header: React.FC = () => {
     const [isOpenMenu, setisOpenMenu] = React.useState<boolean>(false);
 
