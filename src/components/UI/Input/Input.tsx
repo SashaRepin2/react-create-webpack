@@ -1,17 +1,23 @@
-import { InputBase } from "@mui/material";
-import { Container } from "@mui/system";
+import { Container, InputBase } from "@mui/material";
 import React from "react";
+import { SxProps } from "@mui/system";
 
-interface ISearchFilter {
+interface IInput {
     inputValue: string;
     placeholderValue?: string;
+    sxInput?: SxProps;
+    sxContainer?: SxProps;
     onChangeHandler: (value: string) => void;
+    onKeyDownHandler?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-const SearchFilter: React.FC<ISearchFilter> = ({
+const Input: React.FC<IInput> = ({
     inputValue,
-    placeholderValue,
+    placeholderValue = "Введите название",
     onChangeHandler,
+    onKeyDownHandler,
+    sxInput,
+    sxContainer,
 }) => {
     return (
         <Container
@@ -19,12 +25,15 @@ const SearchFilter: React.FC<ISearchFilter> = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                paddingTop: "15px",
+                padding: "5px",
+                margin: "5px",
+                ...sxContainer,
             }}
         >
             <InputBase
                 value={inputValue}
-                placeholder={placeholderValue || "Введите название доски"}
+                placeholder={placeholderValue}
+                onKeyDown={onKeyDownHandler}
                 onChange={(e) => {
                     onChangeHandler(e.target.value);
                 }}
@@ -36,10 +45,11 @@ const SearchFilter: React.FC<ISearchFilter> = ({
                         color: "#57327e",
                         fontSize: "bold",
                     },
+                    ...sxInput,
                 }}
             />
         </Container>
     );
 };
 
-export default React.memo(SearchFilter);
+export default React.memo(Input);

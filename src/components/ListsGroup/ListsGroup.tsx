@@ -65,7 +65,11 @@ const ListsGroup: React.FC<IListsGroup> = ({ board }) => {
 
     return (
         <DragDropContext onDragEnd={onDragEndHandler}>
-            <Droppable droppableId={board.id.toString()} type={"LISTS"} direction={"horizontal"}>
+            <Droppable
+                droppableId={board.id.toString()}
+                type={"LISTS"}
+                direction={"horizontal"}
+            >
                 {(provided) => (
                     <Stack
                         direction={"row"}

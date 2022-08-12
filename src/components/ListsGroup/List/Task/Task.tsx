@@ -16,7 +16,10 @@ interface ItemProps {
 
 const Task: React.FC<ItemProps> = ({ index, task, onCompleteHandler, onDeleteHandler }) => {
     return (
-        <Draggable draggableId={task.id.toString()} index={index}>
+        <Draggable
+            draggableId={task.id.toString()}
+            index={index}
+        >
             {(provided) => (
                 <Container
                     ref={provided.innerRef}

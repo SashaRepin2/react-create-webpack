@@ -1,10 +1,11 @@
-import { Stack, Typography } from "@mui/material";
 import React from "react";
+
+import { Stack, Typography } from "@mui/material";
 import useAppSelector from "../../hooks/useAppSelector";
 import useDebounce from "../../hooks/useDebounce";
 import { IBoard } from "../../interfaces/IBoard";
 import Board from "./Board/Board";
-import SearchFilter from "../UI/SearchFilter/SearchFilter";
+import Input from "../UI/Input/Input";
 
 const BoardsGroup: React.FC = () => {
     const boards = useAppSelector((state) => state.boardReducer.boards);
@@ -24,7 +25,11 @@ const BoardsGroup: React.FC = () => {
 
     return (
         <React.Fragment>
-            <SearchFilter inputValue={filterValue} onChangeHandler={onChangeFilterValue} />
+            <Input
+                inputValue={filterValue}
+                placeholderValue={"Введите название доски"}
+                onChangeHandler={onChangeFilterValue}
+            />
             <Stack
                 direction="column"
                 justifyContent="flex-start"
@@ -33,7 +38,12 @@ const BoardsGroup: React.FC = () => {
                 sx={{ padding: "15px 0" }}
             >
                 {filteredBoards.length ? (
-                    filteredBoards.map((board) => <Board key={board.id} board={board} />)
+                    filteredBoards.map((board) => (
+                        <Board
+                            key={board.id}
+                            board={board}
+                        />
+                    ))
                 ) : (
                     <Typography
                         variant={"h5"}
