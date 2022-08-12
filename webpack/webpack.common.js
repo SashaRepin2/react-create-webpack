@@ -2,18 +2,15 @@ const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-
 module.exports = {
-    entry: [
-        "@babel/polyfill",
-        path.resolve(__dirname, "..", "./src/index.tsx"),
-    ],
+    entry: [path.resolve(__dirname, "..", "./src/index.tsx")],
 
     output: {
         publicPath: "/",
         path: path.resolve(__dirname, "..", "./build"),
         filename: "[name].[contenthash].js",
         clean: true,
+        sourceMapFilename: "[name].[contenthash].js.map",
     },
 
     resolve: {
@@ -37,7 +34,7 @@ module.exports = {
             patterns: [
                 {
                     from: path.resolve(__dirname, "..", "./public/favicon.ico"),
-                    to: path.resolve(__dirname, "..", "./build"),
+                    to: path.resolve(__dirname, "..", "./public"),
                 },
             ],
         }),

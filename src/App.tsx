@@ -1,26 +1,43 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import BackButton from "./components/UI/BackButton/BackButton";
 import Loader from "./components/UI/Loader/Loader";
+import Header from "./components/Header/Header";
+import {
+    LINKS_BOARDS_PAGE,
+    LINKS_BOARD_PAGE,
+    LINKS_HOME_PAGE,
+    LINKS_NOT_FOUND_PAGE,
+} from "./consts/links";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
-const BoardPage = lazy(() => import("./pages/BoardPage"));
-import NotFoundPage from "./pages/NotFoundPage";
+const HomePage = React.lazy(() => import("./pages/HomePage"));
+const BoardPage = React.lazy(() => import("./pages/BoardPage"));
+const NotFoundPage = React.lazy(() => import("./pages/NotFoundPage"));
 
 function App() {
     return (
         <BrowserRouter>
+            <Header />
             <div className="App">
                 <Suspense fallback={<Loader />}>
                     <BackButton />
                     <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/boards" element={<HomePage />} />
                         <Route
-                            path="/boards/:boardId"
+                            path={LINKS_HOME_PAGE}
+                            element={<HomePage />}
+                        />
+                        <Route
+                            path={LINKS_BOARDS_PAGE}
+                            element={<HomePage />}
+                        />
+                        <Route
+                            path={LINKS_BOARD_PAGE}
                             element={<BoardPage />}
                         />
-                        <Route path="*" element={<NotFoundPage />} />
+                        <Route
+                            path={LINKS_NOT_FOUND_PAGE}
+                            element={<NotFoundPage />}
+                        />
                     </Routes>
                 </Suspense>
             </div>

@@ -14,14 +14,12 @@ interface ItemProps {
     onDeleteHandler: (taskId: number) => void;
 }
 
-const Task: React.FC<ItemProps> = ({
-    index,
-    task,
-    onCompleteHandler,
-    onDeleteHandler,
-}) => {
+const Task: React.FC<ItemProps> = ({ index, task, onCompleteHandler, onDeleteHandler }) => {
     return (
-        <Draggable draggableId={task.id.toString()} index={index}>
+        <Draggable
+            draggableId={task.id.toString()}
+            index={index}
+        >
             {(provided) => (
                 <Container
                     ref={provided.innerRef}
@@ -33,10 +31,7 @@ const Task: React.FC<ItemProps> = ({
                         alignItems: "center",
                         borderRadius: "10px",
                         padding: "5px",
-                        bgcolor:
-                            task.status === Statuses.COMPLETE
-                                ? "green"
-                                : "#fff",
+                        bgcolor: task.status === Statuses.COMPLETE ? "green" : "#fff",
                     }}
                 >
                     <Box>{task.title}</Box>
@@ -46,11 +41,7 @@ const Task: React.FC<ItemProps> = ({
                                 onCompleteHandler(task.id);
                             }}
                         >
-                            {task.status === Statuses.COMPLETE ? (
-                                <CloseIcon />
-                            ) : (
-                                <CheckIcon />
-                            )}
+                            {task.status === Statuses.COMPLETE ? <CloseIcon /> : <CheckIcon />}
                         </IconButton>
                         <IconButton
                             onClick={() => {
