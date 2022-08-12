@@ -13,7 +13,6 @@ const Header: React.FC = () => {
     const [isOpenMenu, setisOpenMenu] = React.useState<boolean>(false);
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-        console.log(open);
         if (
             event.type === "keydown" &&
             ((event as React.KeyboardEvent).key === "Tab" ||
