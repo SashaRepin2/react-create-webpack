@@ -76,7 +76,7 @@ const BoardForm: React.FC<BoardFormProps> = ({ isExpanded, setIsExpanded }) => {
                             color="success"
                             onClick={onSubmitHanlder}
                         >
-                            Сохранить
+                            Добавить
                         </Button>
                     </Box>
                 </AccordionDetails>

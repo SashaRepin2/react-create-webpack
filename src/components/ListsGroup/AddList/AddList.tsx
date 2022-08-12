@@ -1,10 +1,11 @@
 import React from "react";
 
-import { Box, IconButton, InputBase } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import useAppDispatch from "../../../hooks/useAppDispatch";
 import { ListSlice } from "../../../store/reducers/ListSlice";
 import { BoardSlice } from "../../../store/reducers/BoardSlice";
+import Input from "../../UI/Input/Input";
 
 interface AddListProps {
     boardId: number;
@@ -34,20 +35,19 @@ const AddList: React.FC<AddListProps> = ({ boardId }) => {
     return (
         <Box
             sx={{
+                display: "flex",
+                alignItems: "center",
                 color: "#fff",
                 bgcolor: "#8458b3",
                 borderRadius: "10px",
-                padding: "15px 20px",
+                padding: "10px",
                 marginLeft: "15px",
             }}
         >
-            <InputBase
-                value={inputValue}
-                placeholder={"Название списка"}
-                onChange={(e) => {
-                    setInputValue(e.target.value);
-                }}
-                sx={{ input: { color: "#fff" } }}
+            <Input
+                inputValue={inputValue}
+                placeholderValue={"Название списка"}
+                onChangeHandler={setInputValue}
             />
             <IconButton
                 onClick={onAddListHandler}
