@@ -45,13 +45,17 @@ const BoardForm: React.FC<BoardFormProps> = ({ isExpanded, setIsExpanded }) => {
     }
 
     return (
-        <Box className={"board_form"}>
-            <Accordion expanded={isExpanded} onChange={setIsExpanded} sx={{ boxShadow: 4 }}>
-                <AccordionSummary className={"board_form__header"}>
+        <Box className={"board-form"}>
+            <Accordion
+                expanded={isExpanded}
+                onChange={setIsExpanded}
+                sx={{ boxShadow: 4 }}
+            >
+                <AccordionSummary className={"board-form__header"}>
                     <AddBoxIcon />
                     <Typography variant={"h5"}>Добавить доску</Typography>
                 </AccordionSummary>
-                <AccordionDetails className={"board_form__body"}>
+                <AccordionDetails className={"board-form__body"}>
                     <TextField
                         value={inputValue}
                         placeholder={"Название доски"}
@@ -59,12 +63,20 @@ const BoardForm: React.FC<BoardFormProps> = ({ isExpanded, setIsExpanded }) => {
                             setInputValue(e.target.value);
                         }}
                     />
-                    <Box className="board_form__options">
-                        <Button variant="contained" color="error" onClick={onCancelHandler}>
+                    <Box className="board-form__options">
+                        <Button
+                            variant="contained"
+                            color="error"
+                            onClick={onCancelHandler}
+                        >
                             Отмена
                         </Button>
-                        <Button variant="contained" color="success" onClick={onSubmitHanlder}>
-                            Сохранить
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={onSubmitHanlder}
+                        >
+                            Добавить
                         </Button>
                     </Box>
                 </AccordionDetails>

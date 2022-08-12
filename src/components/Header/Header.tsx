@@ -7,8 +7,6 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import SideMenu from "./SideMenu/SideMenu";
 
-// interface AppBarProps {}
-
 const Header: React.FC = () => {
     const [isOpenMenu, setisOpenMenu] = React.useState<boolean>(false);
 
@@ -48,7 +46,10 @@ const Header: React.FC = () => {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <SideMenu isOpen={isOpenMenu} toggleDrawer={toggleDrawer} />
+            <SideMenu
+                isOpen={isOpenMenu}
+                toggleDrawer={toggleDrawer}
+            />
         </React.Fragment>
     );
 };

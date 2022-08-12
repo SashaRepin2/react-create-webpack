@@ -21,7 +21,10 @@ const HomePage: React.FC = () => {
             }}
         >
             <Container>
-                <BoardForm isExpanded={isExpanded} setIsExpanded={onChangeFormExpanded} />
+                <BoardForm
+                    isExpanded={isExpanded}
+                    setIsExpanded={onChangeFormExpanded}
+                />
             </Container>
             <Container
                 sx={{

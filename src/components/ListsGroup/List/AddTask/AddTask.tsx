@@ -1,11 +1,10 @@
 import React from "react";
 
-import { InputBase } from "@mui/material";
-
 import useAppDispatch from "../../../../hooks/useAppDispatch";
 import { ListSlice } from "../../../../store/reducers/ListSlice";
 import { TaskSlice } from "../../../../store/reducers/TaskSlice";
 import { Statuses } from "../../../../interfaces/ITask";
+import Input from "../../../UI/Input/Input";
 
 interface AddTaskProps {
     listId: number;
@@ -33,19 +32,19 @@ const AddTask: React.FC<AddTaskProps> = ({ listId }) => {
     }
 
     return (
-        <InputBase
-            value={inputValue}
-            placeholder={"Название задания"}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={onKeyDownHandler}
-            sx={{
-                input: {
-                    color: "#fff",
-                    bgcolor: "#5600b2",
-                    borderRadius: "15px",
-                    padding: "5px 8px",
-                },
-            }}
+        <Input
+            inputValue={inputValue}
+            placeholderValue={"Название задания"}
+            onChangeHandler={setInputValue}
+            onKeyDownHandler={onKeyDownHandler}
+            // sx={{
+            //     input: {
+            //         color: "#fff",
+            //         bgcolor: "#5600b2",
+            //         borderRadius: "15px",
+            //         padding: "5px 8px",
+            //     },
+            // }}
         />
     );
 };

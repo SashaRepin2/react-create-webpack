@@ -41,7 +41,10 @@ const List: React.FC<ListProps> = ({ list, index, onDeleteHandler }) => {
     }, []);
 
     return (
-        <Draggable draggableId={list.id.toString()} index={index}>
+        <Draggable
+            draggableId={list.id.toString()}
+            index={index}
+        >
             {(provided, snapshot) => (
                 <Box
                     ref={provided.innerRef}
@@ -74,12 +77,18 @@ const List: React.FC<ListProps> = ({ list, index, onDeleteHandler }) => {
                         >
                             <DeleteIcon />
                         </IconButton>
-                        <Typography variant={"h6"} sx={{ color: "#fff", marginBottom: "10px" }}>
+                        <Typography
+                            variant={"h6"}
+                            sx={{ color: "#fff", marginBottom: "10px" }}
+                        >
                             {list.title}
                         </Typography>
                         <AddList listId={list.id} />
                     </Box>
-                    <Droppable droppableId={list.id.toString()} type={"TASKS"}>
+                    <Droppable
+                        droppableId={list.id.toString()}
+                        type={"TASKS"}
+                    >
                         {(provided) => (
                             <Stack
                                 sx={{

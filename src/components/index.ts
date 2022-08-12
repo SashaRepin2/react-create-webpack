@@ -4,5 +4,5 @@ export { default as Board } from "./BoardsGroup/Board/Board";
 export { default as List } from "./ListsGroup/List/List";
 export { default as Task } from "./ListsGroup/List/Task/Task";
 export { default as Loader } from "./UI/Loader/Loader";
-export { default as SearchFilter } from "./UI/SearchFilter/SearchFilter";
+export { default as Input } from "./UI/Input/Input";
 export { default as ListsGroup } from "./ListsGroup/ListsGroup";

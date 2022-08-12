@@ -7,6 +7,7 @@ import useAppDispatch from "../../../hooks/useAppDispatch";
 import { BoardSlice } from "../../../store/reducers/BoardSlice";
 
 import { IBoard } from "../../../interfaces/IBoard";
+import { LINKS_BOARD_PAGE } from "../../../consts/links";
 
 interface BoardProps {
     board: IBoard;
@@ -22,7 +23,10 @@ const Board: React.FC<BoardProps> = ({ board }) => {
     }
 
     return (
-        <Link to={`/boards/${board.id}`} style={{ textDecoration: "none" }}>
+        <Link
+            to={LINKS_BOARD_PAGE.replace(":boardId", board.id.toString())}
+            style={{ textDecoration: "none" }}
+        >
             <Container
                 sx={{
                     display: "flex",
@@ -35,7 +39,10 @@ const Board: React.FC<BoardProps> = ({ board }) => {
                     },
                 }}
             >
-                <Typography variant={"h6"} sx={{ color: "#fff" }}>
+                <Typography
+                    variant={"h6"}
+                    sx={{ color: "#fff" }}
+                >
                     {board.title.length > 15 ? board.title.slice(0, 15) + "..." : board.title}
                 </Typography>
                 <Box>
