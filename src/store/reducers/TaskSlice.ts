@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ILabel } from "../../interfaces/ILabel";
 import { ITask, Statuses } from "../../interfaces/ITask";
 
 interface ITaskState {

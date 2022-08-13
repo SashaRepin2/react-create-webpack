@@ -6,6 +6,10 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import SideMenu from "./SideMenu/SideMenu";
+import SettingsIcon from "@mui/icons-material/Settings";
+
+import { LINKS_SETTINGS_PAGE } from "../../consts/links";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
     const [isOpenMenu, setisOpenMenu] = React.useState<boolean>(false);
@@ -39,10 +43,19 @@ const Header: React.FC = () => {
                             variant="h6"
                             noWrap
                             component="div"
-                            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+                            sx={{ flexGrow: 1 }}
                         >
                             Trello Clone
                         </Typography>
+                        <Box>
+                            <Link to={LINKS_SETTINGS_PAGE}>
+                                <IconButton aria-label="back">
+                                    <SettingsIcon
+                                        sx={{ fill: "#fff", height: "32px", width: "32px" }}
+                                    />
+                                </IconButton>
+                            </Link>
+                        </Box>
                     </Toolbar>
                 </AppBar>
             </Box>
