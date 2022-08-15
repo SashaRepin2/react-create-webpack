@@ -38,14 +38,6 @@ const AddTask: React.FC<AddTaskProps> = ({ listId }) => {
             placeholderValue={"Название задания"}
             onChangeHandler={setInputValue}
             onKeyDownHandler={onKeyDownHandler}
-            // sx={{
-            //     input: {
-            //         color: "#fff",
-            //         bgcolor: "#5600b2",
-            //         borderRadius: "15px",
-            //         padding: "5px 8px",
-            //     },
-            // }}
         />
     );
 };

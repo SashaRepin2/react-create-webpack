@@ -8,10 +8,14 @@
     padding: 0;
 }
 
+html,
+body {
+    background-color: $background-color;
+}
+
 .App {
     padding: 50px 25px;
     min-height: 100vh;
-    background-color: $background-color;
 }
 
 * {
@@ -25,7 +29,7 @@
     width: 15px;
 }
 
-body::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
     border-radius: 5px;
     background-color: transparent;
     &:hover {

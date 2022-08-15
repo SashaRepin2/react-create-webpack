@@ -1,20 +1,33 @@
-import { Box, Container, IconButton } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { ITask, Statuses } from "../../../../interfaces/ITask";
 
-import CheckIcon from "@mui/icons-material/Check";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CloseIcon from "@mui/icons-material/Close";
+import useAppSelector from "../../../../hooks/useAppSelector";
+import TaskSettingsMenu from "./components/TaskSettingsMenu";
+import TaskLabel from "./components/TaskLabel";
 
 interface ItemProps {
     index: number;
     task: ITask;
-    onCompleteHandler: (taskId: number) => void;
-    onDeleteHandler: (taskId: number) => void;
 }
 
-const Task: React.FC<ItemProps> = ({ index, task, onCompleteHandler, onDeleteHandler }) => {
+const Task: React.FC<ItemProps> = ({ index, task }) => {
+    const labels = useAppSelector((state) =>
+        state.labelReducer.labels.filter((label) => task.labels.includes(label.id))
+    );
+
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+
+    const onOpenMenuHandler = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const onCloseMenuHandle = () => {
+        setAnchorEl(null);
+    };
+
     return (
         <Draggable
             draggableId={task.id.toString()}
@@ -34,22 +47,29 @@ const Task: React.FC<ItemProps> = ({ index, task, onCompleteHandler, onDeleteHan
                         bgcolor: task.status === Statuses.COMPLETE ? "green" : "#fff",
                     }}
                 >
-                    <Box>{task.title}</Box>
+                    <Typography variant={"subtitle1"}>{task.title}</Typography>
                     <Box>
-                        <IconButton
-                            onClick={() => {
-                                onCompleteHandler(task.id);
-                            }}
-                        >
-                            {task.status === Statuses.COMPLETE ? <CloseIcon /> : <CheckIcon />}
-                        </IconButton>
-                        <IconButton
-                            onClick={() => {
-                                onDeleteHandler(task.id);
-                            }}
-                        >
-                            <DeleteIcon />
-                        </IconButton>
+                        {labels.map((label) => (
+                            <TaskLabel
+                                key={label.id}
+                                label={label}
+                            />
+                        ))}
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <TaskSettingsMenu
+                            taskId={task.id}
+                            isOpen={open}
+                            anchorEl={anchorEl}
+                            onClickHanlder={onOpenMenuHandler}
+                            onCloseHanlder={onCloseMenuHandle}
+                        />
                     </Box>
                 </Container>
             )}

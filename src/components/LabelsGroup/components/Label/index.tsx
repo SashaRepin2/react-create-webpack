@@ -1,35 +1,39 @@
-import { Box, Container, Typography } from "@mui/material";
 import React from "react";
-import useAppDispatch from "../../../../hooks/useAppDispatch";
+
+import { Box, Container, IconButton, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 import { ILabel } from "../../../../interfaces/ILabel";
-import { LabelSlice } from "../../../../store/reducers/LabelSlice";
 
 interface ILabelProps {
     label: ILabel;
+    onDeleteHandler: (labelId: number) => void;
 }
 
-const Label: React.FC<ILabelProps> = ({ label }) => {
-    const dipatch = useAppDispatch();
-    const { deleteLabel } = LabelSlice.actions;
-
-    function onDeleteHandler() {
-        dipatch(deleteLabel(label.id));
-    }
-
+const Label: React.FC<ILabelProps> = ({ label, onDeleteHandler }) => {
     return (
         <Container
             className={"labels-group__label"}
             sx={{
+                minWidth: "200px",
+                padding: "5px",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-around",
-                padding: "10px",
+                justifyContent: "space-between",
                 bgcolor: "#8458b3",
                 borderRadius: "7px",
+                boxShadow: 2,
             }}
         >
-            <Typography>{label.title}</Typography>
+            <Typography
+                className={"labels-group__label-title"}
+                variant={"subtitle1"}
+                sx={{ margin: "0 5px", color: "#fff" }}
+            >
+                {label.title}
+            </Typography>
             <Box
+                className={"labels-group__label-color"}
                 sx={{
                     height: "24px",
                     width: "24px",
@@ -38,9 +42,15 @@ const Label: React.FC<ILabelProps> = ({ label }) => {
                     boxShadow: 3,
                 }}
             />
-            <Box>
-                <button onClick={onDeleteHandler}>Delete</button>
-            </Box>
+            <IconButton
+                className={"labels-group__label-delete"}
+                onClick={() => {
+                    onDeleteHandler(label.id);
+                }}
+                sx={{ color: "red" }}
+            >
+                <DeleteIcon />
+            </IconButton>
         </Container>
     );
 };

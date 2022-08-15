@@ -5,14 +5,14 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import SideMenu from "./SideMenu/SideMenu";
+import HeaderSideMenu from "./HeaderSideMenu/HeaderSideMenu";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 import { LINKS_SETTINGS_PAGE } from "../../consts/links";
 import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
-    const [isOpenMenu, setisOpenMenu] = React.useState<boolean>(false);
+    const [isOpenMenu, setIsOpenMenu] = React.useState<boolean>(false);
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (
@@ -23,7 +23,7 @@ const Header: React.FC = () => {
             return;
         }
 
-        setisOpenMenu(open);
+        setIsOpenMenu(open);
     };
 
     return (
@@ -59,7 +59,7 @@ const Header: React.FC = () => {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <SideMenu
+            <HeaderSideMenu
                 isOpen={isOpenMenu}
                 toggleDrawer={toggleDrawer}
             />
