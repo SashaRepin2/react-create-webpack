@@ -13,7 +13,16 @@ const TaskLabel: React.FC<ITaskLabelProps> = ({ label }) => {
             title={label.title}
             arrow
         >
-            <Box sx={{ borderRadius: "50%", bgcolor: label.hexColor }}>Arrow</Box>
+            <Box
+                sx={{
+                    height: "16px",
+                    width: "16px",
+                    cursor: "default",
+                    borderRadius: "50%",
+                    bgcolor: label.hexColor,
+                    margin: "3px",
+                }}
+            />
         </Tooltip>
     );
 };

@@ -18,15 +18,15 @@ const Task: React.FC<ItemProps> = ({ index, task }) => {
     );
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+    const isOpenSettingsMenu = Boolean(anchorEl);
 
-    const onOpenMenuHandler = (event: React.MouseEvent<HTMLElement>) => {
+    function onOpenMenuHandler(event: React.MouseEvent<HTMLElement>) {
         setAnchorEl(event.currentTarget);
-    };
+    }
 
-    const onCloseMenuHandle = () => {
+    function onCloseMenuHandle() {
         setAnchorEl(null);
-    };
+    }
 
     return (
         <Draggable
@@ -34,11 +34,12 @@ const Task: React.FC<ItemProps> = ({ index, task }) => {
             index={index}
         >
             {(provided) => (
-                <Container
+                <Box
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     sx={{
+                        maxWidth: "300px",
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
@@ -48,7 +49,7 @@ const Task: React.FC<ItemProps> = ({ index, task }) => {
                     }}
                 >
                     <Typography variant={"subtitle1"}>{task.title}</Typography>
-                    <Box>
+                    <Box sx={{ display: "flex", flexWrap: "wrap", margin: "0 5px" }}>
                         {labels.map((label) => (
                             <TaskLabel
                                 key={label.id}
@@ -64,14 +65,14 @@ const Task: React.FC<ItemProps> = ({ index, task }) => {
                         }}
                     >
                         <TaskSettingsMenu
-                            taskId={task.id}
-                            isOpen={open}
+                            task={task}
+                            isOpen={isOpenSettingsMenu}
                             anchorEl={anchorEl}
                             onClickHanlder={onOpenMenuHandler}
                             onCloseHanlder={onCloseMenuHandle}
                         />
                     </Box>
-                </Container>
+                </Box>
             )}
         </Draggable>
     );

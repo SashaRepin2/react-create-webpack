@@ -4,9 +4,11 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import useAppDispatch from "../../../../../../hooks/useAppDispatch";
 import { TaskSlice } from "../../../../../../store/reducers/TaskSlice";
+import TaskAddLabel from "../TaskAddLabel";
+import { ITask } from "../../../../../../interfaces/ITask";
 
 interface ITaskSettingsMenuProps {
-    taskId: number;
+    task: ITask;
     anchorEl: HTMLElement | null;
     isOpen: boolean;
     onClickHanlder: (event: React.MouseEvent<HTMLElement>) => void;
@@ -14,7 +16,7 @@ interface ITaskSettingsMenuProps {
 }
 
 const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
-    taskId,
+    task,
     anchorEl,
     isOpen,
     onClickHanlder,
@@ -22,10 +24,19 @@ const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
 }) => {
     const dispatch = useAppDispatch();
     const { deleteTask } = TaskSlice.actions;
+    const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false);
 
-    const onDeleteTaskHandler = React.useCallback((taskId: number) => {
+    function onOpenModalHandler() {
+        setIsOpenModal(true);
+    }
+
+    function onCloseModalHandler() {
+        setIsOpenModal(false);
+    }
+
+    function onDeleteTaskHandler(taskId: number) {
         dispatch(deleteTask(taskId));
-    }, []);
+    }
 
     return (
         <React.Fragment>
@@ -48,9 +59,14 @@ const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
                     "aria-labelledby": "long-button",
                 }}
             >
-                <MenuItem>Метки</MenuItem>
-                <MenuItem onClick={() => onDeleteTaskHandler(taskId)}>Удалить</MenuItem>
+                <MenuItem onClick={onOpenModalHandler}>Метки</MenuItem>
+                <MenuItem onClick={() => onDeleteTaskHandler(task.id)}>Удалить</MenuItem>
             </Menu>
+            <TaskAddLabel
+                task={task}
+                isShow={isOpenModal}
+                onCloseHandler={onCloseModalHandler}
+            />
         </React.Fragment>
     );
 };
