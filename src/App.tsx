@@ -8,7 +8,9 @@ import {
     LINKS_BOARD_PAGE,
     LINKS_HOME_PAGE,
     LINKS_NOT_FOUND_PAGE,
+    LINKS_SETTINGS_PAGE,
 } from "./consts/links";
+import SettingsPage from "./pages/SettingsPage";
 
 const HomePage = React.lazy(() => import("./pages/HomePage"));
 const BoardPage = React.lazy(() => import("./pages/BoardPage"));
@@ -19,8 +21,8 @@ function App() {
         <BrowserRouter>
             <Header />
             <div className="App">
-                <BackButton />
                 <Suspense fallback={<Loader />}>
+                    <BackButton />
                     <Routes>
                         <Route
                             path={LINKS_HOME_PAGE}
@@ -37,6 +39,10 @@ function App() {
                         <Route
                             path={LINKS_NOT_FOUND_PAGE}
                             element={<NotFoundPage />}
+                        />
+                        <Route
+                            path={LINKS_SETTINGS_PAGE}
+                            element={<SettingsPage />}
                         />
                     </Routes>
                 </Suspense>

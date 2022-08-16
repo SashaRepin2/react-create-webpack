@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ITask, Statuses } from "../../interfaces/ITask";
+import { ITask } from "../../interfaces/ITask";
 
 interface ITaskState {
     tasks: ITask[];
@@ -16,19 +16,6 @@ export const TaskSlice = createSlice({
         addTask(state, action: PayloadAction<ITask>) {
             state.tasks.push(action.payload);
         },
-        changeStatus(
-            state,
-            action: PayloadAction<{
-                taskId: number;
-                newStatus: Statuses;
-            }>
-        ) {
-            const { taskId, newStatus } = action.payload;
-            const task = state.tasks.find((task) => task.id === taskId);
-            if (task) {
-                task.status = newStatus;
-            }
-        },
         deleteListTasks(state, action: PayloadAction<number[]>) {
             state.tasks = state.tasks.filter((task) => !action.payload.includes(task.id));
         },
@@ -41,6 +28,22 @@ export const TaskSlice = createSlice({
 
             if (task) {
                 task.title = newTitle;
+            }
+        },
+        addLabelToTask(state, action: PayloadAction<{ taskId: number; labelId: number }>) {
+            const { taskId, labelId } = action.payload;
+            const task = state.tasks.find((task) => taskId === task.id);
+
+            if (task) {
+                task.labels.push(labelId);
+            }
+        },
+        deleteLabelFromTask(state, action: PayloadAction<{ taskId: number; labelId: number }>) {
+            const { taskId, labelId } = action.payload;
+            const task = state.tasks.find((task) => task.id === taskId);
+
+            if (task) {
+                task.labels = task.labels.filter((_labelId) => _labelId !== labelId);
             }
         },
     },

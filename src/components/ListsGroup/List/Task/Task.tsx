@@ -1,57 +1,78 @@
-import { Box, Container, IconButton } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { ITask, Statuses } from "../../../../interfaces/ITask";
 
-import CheckIcon from "@mui/icons-material/Check";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CloseIcon from "@mui/icons-material/Close";
+import useAppSelector from "../../../../hooks/useAppSelector";
+import TaskSettingsMenu from "./components/TaskSettingsMenu";
+import TaskLabel from "./components/TaskLabel";
 
 interface ItemProps {
     index: number;
     task: ITask;
-    onCompleteHandler: (taskId: number) => void;
-    onDeleteHandler: (taskId: number) => void;
 }
 
-const Task: React.FC<ItemProps> = ({ index, task, onCompleteHandler, onDeleteHandler }) => {
+const Task: React.FC<ItemProps> = ({ index, task }) => {
+    const labels = useAppSelector((state) =>
+        state.labelReducer.labels.filter((label) => task.labels.includes(label.id))
+    );
+
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const isOpenSettingsMenu = Boolean(anchorEl);
+
+    function onOpenMenuHandler(event: React.MouseEvent<HTMLElement>) {
+        setAnchorEl(event.currentTarget);
+    }
+
+    function onCloseMenuHandle() {
+        setAnchorEl(null);
+    }
+
     return (
         <Draggable
             draggableId={task.id.toString()}
             index={index}
         >
             {(provided) => (
-                <Container
+                <Box
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     sx={{
+                        maxWidth: "300px",
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
                         borderRadius: "10px",
-                        padding: "5px",
+                        padding: "5px 10px",
                         bgcolor: task.status === Statuses.COMPLETE ? "green" : "#fff",
                     }}
                 >
-                    <Box>{task.title}</Box>
-                    <Box>
-                        <IconButton
-                            onClick={() => {
-                                onCompleteHandler(task.id);
-                            }}
-                        >
-                            {task.status === Statuses.COMPLETE ? <CloseIcon /> : <CheckIcon />}
-                        </IconButton>
-                        <IconButton
-                            onClick={() => {
-                                onDeleteHandler(task.id);
-                            }}
-                        >
-                            <DeleteIcon />
-                        </IconButton>
+                    <Typography variant={"subtitle1"}>{task.title}</Typography>
+                    <Box sx={{ display: "flex", flexWrap: "wrap", margin: "0 5px" }}>
+                        {labels.map((label) => (
+                            <TaskLabel
+                                key={label.id}
+                                label={label}
+                            />
+                        ))}
                     </Box>
-                </Container>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <TaskSettingsMenu
+                            task={task}
+                            isOpen={isOpenSettingsMenu}
+                            anchorEl={anchorEl}
+                            onClickHanlder={onOpenMenuHandler}
+                            onCloseHanlder={onCloseMenuHandle}
+                        />
+                    </Box>
+                </Box>
             )}
         </Draggable>
     );
