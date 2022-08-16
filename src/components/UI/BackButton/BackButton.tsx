@@ -10,7 +10,7 @@ const BackButton: React.FC = () => {
             to={LINKS_BOARDS_PAGE}
             className="back-button"
             style={{
-                position: "absolute",
+                position: "fixed",
                 bottom: "25px",
                 left: "25px",
                 zIndex: "1001",
