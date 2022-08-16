@@ -44,7 +44,7 @@ const Task: React.FC<ItemProps> = ({ index, task }) => {
                         justifyContent: "space-between",
                         alignItems: "center",
                         borderRadius: "10px",
-                        padding: "5px",
+                        padding: "5px 10px",
                         bgcolor: task.status === Statuses.COMPLETE ? "green" : "#fff",
                     }}
                 >
