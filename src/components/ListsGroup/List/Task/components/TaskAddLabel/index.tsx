@@ -42,7 +42,9 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
                 onCloseHandle={onCloseHandler}
             >
                 <Container>
-                    <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+                    <Box
+                        sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}
+                    >
                         <Typography
                             variant={"h5"}
                             sx={{ color: "#fff", fontWeight: "bold", marginRight: "5px" }}
