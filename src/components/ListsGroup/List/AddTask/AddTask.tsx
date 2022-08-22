@@ -23,6 +23,7 @@ const AddTask: React.FC<AddTaskProps> = ({ listId }) => {
                     id: Date.now(),
                     title: inputValue,
                     status: Statuses.UNCOMPLETE,
+                    labels: [],
                 };
                 dispatch(addTask(task));
                 dispatch(addListTask({ listId, taskId: task.id }));

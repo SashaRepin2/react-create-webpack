@@ -4,11 +4,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Task from "./Task/Task";
 
-import useAppDispatch from "../../../hooks/useAppDispatch";
 import useAppSelector from "../../../hooks/useAppSelector";
 import { IList } from "../../../interfaces/IList";
-import { ITask, Statuses } from "../../../interfaces/ITask";
-import { TaskSlice } from "../../../store/reducers/TaskSlice";
+import { ITask } from "../../../interfaces/ITask";
 import AddList from "./AddTask/AddTask";
 import { DND_TYPES_TASKS } from "../../../consts/dndTypes";
 
@@ -19,9 +17,6 @@ interface ListProps {
 }
 
 const List: React.FC<ListProps> = ({ list, index, onDeleteHandler }) => {
-    const dispatch = useAppDispatch();
-    const { deleteTask, changeStatus } = TaskSlice.actions;
-
     const tasks = useAppSelector((state) => {
         const listTasks = state.taskReducer.tasks.filter((task) =>
             list.sequenceTasks.includes(task.id)
@@ -32,14 +27,6 @@ const List: React.FC<ListProps> = ({ list, index, onDeleteHandler }) => {
                 list.sequenceTasks.indexOf(prevTask.id) - list.sequenceTasks.indexOf(nextTask.id)
         );
     });
-
-    const CompleteTask = React.useCallback((taskId: number) => {
-        dispatch(changeStatus({ taskId: taskId, newStatus: Statuses.COMPLETE }));
-    }, []);
-
-    const DeleteTask = React.useCallback((taskId: number) => {
-        dispatch(deleteTask(taskId));
-    }, []);
 
     return (
         <Draggable
@@ -107,8 +94,6 @@ const List: React.FC<ListProps> = ({ list, index, onDeleteHandler }) => {
                                         key={task.id}
                                         task={task}
                                         index={index}
-                                        onCompleteHandler={CompleteTask}
-                                        onDeleteHandler={DeleteTask}
                                     />
                                 ))}
                                 {provided.placeholder}
