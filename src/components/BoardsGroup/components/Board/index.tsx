@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import useAppDispatch from "../../../hooks/useAppDispatch";
-import { BoardSlice } from "../../../store/reducers/BoardSlice";
+import useAppDispatch from "../../../../hooks/useAppDispatch";
+import { BoardSlice } from "../../../../store/reducers/BoardSlice";
 
-import { IBoard } from "../../../interfaces/IBoard";
-import { LINKS_BOARD_PAGE } from "../../../consts/links";
+import { IBoard } from "../../../../interfaces/IBoard";
+import { LINKS_BOARD_PAGE } from "../../../../consts/links";
+import { TEXT_MAX_LENGTH } from "../../../../consts/text";
 
 interface BoardProps {
     board: IBoard;
@@ -43,7 +44,9 @@ const Board: React.FC<BoardProps> = ({ board }) => {
                     variant={"h6"}
                     sx={{ color: "#fff" }}
                 >
-                    {board.title.length > 15 ? board.title.slice(0, 15) + "..." : board.title}
+                    {board.title.length > TEXT_MAX_LENGTH
+                        ? board.title.slice(0, TEXT_MAX_LENGTH) + "..."
+                        : board.title}
                 </Typography>
                 <Box>
                     <IconButton onClick={onDeleteBoardHandler}>

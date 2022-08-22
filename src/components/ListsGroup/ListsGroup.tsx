@@ -11,6 +11,7 @@ import { IList } from "../../interfaces/IList";
 import { ListSlice } from "../../store/reducers/ListSlice";
 import { BoardSlice } from "../../store/reducers/BoardSlice";
 import { TaskSlice } from "../../store/reducers/TaskSlice";
+import { DND_TYPES_LISTS } from "../../consts/dndTypes";
 
 interface IListsGroup {
     board: IBoard;
@@ -57,7 +58,6 @@ const ListsGroup: React.FC<IListsGroup> = ({ board }) => {
     }
 
     function onDeleteListHandler(list: IList) {
-        // ??????
         dispatch(deleteListFromBoard({ boardId: board.id, listId: list.id }));
         dispatch(deleteListTasks(list.sequenceTasks));
         dispatch(deleteList(list.id));
@@ -67,7 +67,7 @@ const ListsGroup: React.FC<IListsGroup> = ({ board }) => {
         <DragDropContext onDragEnd={onDragEndHandler}>
             <Droppable
                 droppableId={board.id.toString()}
-                type={"LISTS"}
+                type={DND_TYPES_LISTS}
                 direction={"horizontal"}
             >
                 {(provided) => (

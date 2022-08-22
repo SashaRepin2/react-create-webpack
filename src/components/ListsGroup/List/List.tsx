@@ -10,6 +10,7 @@ import { IList } from "../../../interfaces/IList";
 import { ITask, Statuses } from "../../../interfaces/ITask";
 import { TaskSlice } from "../../../store/reducers/TaskSlice";
 import AddList from "./AddTask/AddTask";
+import { DND_TYPES_TASKS } from "../../../consts/dndTypes";
 
 interface ListProps {
     list: IList;
@@ -87,7 +88,7 @@ const List: React.FC<ListProps> = ({ list, index, onDeleteHandler }) => {
                     </Box>
                     <Droppable
                         droppableId={list.id.toString()}
-                        type={"TASKS"}
+                        type={DND_TYPES_TASKS}
                     >
                         {(provided) => (
                             <Stack

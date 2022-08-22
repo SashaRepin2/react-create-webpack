@@ -4,7 +4,7 @@ import { Stack, Typography } from "@mui/material";
 import useAppSelector from "../../hooks/useAppSelector";
 import useDebounce from "../../hooks/useDebounce";
 import { IBoard } from "../../interfaces/IBoard";
-import Board from "./Board/Board";
+import Board from "./components/Board";
 import Input from "../UI/Input/Input";
 
 const BoardsGroup: React.FC = () => {
