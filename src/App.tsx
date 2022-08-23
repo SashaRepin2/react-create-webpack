@@ -1,8 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { Suspense } from "react";
-import BackButton from "./components/UI/BackButton/BackButton";
-import Loader from "./components/UI/Loader/Loader";
-import Header from "./components/Header/Header";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import Header from "./components/Header";
+import BackButton from "./components/UI/BackButton";
+import Loader from "./components/UI/Loader";
+
 import {
     LINKS_BOARDS_PAGE,
     LINKS_BOARD_PAGE,
@@ -10,6 +13,7 @@ import {
     LINKS_NOT_FOUND_PAGE,
     LINKS_SETTINGS_PAGE,
 } from "./consts/links";
+
 import SettingsPage from "./pages/SettingsPage";
 
 const HomePage = React.lazy(() => import("./pages/HomePage"));

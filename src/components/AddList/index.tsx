@@ -1,17 +1,20 @@
 import React from "react";
 
-import { Box, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import useAppDispatch from "../../../hooks/useAppDispatch";
-import { ListSlice } from "../../../store/reducers/ListSlice";
-import { BoardSlice } from "../../../store/reducers/BoardSlice";
-import Input from "../../UI/Input/Input";
+import { Box, IconButton } from "@mui/material";
 
-interface AddListProps {
+import useAppDispatch from "../../hooks/useAppDispatch";
+
+import { BoardSlice } from "../../store/reducers/BoardSlice";
+import { ListSlice } from "../../store/reducers/ListSlice";
+
+import Input from "../UI/Input";
+
+interface IAddListProps {
     boardId: number;
 }
 
-const AddList: React.FC<AddListProps> = ({ boardId }) => {
+const AddList: React.FC<IAddListProps> = ({ boardId }) => {
     const dispatch = useAppDispatch();
 
     const { addList } = ListSlice.actions;

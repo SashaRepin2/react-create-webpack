@@ -29,7 +29,7 @@ module.exports = {
         "react/jsx-uses-react": "off",
         "react/react-in-jsx-scope": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
-        "react/jsx-max-props-per-line": ["error", { maximum: 1, when: "always" }],
         "react-hooks/exhaustive-deps": "off",
+        "react/jsx-max-props-per-line": ["error", { maximum: 1, when: "always" }],
     },
 };

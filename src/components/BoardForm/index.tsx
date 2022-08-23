@@ -1,4 +1,6 @@
 import React from "react";
+
+import AddBoxIcon from "@mui/icons-material/AddBox";
 import {
     Accordion,
     AccordionDetails,
@@ -8,19 +10,19 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import AddBoxIcon from "@mui/icons-material/AddBox";
+
+import useAppDispatch from "../../hooks/useAppDispatch";
 
 import { BoardSlice } from "../../store/reducers/BoardSlice";
-import useAppDispatch from "../../hooks/useAppDispatch";
 
 import "./BoardForm.scss";
 
-interface BoardFormProps {
+interface IBoardFormProps {
     isExpanded: boolean;
     setIsExpanded: () => void;
 }
 
-const BoardForm: React.FC<BoardFormProps> = ({ isExpanded, setIsExpanded }) => {
+const BoardForm: React.FC<IBoardFormProps> = ({ isExpanded, setIsExpanded }) => {
     const dispatch = useAppDispatch();
     const { addBoard } = BoardSlice.actions;
     const [inputValue, setInputValue] = React.useState<string>("");

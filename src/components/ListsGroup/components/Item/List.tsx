@@ -1,14 +1,18 @@
 import React from "react";
-import { Box, Stack, Typography, IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Draggable, Droppable } from "react-beautiful-dnd";
-import Task from "./Task/Task";
 
-import useAppSelector from "../../../hooks/useAppSelector";
-import { IList } from "../../../interfaces/IList";
-import { ITask } from "../../../interfaces/ITask";
-import AddList from "./AddTask/AddTask";
-import { DND_TYPES_TASKS } from "../../../consts/dndTypes";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { Draggable, Droppable } from "react-beautiful-dnd";
+
+import useAppSelector from "../../../../hooks/useAppSelector";
+
+import { DND_TYPES_TASKS } from "../../../../consts/dndTypes";
+
+import { IList } from "../../../../interfaces/IList";
+import { ITask } from "../../../../interfaces/ITask";
+
+import AddList from "../../../AddTask/AddTask";
+import Task from "../../../Task";
 
 interface ListProps {
     list: IList;

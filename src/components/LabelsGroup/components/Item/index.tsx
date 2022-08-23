@@ -1,19 +1,19 @@
 import React from "react";
 
-import { Box, Container, IconButton, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, Container, IconButton, Typography } from "@mui/material";
 
 import { ILabel } from "../../../../interfaces/ILabel";
 
-interface ILabelProps {
+interface ILabelsGroupItemProps {
     label: ILabel;
     onDeleteHandler: (labelId: number) => void;
 }
 
-const Label: React.FC<ILabelProps> = ({ label, onDeleteHandler }) => {
+const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDeleteHandler }) => {
     return (
         <Container
-            className={"labels-group__label"}
+            className={"labels-group-label"}
             sx={{
                 minWidth: "200px",
                 padding: "5px",
@@ -55,4 +55,4 @@ const Label: React.FC<ILabelProps> = ({ label, onDeleteHandler }) => {
     );
 };
 
-export default Label;
+export default React.memo(LabelsGroupItem);

@@ -1,15 +1,16 @@
 import React from "react";
 
 import { Box, Typography } from "@mui/material";
-import { ILabel } from "../../../../../../../../interfaces/ILabel";
 
-interface IAddLabelList {
+import { ILabel } from "../../../../interfaces/ILabel";
+
+interface IAddLabelListProps {
     title: string;
     labels: ILabel[];
     onClickLabelHandler: (label: ILabel) => void;
 }
 
-const AddLabelList: React.FC<IAddLabelList> = ({ title, labels, onClickLabelHandler }) => {
+const AddLabelList: React.FC<IAddLabelListProps> = ({ title, labels, onClickLabelHandler }) => {
     return (
         <Box sx={{ overflow: "hidden", bgcolor: "#D0BDF4", borderRadius: "5px", padding: "5px" }}>
             <Box sx={{ bgcolor: "#8458b3", borderRadius: "5px", padding: "5px" }}>

@@ -1,9 +1,13 @@
-import { Stack } from "@mui/material";
 import React from "react";
+
+import { Stack } from "@mui/material";
+
+import Label from "./components/Item";
+
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
+
 import { LabelSlice } from "../../store/reducers/LabelSlice";
-import Label from "./components/Label";
 
 const LabelsGroup: React.FC = () => {
     const dispatch = useAppDispatch();

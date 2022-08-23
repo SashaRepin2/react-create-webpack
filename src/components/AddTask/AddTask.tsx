@@ -1,10 +1,13 @@
 import React from "react";
 
-import useAppDispatch from "../../../../hooks/useAppDispatch";
-import { ListSlice } from "../../../../store/reducers/ListSlice";
-import { TaskSlice } from "../../../../store/reducers/TaskSlice";
-import { Statuses } from "../../../../interfaces/ITask";
-import Input from "../../../UI/Input/Input";
+import useAppDispatch from "../../hooks/useAppDispatch";
+
+import { ListSlice } from "../../store/reducers/ListSlice";
+import { TaskSlice } from "../../store/reducers/TaskSlice";
+
+import { Statuses } from "../../interfaces/ITask";
+
+import Input from "../UI/Input";
 
 interface AddTaskProps {
     listId: number;

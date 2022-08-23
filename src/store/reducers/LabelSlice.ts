@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
 import { ILabel } from "../../interfaces/ILabel";
 
 interface ILabelState {
@@ -19,6 +20,7 @@ export const LabelSlice = createSlice({
         changeLabel(state, action: PayloadAction<ILabel>) {
             const newLabel = action.payload;
             const label = state.labels.find((label) => label.id === newLabel.id);
+
             if (label) {
                 label.hexColor = newLabel.hexColor;
                 label.title = label.title;

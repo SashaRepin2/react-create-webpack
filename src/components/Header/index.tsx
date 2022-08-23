@@ -1,15 +1,17 @@
 import * as React from "react";
+
+import MenuIcon from "@mui/icons-material/Menu";
+import SettingsIcon from "@mui/icons-material/Settings";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import MenuIcon from "@mui/icons-material/Menu";
-import HeaderSideMenu from "./HeaderSideMenu/HeaderSideMenu";
-import SettingsIcon from "@mui/icons-material/Settings";
+import { Link } from "react-router-dom";
+
+import HeaderSideMenu from "./components/SideMenu";
 
 import { LINKS_SETTINGS_PAGE } from "../../consts/links";
-import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
     const [isOpenMenu, setIsOpenMenu] = React.useState<boolean>(false);

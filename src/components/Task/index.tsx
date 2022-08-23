@@ -1,11 +1,14 @@
-import { Box, Typography } from "@mui/material";
 import React from "react";
-import { Draggable } from "react-beautiful-dnd";
-import { ITask, Statuses } from "../../../../interfaces/ITask";
 
-import useAppSelector from "../../../../hooks/useAppSelector";
-import TaskSettingsMenu from "./components/TaskSettingsMenu";
-import TaskLabel from "./components/TaskLabel";
+import { Box, Typography } from "@mui/material";
+import { Draggable } from "react-beautiful-dnd";
+
+import TaskLabel from "./components/Label";
+import TaskSettingsMenu from "./components/SettingsMenu";
+
+import useAppSelector from "../../hooks/useAppSelector";
+
+import { ITask, Statuses } from "../../interfaces/ITask";
 
 interface ItemProps {
     index: number;

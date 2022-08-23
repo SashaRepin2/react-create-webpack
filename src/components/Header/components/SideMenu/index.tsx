@@ -1,23 +1,24 @@
 import * as React from "react";
+
+import HomeIcon from "@mui/icons-material/Home";
+import SettingsIcon from "@mui/icons-material/Settings";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import SettingsIcon from "@mui/icons-material/Settings";
-import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
-import { LINKS_HOME_PAGE, LINKS_SETTINGS_PAGE } from "../../../consts/links";
 
-interface SideMenuProps {
+import { LINKS_HOME_PAGE, LINKS_SETTINGS_PAGE } from "../../../../consts/links";
+
+interface IHeaderSideMenuProps {
     isOpen: boolean;
     toggleDrawer: (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => void;
 }
 
-const HeaderSideMenu: React.FC<SideMenuProps> = ({ isOpen, toggleDrawer }) => {
+const HeaderSideMenu: React.FC<IHeaderSideMenuProps> = ({ isOpen, toggleDrawer }) => {
     return (
         <Drawer
             anchor={"left"}
@@ -87,4 +88,4 @@ const HeaderSideMenu: React.FC<SideMenuProps> = ({ isOpen, toggleDrawer }) => {
     );
 };
 
-export default HeaderSideMenu;
+export default React.memo(HeaderSideMenu);

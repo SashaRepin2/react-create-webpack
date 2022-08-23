@@ -1,23 +1,27 @@
 import React from "react";
+
 import { Stack } from "@mui/material";
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import List from "./List/List";
+import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
+
+import List from "./components/Item/List";
 
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 
-import { IBoard } from "../../interfaces/IBoard";
-import { IList } from "../../interfaces/IList";
-import { ListSlice } from "../../store/reducers/ListSlice";
-import { BoardSlice } from "../../store/reducers/BoardSlice";
-import { TaskSlice } from "../../store/reducers/TaskSlice";
 import { DND_TYPES_LISTS } from "../../consts/dndTypes";
 
-interface IListsGroup {
+import { BoardSlice } from "../../store/reducers/BoardSlice";
+import { ListSlice } from "../../store/reducers/ListSlice";
+import { TaskSlice } from "../../store/reducers/TaskSlice";
+
+import { IBoard } from "../../interfaces/IBoard";
+import { IList } from "../../interfaces/IList";
+
+interface IListsGroupProps {
     board: IBoard;
 }
 
-const ListsGroup: React.FC<IListsGroup> = ({ board }) => {
+const ListsGroup: React.FC<IListsGroupProps> = ({ board }) => {
     const dispatch = useAppDispatch();
     const { deleteListTasks } = TaskSlice.actions;
     const { moveTask, deleteList } = ListSlice.actions;

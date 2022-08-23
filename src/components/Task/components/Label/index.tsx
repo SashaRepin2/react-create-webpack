@@ -1,7 +1,9 @@
+import React from "react";
+
 import { Tooltip } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
-import { ILabel } from "../../../../../../interfaces/ILabel";
+
+import { ILabel } from "../../../../interfaces/ILabel";
 
 interface ITaskLabelProps {
     label: ILabel;

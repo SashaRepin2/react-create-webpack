@@ -1,20 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Box, Container, IconButton, Typography } from "@mui/material";
+
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, Container, IconButton, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 import useAppDispatch from "../../../../hooks/useAppDispatch";
-import { BoardSlice } from "../../../../store/reducers/BoardSlice";
 
-import { IBoard } from "../../../../interfaces/IBoard";
 import { LINKS_BOARD_PAGE } from "../../../../consts/links";
 import { TEXT_MAX_LENGTH } from "../../../../consts/text";
 
-interface BoardProps {
+import { BoardSlice } from "../../../../store/reducers/BoardSlice";
+
+import { IBoard } from "../../../../interfaces/IBoard";
+
+interface IBoardsGroupItemProps {
     board: IBoard;
 }
 
-const Board: React.FC<BoardProps> = ({ board }) => {
+const BoardsGroupItem: React.FC<IBoardsGroupItemProps> = ({ board }) => {
     const dispatch = useAppDispatch();
     const { deleteBoard } = BoardSlice.actions;
 
@@ -58,4 +61,4 @@ const Board: React.FC<BoardProps> = ({ board }) => {
     );
 };
 
-export default React.memo(Board);
+export default React.memo(BoardsGroupItem);

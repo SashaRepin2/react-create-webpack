@@ -1,21 +1,27 @@
+import React from "react";
+
 import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
-import useAppDispatch from "../../../../../../hooks/useAppDispatch";
-import useAppSelector from "../../../../../../hooks/useAppSelector";
-import { ILabel } from "../../../../../../interfaces/ILabel";
-import { ITask } from "../../../../../../interfaces/ITask";
-import { TaskSlice } from "../../../../../../store/reducers/TaskSlice";
-import ModalPopup from "../../../../../UI/BaseModal";
-import AddLabelList from "./components/AddLabelList";
 
-interface ITaskAddLabelProps {
+import AddLabelList from "./components/List";
+
+import useAppDispatch from "../../hooks/useAppDispatch";
+import useAppSelector from "../../hooks/useAppSelector";
+
+import { TaskSlice } from "../../store/reducers/TaskSlice";
+
+import { ILabel } from "../../interfaces/ILabel";
+import { ITask } from "../../interfaces/ITask";
+
+import ModalPopup from "../UI/BaseModal";
+
+interface IAddLabelProps {
     task: ITask;
     isShow: boolean;
     onCloseHandler: () => void;
 }
 
-const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandler }) => {
+const AddLabel: React.FC<IAddLabelProps> = ({ task, isShow, onCloseHandler }) => {
     const dispatch = useAppDispatch();
     const { addLabelToTask, deleteLabelFromTask } = TaskSlice.actions;
 
@@ -43,7 +49,11 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
             >
                 <Container>
                     <Box
-                        sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            alignItems: "center",
+                        }}
                     >
                         <Typography
                             variant={"h5"}
@@ -94,4 +104,4 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
     );
 };
 
-export default TaskAddLabel;
+export default React.memo(AddLabel);

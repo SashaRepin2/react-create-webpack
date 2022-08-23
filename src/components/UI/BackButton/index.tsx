@@ -1,7 +1,9 @@
 import React from "react";
+
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
+
 import { LINKS_BOARDS_PAGE } from "../../../consts/links";
 
 const BackButton: React.FC = () => {

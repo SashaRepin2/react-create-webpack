@@ -1,11 +1,15 @@
 import React from "react";
 
 import { Stack, Typography } from "@mui/material";
+
+import Board from "./components/Item";
+
 import useAppSelector from "../../hooks/useAppSelector";
 import useDebounce from "../../hooks/useDebounce";
+
 import { IBoard } from "../../interfaces/IBoard";
-import Board from "./components/Board";
-import Input from "../UI/Input/Input";
+
+import Input from "../UI/Input";
 
 const BoardsGroup: React.FC = () => {
     const boards = useAppSelector((state) => state.boardReducer.boards);

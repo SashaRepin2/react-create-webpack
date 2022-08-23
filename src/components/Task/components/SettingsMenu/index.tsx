@@ -1,11 +1,15 @@
 import React from "react";
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import useAppDispatch from "../../../../../../hooks/useAppDispatch";
-import { TaskSlice } from "../../../../../../store/reducers/TaskSlice";
-import TaskAddLabel from "../TaskAddLabel";
-import { ITask } from "../../../../../../interfaces/ITask";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { IconButton, Menu, MenuItem } from "@mui/material";
+
+import useAppDispatch from "../../../../hooks/useAppDispatch";
+
+import { TaskSlice } from "../../../../store/reducers/TaskSlice";
+
+import { ITask } from "../../../../interfaces/ITask";
+
+import TaskAddLabel from "../../../AddLabel";
 
 interface ITaskSettingsMenuProps {
     task: ITask;
