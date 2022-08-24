@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Box, Container, Divider, Typography } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { Box, Container, Divider, Typography } from "@mui/material";
 
 import LabelsGroup from "../components/LabelsGroup";
 import AddLabel from "../components/LabelsGroup/components/AddLabel";

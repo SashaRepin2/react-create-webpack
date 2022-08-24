@@ -1,11 +1,14 @@
 import React from "react";
-import { Params, useParams } from "react-router-dom";
-import useAppSelector from "../hooks/useAppSelector";
 
 import { Box, Container, Typography } from "@mui/material";
-import NotFoundPage from "./NotFoundPage";
+import { Params, useParams } from "react-router-dom";
+
 import { ListsGroup } from "../components";
-import AddList from "../components/ListsGroup/AddList/AddList";
+import AddList from "../components/AddList";
+
+import useAppSelector from "../hooks/useAppSelector";
+
+import NotFoundPage from "./NotFoundPage";
 
 const BoardPage: React.FC = () => {
     const { boardId } = useParams<Params>();

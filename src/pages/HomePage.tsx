@@ -1,7 +1,9 @@
 import React from "react";
+
 import { Container } from "@mui/material";
+
 import { BoardForm } from "../components";
-import BoardsGroup from "../components/BoardsGroup/BoardsGroup";
+import BoardsGroup from "../components/BoardsGroup";
 
 const HomePage: React.FC = () => {
     const [isExpanded, setIsExpanded] = React.useState<boolean>(false);

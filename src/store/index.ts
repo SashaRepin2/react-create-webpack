@@ -1,20 +1,20 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
-
 import {
-    persistStore,
-    persistReducer,
     FLUSH,
-    REHYDRATE,
     PAUSE,
     PERSIST,
     PURGE,
     REGISTER,
+    REHYDRATE,
+    persistReducer,
+    persistStore,
 } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
 import boardReducer from "./reducers/BoardSlice";
+import labelReducer from "./reducers/LabelSlice";
 import listReducer from "./reducers/ListSlice";
 import taskReducer from "./reducers/TaskSlice";
-import labelReducer from "./reducers/LabelSlice";
 
 const rootReducer = combineReducers({
     boardReducer,

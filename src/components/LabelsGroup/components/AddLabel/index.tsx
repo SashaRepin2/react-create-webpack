@@ -3,14 +3,15 @@ import React from "react";
 import { Box, Button, Container } from "@mui/material";
 import { HexColorPicker } from "react-colorful";
 
-import Input from "../../../UI/Input/Input";
-
 import useAppDispatch from "../../../../hooks/useAppDispatch";
+
 import { LabelSlice } from "../../../../store/reducers/LabelSlice";
+
+import Input from "../../../UI/Input";
 
 const initLabel = { title: "", hexColor: "#fff" };
 
-const AddLabel = () => {
+const LabelsGroupAddLabel: React.FC = () => {
     const dispatch = useAppDispatch();
     const { addLabel } = LabelSlice.actions;
     const [labelForm, setLabelForm] = React.useState<{ title: string; hexColor: string }>(
@@ -77,4 +78,4 @@ const AddLabel = () => {
     );
 };
 
-export default AddLabel;
+export default LabelsGroupAddLabel;
