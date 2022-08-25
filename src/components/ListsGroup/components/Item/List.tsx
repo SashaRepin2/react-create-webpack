@@ -13,14 +13,15 @@ import { ITask } from "../../../../interfaces/ITask";
 
 import AddList from "../../../AddTask/AddTask";
 import Task from "../../../Task";
+import AlertDialog from "../../../UI/AlertDialog";
 
 interface ListProps {
     list: IList;
     index: number;
-    onDeleteHandler: (list: IList) => void;
+    onDelete: (list: IList) => void;
 }
 
-const List: React.FC<ListProps> = ({ list, index, onDeleteHandler }) => {
+const List: React.FC<ListProps> = ({ list, index, onDelete }) => {
     const tasks = useAppSelector((state) => {
         const listTasks = state.taskReducer.tasks.filter((task) =>
             list.sequenceTasks.includes(task.id)
@@ -32,81 +33,108 @@ const List: React.FC<ListProps> = ({ list, index, onDeleteHandler }) => {
         );
     });
 
+    const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false);
+
+    function onOpenDialogHandler() {
+        setIsOpenDialog(true);
+    }
+
+    function onCloseDialogHandler() {
+        setIsOpenDialog(false);
+    }
+
+    function onSubmitDialogHandler() {
+        onDelete(list);
+    }
+
     return (
-        <Draggable
-            draggableId={list.id.toString()}
-            index={index}
-        >
-            {(provided) => (
-                <Box
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    sx={{
-                        bgcolor: "#8458b3",
-                        borderRadius: "10px",
-                        height: "fit-content",
-                        maxWidth: "400px",
-                    }}
-                >
+        <React.Fragment>
+            <Draggable
+                draggableId={list.id.toString()}
+                index={index}
+            >
+                {(provided) => (
                     <Box
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
                         sx={{
-                            display: "flex",
-                            position: "relative",
-                            flexDirection: "column",
-                            justifyContent: "flex-start",
-                            alignItems: "center",
-                            bgcolor: "#400085",
-                            padding: "10px 5px",
-                            borderRadius: "10px 10px 0 0",
+                            bgcolor: "#8458b3",
+                            borderRadius: "10px",
+                            height: "fit-content",
+                            maxWidth: "400px",
                         }}
                     >
-                        <IconButton
-                            onClick={() => {
-                                onDeleteHandler(list);
+                        <Box
+                            sx={{
+                                display: "flex",
+                                position: "relative",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                bgcolor: "#400085",
+                                padding: "10px 5px",
+                                borderRadius: "10px 10px 0 0",
                             }}
-                            sx={{ position: "absolute", right: "5px", top: "5px", color: "red" }}
                         >
-                            <DeleteIcon />
-                        </IconButton>
-                        <Typography
-                            variant={"h6"}
-                            sx={{ color: "#fff", marginBottom: "10px" }}
-                        >
-                            {list.title}
-                        </Typography>
-                        <AddList listId={list.id} />
-                    </Box>
-                    <Droppable
-                        droppableId={list.id.toString()}
-                        type={DND_TYPES_TASKS}
-                    >
-                        {(provided) => (
-                            <Stack
+                            <IconButton
+                                onClick={onOpenDialogHandler}
                                 sx={{
-                                    minWidth: "300px",
-                                    padding: "15px 10px",
-                                    overflow: "hidden",
+                                    position: "absolute",
+                                    right: "5px",
+                                    top: "5px",
+                                    color: "red",
                                 }}
-                                direction={"column"}
-                                spacing={2}
-                                ref={provided.innerRef}
-                                {...provided.droppableProps}
                             >
-                                {tasks.map((task, index) => (
-                                    <Task
-                                        key={task.id}
-                                        task={task}
-                                        index={index}
-                                    />
-                                ))}
-                                {provided.placeholder}
-                            </Stack>
-                        )}
-                    </Droppable>
-                </Box>
-            )}
-        </Draggable>
+                                <DeleteIcon />
+                            </IconButton>
+                            <Typography
+                                variant={"h6"}
+                                sx={{ color: "#fff", marginBottom: "10px" }}
+                            >
+                                {list.title}
+                            </Typography>
+                            <AddList listId={list.id} />
+                        </Box>
+                        <Droppable
+                            droppableId={list.id.toString()}
+                            type={DND_TYPES_TASKS}
+                        >
+                            {(provided) => (
+                                <Stack
+                                    sx={{
+                                        minWidth: "300px",
+                                        padding: "15px 10px",
+                                        overflow: "hidden",
+                                    }}
+                                    direction={"column"}
+                                    spacing={2}
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                >
+                                    {tasks.map((task, index) => (
+                                        <Task
+                                            key={task.id}
+                                            task={task}
+                                            index={index}
+                                        />
+                                    ))}
+                                    {provided.placeholder}
+                                </Stack>
+                            )}
+                        </Droppable>
+                    </Box>
+                )}
+            </Draggable>
+            <AlertDialog
+                isOpen={isOpenDialog}
+                title={"Удаление списка"}
+                description={`Вы действительно хотите удалить список "${list.title}"`}
+                submitTextBtn={"Удалить"}
+                onClose={onCloseDialogHandler}
+                onSubmit={onSubmitDialogHandler}
+            />
+        </React.Fragment>
     );
 };
 

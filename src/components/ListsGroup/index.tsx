@@ -95,7 +95,7 @@ const ListsGroup: React.FC<IListsGroupProps> = ({ board }) => {
                                     index={index}
                                     list={list}
                                     key={list.id}
-                                    onDeleteHandler={onDeleteListHandler}
+                                    onDelete={onDeleteListHandler}
                                 />
                             ))}
                         {provided.placeholder}
