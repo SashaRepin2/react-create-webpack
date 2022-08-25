@@ -44,8 +44,9 @@ const AddLabel: React.FC<IAddLabelProps> = ({ task, isShow, onCloseHandler }) =>
     return (
         <div>
             <ModalPopup
+                title={"Управление метками"}
                 isShow={isShow}
-                onCloseHandle={onCloseHandler}
+                onClose={onCloseHandler}
             >
                 <Container>
                     <Box
@@ -55,12 +56,6 @@ const AddLabel: React.FC<IAddLabelProps> = ({ task, isShow, onCloseHandler }) =>
                             alignItems: "center",
                         }}
                     >
-                        <Typography
-                            variant={"h5"}
-                            sx={{ color: "#fff", fontWeight: "bold", marginRight: "5px" }}
-                        >
-                            Задание:
-                        </Typography>
                         <Typography
                             variant={"h6"}
                             sx={{ color: "#fff", fontWeight: "bold" }}

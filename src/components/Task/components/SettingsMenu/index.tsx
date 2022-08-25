@@ -32,6 +32,7 @@ const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
 
     function onOpenModalHandler() {
         setIsOpenModal(true);
+        onCloseHanlder();
     }
 
     function onCloseModalHandler() {

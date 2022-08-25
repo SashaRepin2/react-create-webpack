@@ -1,37 +1,36 @@
 import React from "react";
 
-import { Modal } from "@mui/material";
+import { Divider, Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import ReactDOM from "react-dom";
+
+import styles from "./BaseModal.module.scss";
 
 interface IBaseModalProps {
     isShow: boolean;
-    onCloseHandle: () => void;
+    title: string;
     children: React.ReactNode;
+    onClose: () => void;
 }
 
-const BaseModal: React.FC<IBaseModalProps> = ({ isShow, onCloseHandle, children }) => {
-    return (
+const BaseModal: React.FC<IBaseModalProps> = ({ isShow, onClose, children, title }) => {
+    return ReactDOM.createPortal(
         <Modal
             open={isShow}
-            onClose={onCloseHandle}
+            onClose={onClose}
         >
-            <Box
-                sx={{
-                    minWidth: "300px",
-                    maxWidth: "500px",
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    borderRadius: "5px",
-                    bgcolor: "#1976d2",
-                    boxShadow: 24,
-                    padding: "10px",
-                }}
-            >
-                {children}
+            <Box className={styles.body}>
+                <Typography
+                    className={styles.title}
+                    variant={"h6"}
+                >
+                    {title}
+                </Typography>
+                <Divider className={styles.divider} />
+                <Box className={styles.content}>{children}</Box>
             </Box>
-        </Modal>
+        </Modal>,
+        document.body
     );
 };
 
