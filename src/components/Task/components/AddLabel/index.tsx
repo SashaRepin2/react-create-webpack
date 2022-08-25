@@ -5,23 +5,23 @@ import { Box } from "@mui/system";
 
 import AddLabelList from "./components/List";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
-import useAppSelector from "../../hooks/useAppSelector";
+import useAppDispatch from "../../../../hooks/useAppDispatch";
+import useAppSelector from "../../../../hooks/useAppSelector";
 
-import { TaskSlice } from "../../store/reducers/TaskSlice";
+import { TaskSlice } from "../../../../store/reducers/TaskSlice";
 
-import { ILabel } from "../../interfaces/ILabel";
-import { ITask } from "../../interfaces/ITask";
+import { ILabel } from "../../../../interfaces/ILabel";
+import { ITask } from "../../../../interfaces/ITask";
 
-import ModalPopup from "../UI/BaseModal";
+import ModalPopup from "../../../UI/BaseModal";
 
-interface IAddLabelProps {
+interface ITaskAddLabelProps {
     task: ITask;
     isShow: boolean;
     onCloseHandler: () => void;
 }
 
-const AddLabel: React.FC<IAddLabelProps> = ({ task, isShow, onCloseHandler }) => {
+const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandler }) => {
     const dispatch = useAppDispatch();
     const { addLabelToTask, deleteLabelFromTask } = TaskSlice.actions;
 
@@ -104,4 +104,4 @@ const AddLabel: React.FC<IAddLabelProps> = ({ task, isShow, onCloseHandler }) =>
     );
 };
 
-export default React.memo(AddLabel);
+export default React.memo(TaskAddLabel);

@@ -59,9 +59,8 @@ const SettingsPage: React.FC = () => {
             </Divider>
             <Container
                 sx={{
-                    display: "grid",
-                    gridGap: "10px",
-                    gridTemplateColumns: "repeat(2, max-content)",
+                    display: "flex",
+                    flexDirection: "column",
                     justifyContent: "flex-start",
                     padding: "5px",
                 }}

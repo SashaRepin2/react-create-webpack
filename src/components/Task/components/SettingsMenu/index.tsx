@@ -9,8 +9,8 @@ import { TaskSlice } from "../../../../store/reducers/TaskSlice";
 
 import { ITask } from "../../../../interfaces/ITask";
 
-import TaskAddLabel from "../../../AddLabel";
 import AlertDialog from "../../../UI/AlertDialog";
+import TaskAddLabel from "../AddLabel";
 
 interface ITaskSettingsMenuProps {
     task: ITask;
