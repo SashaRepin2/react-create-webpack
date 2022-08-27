@@ -1,16 +1,18 @@
 import React from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 
 import { ILabel } from "../../../../interfaces/ILabel";
 
 interface ILabelsGroupItemProps {
     label: ILabel;
-    onDeleteHandler: (labelId: number) => void;
+    onDelete: (labelId: number) => void;
+    onEdit: (labelId: number) => void;
 }
 
-const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDeleteHandler }) => {
+const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDelete, onEdit }) => {
     return (
         <React.Fragment>
             <Container
@@ -18,9 +20,9 @@ const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDeleteHandl
                 sx={{
                     minWidth: "200px",
                     padding: "5px",
-                    display: "flex",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, 1fr) min-content",
                     alignItems: "center",
-                    justifyContent: "space-between",
                     bgcolor: "#8458b3",
                     borderRadius: "7px",
                     boxShadow: 2,
@@ -30,8 +32,6 @@ const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDeleteHandl
                     className={"labels-group__label-title"}
                     variant={"subtitle1"}
                     sx={{
-                        margin: "0 5px",
-
                         color: "#fff",
                     }}
                 >
@@ -48,14 +48,28 @@ const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDeleteHandl
                         boxShadow: 3,
                     }}
                 />
-                <Box>
+                <Box
+                    className={"labels-group__label-settings"}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        alignItems: "center",
+                    }}
+                >
+                    {/* <IconButton
+                        className={"labels-group__label-delete"}
+                        onClick={() => onEdit(label)}
+                        sx={{
+                            color: "#ffff00",
+                        }}
+                    >
+                        <EditIcon />
+                    </IconButton> */}
                     <IconButton
                         className={"labels-group__label-delete"}
-                        onClick={() => {
-                            onDeleteHandler(label.id);
-                        }}
+                        onClick={() => onDelete(label.id)}
                         sx={{
-                            color: "red",
+                            color: "#f00",
                         }}
                     >
                         <DeleteIcon />

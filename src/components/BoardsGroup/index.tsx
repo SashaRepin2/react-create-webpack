@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Stack, Typography } from "@mui/material";
+import { Container, Stack, Typography } from "@mui/material";
 
 import Board from "./components/Item";
 
@@ -29,11 +29,20 @@ const BoardsGroup: React.FC = () => {
 
     return (
         <React.Fragment>
-            <Input
-                inputValue={filterValue}
-                placeholderValue={"Введите название доски"}
-                onChangeHandler={onChangeFilterValue}
-            />
+            <Container
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    paddingTop: "15px",
+                }}
+            >
+                <Input
+                    inputValue={filterValue}
+                    placeholderValue={"Введите название доски"}
+                    onChangeHandler={onChangeFilterValue}
+                />
+            </Container>
             <Stack
                 direction="column"
                 justifyContent="flex-start"

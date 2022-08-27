@@ -3,10 +3,22 @@ import React from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Box, Container, Divider, Typography } from "@mui/material";
 
+import AddLabel from "../components/LabelForm";
 import LabelsGroup from "../components/LabelsGroup";
-import AddLabel from "../components/LabelsGroup/components/AddLabel";
+
+import { ILabel } from "../interfaces/ILabel";
 
 const SettingsPage: React.FC = () => {
+    const [currEditLable, setCurrEditLabel] = React.useState<ILabel | null>(null);
+
+    function onEditLabelHandler(lable: ILabel) {
+        setCurrEditLabel(lable);
+    }
+
+    function onCloseEditHandler() {
+        setCurrEditLabel(null);
+    }
+
     return (
         <Container
             sx={{
@@ -37,11 +49,20 @@ const SettingsPage: React.FC = () => {
                 >
                     Настройки
                 </Typography>
-                <SettingsIcon sx={{ fill: "#fff", height: "32px", width: "32px" }} />
+                <SettingsIcon
+                    sx={{
+                        fill: "#fff",
+                        height: "32px",
+                        width: "32px",
+                    }}
+                />
             </Box>
             <Divider
                 variant={"fullWidth"}
-                sx={{ "&::after, &::before": { borderWidth: "2px" }, margin: "15px 0" }}
+                sx={{
+                    "&::after, &::before": { borderWidth: "2px" },
+                    margin: "15px 0",
+                }}
             >
                 <Typography
                     variant={"subtitle2"}
@@ -59,14 +80,18 @@ const SettingsPage: React.FC = () => {
             </Divider>
             <Container
                 sx={{
-                    display: "flex",
-                    flexDirection: "column",
+                    display: "grid",
+                    gridTemplateColumns: "1fr min-content",
                     justifyContent: "flex-start",
+                    columnGap: "10px",
                     padding: "5px",
                 }}
             >
-                <LabelsGroup />
-                <AddLabel />
+                <LabelsGroup onEditLabel={onEditLabelHandler} />
+                <AddLabel
+                    label={currEditLable}
+                    onCloseEdit={onCloseEditHandler}
+                />
             </Container>
         </Container>
     );

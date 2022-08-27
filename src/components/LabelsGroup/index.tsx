@@ -9,7 +9,13 @@ import useAppSelector from "../../hooks/useAppSelector";
 
 import { LabelSlice } from "../../store/reducers/LabelSlice";
 
-const LabelsGroup: React.FC = () => {
+import { ILabel } from "../../interfaces/ILabel";
+
+interface ILabelsGroupProps {
+    onEditLabel: (lable: ILabel) => void;
+}
+
+const LabelsGroup: React.FC<ILabelsGroupProps> = ({ onEditLabel }) => {
     const dispatch = useAppDispatch();
     const { deleteLabel } = LabelSlice.actions;
 
@@ -37,7 +43,10 @@ const LabelsGroup: React.FC = () => {
                 <Label
                     key={label.id}
                     label={label}
-                    onDeleteHandler={onDeleteLabelHanlder}
+                    onDelete={onDeleteLabelHanlder}
+                    onEdit={(listId) => {
+                        console.log(listId);
+                    }}
                 />
             ))}
         </Stack>

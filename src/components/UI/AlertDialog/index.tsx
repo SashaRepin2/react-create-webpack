@@ -1,14 +1,11 @@
 import * as React from "react";
 
+import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import ReactDOM from "react-dom";
 
-import styles from "./AlertDialog.module.scss";
+import "./AlertDialog.scss";
+
+import BaseModal from "../BaseModal";
 
 interface IAlertDialogProps {
     isOpen: boolean;
@@ -29,23 +26,32 @@ const AlertDialog: React.FC<IAlertDialogProps> = ({
     onClose,
     onSubmit,
 }) => {
-    return ReactDOM.createPortal(
-        <Dialog
-            open={isOpen}
+    return (
+        <BaseModal
+            isOpen={isOpen}
+            title={title}
             onClose={onClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-            <DialogContent>
-                <DialogContentText id="alert-dialog-description">{description}</DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={onClose}>{closeTextBtn ? closeTextBtn : "Закрыть"} </Button>
-                <Button onClick={onSubmit}>{submitTextBtn ? submitTextBtn : "Принять"}</Button>
-            </DialogActions>
-        </Dialog>,
-        document.body
+            <Box className={"alert-dialog"}>
+                <Box className={"alert-dialog__text"}>{description}</Box>
+                <Box className={"alert-dialog__controls"}>
+                    <Button
+                        className={"alert-dialog__controls-button"}
+                        variant={"contained"}
+                        onClick={onClose}
+                    >
+                        {closeTextBtn || "Отмена"}
+                    </Button>
+                    <Button
+                        className={"alert-dialog__controls-button"}
+                        variant={"contained"}
+                        onClick={onSubmit}
+                    >
+                        {submitTextBtn || "Принять"}
+                    </Button>
+                </Box>
+            </Box>
+        </BaseModal>
     );
 };
 

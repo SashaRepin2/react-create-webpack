@@ -13,7 +13,7 @@ import { TaskSlice } from "../../../../store/reducers/TaskSlice";
 import { ILabel } from "../../../../interfaces/ILabel";
 import { ITask } from "../../../../interfaces/ITask";
 
-import ModalPopup from "../../../UI/BaseModal";
+import BaseModal from "../../../UI/BaseModal";
 
 interface ITaskAddLabelProps {
     task: ITask;
@@ -43,9 +43,10 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
 
     return (
         <div>
-            <ModalPopup
-                isShow={isShow}
-                onCloseHandle={onCloseHandler}
+            <BaseModal
+                isOpen={isShow}
+                title={"Добавление метки"}
+                onClose={onCloseHandler}
             >
                 <Container>
                     <Box
@@ -99,7 +100,7 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
                         />
                     </Box>
                 </Container>
-            </ModalPopup>
+            </BaseModal>
         </div>
     );
 };
