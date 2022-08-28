@@ -1,45 +1,34 @@
 import React from "react";
 
-import { Button, Container } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { HexColorPicker } from "react-colorful";
 
 import useAppDispatch from "../../hooks/useAppDispatch";
+import useAppSelector from "../../hooks/useAppSelector";
 
-import { LabelSlice } from "../../store/reducers/LabelSlice";
-
-import { ILabel } from "../../interfaces/ILabel";
+import store from "../../store";
+import { LabelFormSlice } from "../../store/reducers/LabelFormSlice";
+import submitLabelForm from "../../store/thunk/submitLabelForm";
 
 import Input from "../UI/Input";
 
-const initLabel = { title: "", hexColor: "#fff" };
-
-interface ILabelFormProps {
-    label: ILabel | null;
-    onCloseEdit: () => void;
-}
-
-const LabelForm: React.FC<ILabelFormProps> = ({ label, onCloseEdit }) => {
+const LabelForm: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { addLabel, editLabel } = LabelSlice.actions;
-    const [labelForm, setLabelForm] = React.useState<{ title: string; hexColor: string }>(
-        initLabel
-    );
+    const { initLabel, editLabel } = useAppSelector((state) => {
+        return {
+            initLabel: state.labelFormReducer.fieldsValues,
+            editLabel: state.labelFormReducer.editLabel,
+        };
+    });
 
-    function onSubmitHandler() {
-        if (labelForm.title && labelForm.hexColor) {
-            if (label) {
-                dispatch(editLabel({ ...label, ...labelForm }));
-            } else {
-                dispatch(addLabel({ id: Date.now(), ...labelForm }));
-            }
+    const { changeHexColor, changeTitle, resetForm } = LabelFormSlice.actions;
 
-            setLabelForm(initLabel);
-        }
+    function onSubmitFormHandler() {
+        submitLabelForm()(dispatch, store.getState());
     }
 
-    function onCloseEditHandler() {
-        onCloseEdit();
-        setLabelForm(initLabel);
+    function onCloseFormHandler() {
+        dispatch(resetForm());
     }
 
     return (
@@ -47,31 +36,65 @@ const LabelForm: React.FC<ILabelFormProps> = ({ label, onCloseEdit }) => {
             sx={{
                 display: "flex",
                 justifyContent: "flex-start",
+                alignItems: "center",
                 flexDirection: "column",
-                gap: "25px",
+                gap: "20px",
                 bgcolor: "purple",
                 borderRadius: "5px",
                 padding: "10px",
             }}
         >
+            {editLabel && (
+                <Container
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <Typography
+                        variant={"h5"}
+                        sx={{
+                            color: "#fff",
+                        }}
+                    >
+                        Редактирование
+                    </Typography>
+                </Container>
+            )}
             <Input
-                inputValue={labelForm.title}
+                inputValue={initLabel.title}
                 placeholderValue={"Title"}
                 onChangeHandler={(value) => {
-                    setLabelForm({ ...labelForm, title: value });
+                    dispatch(changeTitle(value));
                 }}
             />
             <HexColorPicker
-                color={labelForm.hexColor}
+                color={initLabel.hexColor}
                 onChange={(value) => {
-                    setLabelForm({ ...labelForm, hexColor: value });
+                    dispatch(changeHexColor(value));
                 }}
             />
 
-            {label && (
+            <Box sx={{ display: "flex", columnGap: "10px" }}>
+                {editLabel && (
+                    <Button
+                        variant={"contained"}
+                        onClick={onCloseFormHandler}
+                        sx={{
+                            fontWeight: "bold",
+                            color: "purple",
+                            bgcolor: "#D0BDF4",
+                            "&:hover": { bgcolor: "#D0BDF4" },
+                        }}
+                    >
+                        Отмена
+                    </Button>
+                )}
+
                 <Button
                     variant={"contained"}
-                    onClick={onCloseEditHandler}
+                    onClick={onSubmitFormHandler}
                     sx={{
                         fontWeight: "bold",
                         color: "purple",
@@ -79,24 +102,11 @@ const LabelForm: React.FC<ILabelFormProps> = ({ label, onCloseEdit }) => {
                         "&:hover": { bgcolor: "#D0BDF4" },
                     }}
                 >
-                    Отмена
+                    {editLabel ? "Сохранить" : "Добавить"}
                 </Button>
-            )}
-
-            <Button
-                variant={"contained"}
-                onClick={onSubmitHandler}
-                sx={{
-                    fontWeight: "bold",
-                    color: "purple",
-                    bgcolor: "#D0BDF4",
-                    "&:hover": { bgcolor: "#D0BDF4" },
-                }}
-            >
-                {!label ? "Добавить" : "Сохранить"}
-            </Button>
+            </Box>
         </Container>
     );
 };
 
-export default LabelForm;
+export default React.memo(LabelForm);

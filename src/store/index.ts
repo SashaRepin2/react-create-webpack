@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import boardReducer from "./reducers/BoardSlice";
+import labelFormReducer from "./reducers/LabelFormSlice";
 import labelReducer from "./reducers/LabelSlice";
 import listReducer from "./reducers/ListSlice";
 import taskReducer from "./reducers/TaskSlice";
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     listReducer,
     taskReducer,
     labelReducer,
+    labelFormReducer,
 });
 
 const persistConfig = {

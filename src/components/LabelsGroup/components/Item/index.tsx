@@ -9,7 +9,7 @@ import { ILabel } from "../../../../interfaces/ILabel";
 interface ILabelsGroupItemProps {
     label: ILabel;
     onDelete: (labelId: number) => void;
-    onEdit: (labelId: number) => void;
+    onEdit: (label: ILabel) => void;
 }
 
 const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDelete, onEdit }) => {
@@ -56,7 +56,7 @@ const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDelete, onE
                         alignItems: "center",
                     }}
                 >
-                    {/* <IconButton
+                    <IconButton
                         className={"labels-group__label-delete"}
                         onClick={() => onEdit(label)}
                         sx={{
@@ -64,7 +64,7 @@ const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDelete, onE
                         }}
                     >
                         <EditIcon />
-                    </IconButton> */}
+                    </IconButton>
                     <IconButton
                         className={"labels-group__label-delete"}
                         onClick={() => onDelete(label.id)}

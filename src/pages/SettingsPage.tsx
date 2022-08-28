@@ -3,22 +3,10 @@ import React from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Box, Container, Divider, Typography } from "@mui/material";
 
-import AddLabel from "../components/LabelForm";
+import LabelForm from "../components/LabelForm";
 import LabelsGroup from "../components/LabelsGroup";
 
-import { ILabel } from "../interfaces/ILabel";
-
 const SettingsPage: React.FC = () => {
-    const [currEditLable, setCurrEditLabel] = React.useState<ILabel | null>(null);
-
-    function onEditLabelHandler(lable: ILabel) {
-        setCurrEditLabel(lable);
-    }
-
-    function onCloseEditHandler() {
-        setCurrEditLabel(null);
-    }
-
     return (
         <Container
             sx={{
@@ -87,11 +75,8 @@ const SettingsPage: React.FC = () => {
                     padding: "5px",
                 }}
             >
-                <LabelsGroup onEditLabel={onEditLabelHandler} />
-                <AddLabel
-                    label={currEditLable}
-                    onCloseEdit={onCloseEditHandler}
-                />
+                <LabelsGroup />
+                <LabelForm />
             </Container>
         </Container>
     );
