@@ -17,13 +17,13 @@ export const LabelSlice = createSlice({
         addLabel(state, action: PayloadAction<ILabel>) {
             state.labels.push(action.payload);
         },
-        changeLabel(state, action: PayloadAction<ILabel>) {
+        editLabel(state, action: PayloadAction<ILabel>) {
             const newLabel = action.payload;
             const label = state.labels.find((label) => label.id === newLabel.id);
 
             if (label) {
                 label.hexColor = newLabel.hexColor;
-                label.title = label.title;
+                label.title = newLabel.title;
             }
         },
         deleteLabel(state, action: PayloadAction<number>) {

@@ -3,7 +3,7 @@ import React from "react";
 import { Stack } from "@mui/material";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
-import List from "./components/Item/List";
+import List from "./components/List/List";
 
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
@@ -95,7 +95,7 @@ const ListsGroup: React.FC<IListsGroupProps> = ({ board }) => {
                                     index={index}
                                     list={list}
                                     key={list.id}
-                                    onDeleteHandler={onDeleteListHandler}
+                                    onDelete={onDeleteListHandler}
                                 />
                             ))}
                         {provided.placeholder}

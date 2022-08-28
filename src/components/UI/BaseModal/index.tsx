@@ -1,37 +1,60 @@
 import React from "react";
 
-import { Modal } from "@mui/material";
 import { Box } from "@mui/system";
+import ReactDOM from "react-dom";
+
+import getScrollbarWidth from "../../../utils/getScrollbarWidth";
+
+import "./BaseModal.scss";
 
 interface IBaseModalProps {
-    isShow: boolean;
-    onCloseHandle: () => void;
+    isOpen: boolean;
+    title?: string;
     children: React.ReactNode;
+    onClose: () => void;
 }
 
-const BaseModal: React.FC<IBaseModalProps> = ({ isShow, onCloseHandle, children }) => {
-    return (
-        <Modal
-            open={isShow}
-            onClose={onCloseHandle}
-        >
-            <Box
-                sx={{
-                    minWidth: "300px",
-                    maxWidth: "500px",
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    borderRadius: "5px",
-                    bgcolor: "#1976d2",
-                    boxShadow: 24,
-                    padding: "10px",
-                }}
-            >
-                {children}
+const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children }) => {
+    const modalRef = React.useRef<HTMLElement>(null);
+
+    React.useEffect(() => {
+        const onClickOutsideModal = (event: MouseEvent) => {
+            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+                onClose();
+            }
+        };
+
+        document.addEventListener("click", onClickOutsideModal, true);
+
+        return () => {
+            document.removeEventListener("click", onClickOutsideModal, true);
+        };
+    }, []);
+
+    React.useEffect(() => {
+        document.body.style.paddingRight = isOpen ? getScrollbarWidth() + "px" : "";
+        document.body.style.overflow = isOpen ? "hidden" : "";
+
+        return () => {
+            document.body.style.paddingRight = "";
+            document.body.style.overflow = "";
+        };
+    }, [isOpen]);
+
+    return ReactDOM.createPortal(
+        isOpen && (
+            <Box className={"modal"}>
+                <Box
+                    className={"modal__body"}
+                    onClick={(e) => e.stopPropagation()}
+                    ref={modalRef}
+                >
+                    {title && <Box className={"modal__body-title"}>{title}</Box>}
+                    <Box className={"modal__body-content"}>{children}</Box>
+                </Box>
             </Box>
-        </Modal>
+        ),
+        document.body
     );
 };
 

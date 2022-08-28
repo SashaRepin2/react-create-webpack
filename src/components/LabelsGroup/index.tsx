@@ -7,17 +7,25 @@ import Label from "./components/Item";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 
+import { LabelFormSlice } from "../../store/reducers/LabelFormSlice";
 import { LabelSlice } from "../../store/reducers/LabelSlice";
+
+import { ILabel } from "../../interfaces/ILabel";
 
 const LabelsGroup: React.FC = () => {
     const dispatch = useAppDispatch();
     const { deleteLabel } = LabelSlice.actions;
+    const { changeEditLabel } = LabelFormSlice.actions;
 
     const labels = useAppSelector((state) => state.labelReducer.labels);
 
-    const onDeleteLabelHanlder = (labelId: number) => {
+    function onDeleteLabelHanlder(labelId: number) {
         dispatch(deleteLabel(labelId));
-    };
+    }
+
+    function onEditLabelHandler(label: ILabel) {
+        dispatch(changeEditLabel(label));
+    }
 
     return (
         <Stack
@@ -37,7 +45,8 @@ const LabelsGroup: React.FC = () => {
                 <Label
                     key={label.id}
                     label={label}
-                    onDeleteHandler={onDeleteLabelHanlder}
+                    onDelete={onDeleteLabelHanlder}
+                    onEdit={onEditLabelHandler}
                 />
             ))}
         </Stack>

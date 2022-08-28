@@ -1,0 +1,24 @@
+.alert-dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &__text {
+        margin: 10px auto;
+        padding: 5px 10px;
+
+        color: #fff;
+        font-weight: normal;
+        font-size: 1.2rem;
+    }
+
+    &__controls {
+        padding: 8px 10px;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        background-color: #57327e;
+    }
+}
