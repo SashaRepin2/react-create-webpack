@@ -40,11 +40,12 @@ const AddList: React.FC<IAddListProps> = ({ boardId }) => {
             sx={{
                 display: "flex",
                 alignItems: "center",
+                padding: "10px",
+                margin: "0 15px",
+                gap: "10px",
                 color: "#fff",
                 bgcolor: "#8458b3",
                 borderRadius: "10px",
-                padding: "10px",
-                marginLeft: "15px",
             }}
         >
             <Input
