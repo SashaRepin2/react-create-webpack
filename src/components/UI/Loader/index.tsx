@@ -2,9 +2,14 @@ import React from "react";
 
 import "./Loader.scss";
 
-const Loader: React.FC = () => {
+interface ILoaderProps {
+    position: "absolute" | "fixed" | "relative";
+}
+
+const Loader: React.FC<ILoaderProps> = ({ position }) => {
     return (
         <svg
+            style={{ position }}
             className={"spinner"}
             viewBox="0 0 50 50"
         >
