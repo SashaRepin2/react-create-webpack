@@ -3,8 +3,8 @@ import React from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Box, Container, Divider, Typography } from "@mui/material";
 
+import LabelForm from "../components/LabelForm";
 import LabelsGroup from "../components/LabelsGroup";
-import AddLabel from "../components/LabelsGroup/components/AddLabel";
 
 const SettingsPage: React.FC = () => {
     return (
@@ -37,11 +37,20 @@ const SettingsPage: React.FC = () => {
                 >
                     Настройки
                 </Typography>
-                <SettingsIcon sx={{ fill: "#fff", height: "32px", width: "32px" }} />
+                <SettingsIcon
+                    sx={{
+                        fill: "#fff",
+                        height: "32px",
+                        width: "32px",
+                    }}
+                />
             </Box>
             <Divider
                 variant={"fullWidth"}
-                sx={{ "&::after, &::before": { borderWidth: "2px" }, margin: "15px 0" }}
+                sx={{
+                    "&::after, &::before": { borderWidth: "2px" },
+                    margin: "15px 0",
+                }}
             >
                 <Typography
                     variant={"subtitle2"}
@@ -60,14 +69,14 @@ const SettingsPage: React.FC = () => {
             <Container
                 sx={{
                     display: "grid",
-                    gridGap: "10px",
-                    gridTemplateColumns: "repeat(2, max-content)",
+                    gridTemplateColumns: "1fr min-content",
                     justifyContent: "flex-start",
+                    columnGap: "10px",
                     padding: "5px",
                 }}
             >
                 <LabelsGroup />
-                <AddLabel />
+                <LabelForm />
             </Container>
         </Container>
     );

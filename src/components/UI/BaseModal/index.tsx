@@ -1,35 +1,59 @@
 import React from "react";
 
-import { Divider, Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import ReactDOM from "react-dom";
 
-import styles from "./BaseModal.module.scss";
+import getScrollbarWidth from "../../../utils/getScrollbarWidth";
+
+import "./BaseModal.scss";
 
 interface IBaseModalProps {
-    isShow: boolean;
-    title: string;
+    isOpen: boolean;
+    title?: string;
     children: React.ReactNode;
     onClose: () => void;
 }
 
-const BaseModal: React.FC<IBaseModalProps> = ({ isShow, onClose, children, title }) => {
+const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children }) => {
+    const modalRef = React.useRef<HTMLElement>(null);
+
+    React.useEffect(() => {
+        const onClickOutsideModal = (event: MouseEvent) => {
+            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+                onClose();
+            }
+        };
+
+        document.addEventListener("click", onClickOutsideModal, true);
+
+        return () => {
+            document.removeEventListener("click", onClickOutsideModal, true);
+        };
+    }, []);
+
+    React.useEffect(() => {
+        document.body.style.paddingRight = isOpen ? getScrollbarWidth() + "px" : "";
+        document.body.style.overflow = isOpen ? "hidden" : "";
+
+        return () => {
+            document.body.style.paddingRight = "";
+            document.body.style.overflow = "";
+        };
+    }, [isOpen]);
+
     return ReactDOM.createPortal(
-        <Modal
-            open={isShow}
-            onClose={onClose}
-        >
-            <Box className={styles.body}>
-                <Typography
-                    className={styles.title}
-                    variant={"h6"}
+        isOpen && (
+            <Box className={"modal"}>
+                <Box
+                    className={"modal__body"}
+                    onClick={(e) => e.stopPropagation()}
+                    ref={modalRef}
                 >
-                    {title}
-                </Typography>
-                <Divider className={styles.divider} />
-                <Box className={styles.content}>{children}</Box>
+                    {title && <Box className={"modal__body-title"}>{title}</Box>}
+                    <Box className={"modal__body-content"}>{children}</Box>
+                </Box>
             </Box>
-        </Modal>,
+        ),
         document.body
     );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container, InputBase } from "@mui/material";
+import { Box, InputBase } from "@mui/material";
 import { SxProps } from "@mui/system";
 
 interface IInput {
@@ -21,13 +21,8 @@ const Input: React.FC<IInput> = ({
     sxContainer,
 }) => {
     return (
-        <Container
+        <Box
             sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "5px",
-                margin: "5px",
                 ...sxContainer,
             }}
         >
@@ -49,7 +44,7 @@ const Input: React.FC<IInput> = ({
                     ...sxInput,
                 }}
             />
-        </Container>
+        </Box>
     );
 };
 

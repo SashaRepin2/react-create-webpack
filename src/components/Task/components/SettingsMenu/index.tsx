@@ -9,7 +9,8 @@ import { TaskSlice } from "../../../../store/reducers/TaskSlice";
 
 import { ITask } from "../../../../interfaces/ITask";
 
-import TaskAddLabel from "../../../AddLabel";
+import AlertDialog from "../../../UI/AlertDialog";
+import TaskAddLabel from "../AddLabel";
 
 interface ITaskSettingsMenuProps {
     task: ITask;
@@ -29,6 +30,7 @@ const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
     const dispatch = useAppDispatch();
     const { deleteTask } = TaskSlice.actions;
     const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false);
+    const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false);
 
     function onOpenModalHandler() {
         setIsOpenModal(true);
@@ -39,8 +41,16 @@ const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
         setIsOpenModal(false);
     }
 
-    function onDeleteTaskHandler(taskId: number) {
-        dispatch(deleteTask(taskId));
+    function onOpenDialogHandler() {
+        setIsOpenDialog(true);
+    }
+
+    function onCloseDialogHandler() {
+        setIsOpenDialog(false);
+    }
+
+    function onSubmitDialogHandler() {
+        dispatch(deleteTask(task.id));
     }
 
     return (
@@ -65,12 +75,20 @@ const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
                 }}
             >
                 <MenuItem onClick={onOpenModalHandler}>Метки</MenuItem>
-                <MenuItem onClick={() => onDeleteTaskHandler(task.id)}>Удалить</MenuItem>
+                <MenuItem onClick={onOpenDialogHandler}>Удалить</MenuItem>
             </Menu>
             <TaskAddLabel
                 task={task}
                 isShow={isOpenModal}
                 onCloseHandler={onCloseModalHandler}
+            />
+            <AlertDialog
+                isOpen={isOpenDialog}
+                title={"Удаление задачи"}
+                description={`Вы действительно хотите удалить задачу "${task.title}"`}
+                submitTextBtn={"Удалить"}
+                onClose={onCloseDialogHandler}
+                onSubmit={onSubmitDialogHandler}
             />
         </React.Fragment>
     );
