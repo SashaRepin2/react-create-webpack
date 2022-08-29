@@ -1,15 +1,15 @@
 import React from "react";
 
-import styles from "./Loader.module.scss";
+import "./Loader.scss";
 
 const Loader: React.FC = () => {
     return (
         <svg
-            className={styles.spinner}
+            className={"spinner"}
             viewBox="0 0 50 50"
         >
             <circle
-                className={styles.path}
+                className={"spinner__path"}
                 cx="25"
                 cy="25"
                 r="20"
