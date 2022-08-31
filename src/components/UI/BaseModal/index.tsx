@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import { Box } from "@mui/system";
 import ReactDOM from "react-dom";
@@ -15,9 +15,9 @@ interface IBaseModalProps {
 }
 
 const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children }) => {
-    const modalRef = React.useRef<HTMLElement>(null);
+    const modalRef = useRef<HTMLElement>(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const onClickOutsideModal = (event: MouseEvent) => {
             if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
                 onClose();
@@ -31,7 +31,7 @@ const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children
         };
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         document.body.style.paddingRight = isOpen ? getScrollbarWidth() + "px" : "";
         document.body.style.overflow = isOpen ? "hidden" : "";
 

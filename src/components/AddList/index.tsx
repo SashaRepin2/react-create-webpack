@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
 import { Box, IconButton } from "@mui/material";
@@ -19,7 +19,7 @@ const AddList: React.FC<IAddListProps> = ({ boardId }) => {
 
     const { addList } = ListSlice.actions;
     const { addBoardList } = BoardSlice.actions;
-    const [inputValue, setInputValue] = React.useState<string>("");
+    const [inputValue, setInputValue] = useState<string>("");
 
     function onAddListHandler() {
         if (inputValue) {

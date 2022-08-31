@@ -2,34 +2,33 @@ import React from "react";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
-
-import { LINKS_BOARDS_PAGE } from "../../../consts/links";
+import { useNavigate } from "react-router-dom";
 
 const BackButton: React.FC = () => {
+    const navigate = useNavigate();
+
+    function onClickHandler() {
+        navigate(-1);
+    }
+
     return (
-        <Link
-            to={LINKS_BOARDS_PAGE}
+        <IconButton
             className="back-button"
-            style={{
+            aria-label="back"
+            onClick={onClickHandler}
+            sx={{
                 position: "fixed",
                 bottom: "25px",
                 left: "25px",
                 zIndex: "1001",
+                height: "64px",
+                width: "64px",
+                bgcolor: "#8458b3",
+                "&:hover": { bgcolor: "#5E229E" },
             }}
         >
-            <IconButton
-                aria-label="back"
-                sx={{
-                    height: "64px",
-                    width: "64px",
-                    bgcolor: "#8458b3",
-                    "&:hover": { bgcolor: "#5E229E" },
-                }}
-            >
-                <ArrowBackIcon sx={{ fill: "#fff" }} />
-            </IconButton>
-        </Link>
+            <ArrowBackIcon sx={{ fill: "#fff" }} />
+        </IconButton>
     );
 };
 export default BackButton;

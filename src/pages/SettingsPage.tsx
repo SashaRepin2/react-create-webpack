@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Box, Container, Divider, Typography } from "@mui/material";
 
-import LabelForm from "../components/LabelForm";
+import LabelForm from "../components/Forms/LabelForm";
 import LabelsGroup from "../components/LabelsGroup";
 
+import useAppDispatch from "../hooks/useAppDispatch";
+
+import getBoardsThunk from "../store/thunk/boards";
+
 const SettingsPage: React.FC = () => {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(getBoardsThunk());
+    }, []);
+
     return (
         <Container
             sx={{

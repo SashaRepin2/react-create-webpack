@@ -1,13 +1,21 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+import { REQUEST_STATUSES } from "../../consts/requestStatuses";
+
 import { IBoard } from "../../interfaces/IBoard";
+
+import getBoardsThunk from "../thunk/boards";
 
 interface IBoardState {
     boards: IBoard[];
+    status: string;
+    error: string | null;
 }
 
 const initialState: IBoardState = {
     boards: [],
+    status: REQUEST_STATUSES.IDLE,
+    error: null,
 };
 
 export const BoardSlice = createSlice({
@@ -57,6 +65,24 @@ export const BoardSlice = createSlice({
                 board.sequenceLists = board.sequenceLists.filter((id) => id !== listId);
             }
         },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getBoardsThunk.pending, (state) => {
+            state.status = REQUEST_STATUSES.LOADING;
+            state.error = null;
+        });
+        builder.addCase(getBoardsThunk.fulfilled, (state) => {
+            state.status = REQUEST_STATUSES.IDLE;
+        });
+        builder.addCase(getBoardsThunk.rejected, (state, action) => {
+            if (action.payload) {
+                state.error = action.payload;
+            } else {
+                state.error = null;
+            }
+
+            state.status = REQUEST_STATUSES.REJECTED;
+        });
     },
 });
 

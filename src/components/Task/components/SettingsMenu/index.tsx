@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { IconButton, Menu, MenuItem } from "@mui/material";
@@ -29,8 +29,8 @@ const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
 }) => {
     const dispatch = useAppDispatch();
     const { deleteTask } = TaskSlice.actions;
-    const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false);
-    const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false);
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
     function onOpenModalHandler() {
         setIsOpenModal(true);
