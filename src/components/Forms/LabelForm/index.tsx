@@ -3,14 +3,14 @@ import React from "react";
 import { Box, Button, Container, Typography } from "@mui/material";
 import { HexColorPicker } from "react-colorful";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
-import useAppSelector from "../../hooks/useAppSelector";
+import useAppDispatch from "../../../hooks/useAppDispatch";
+import useAppSelector from "../../../hooks/useAppSelector";
 
-import store from "../../store";
-import { LabelFormSlice } from "../../store/reducers/LabelFormSlice";
-import submitLabelForm from "../../store/thunk/submitLabelForm";
+import store from "../../../store";
+import { LabelFormSlice } from "../../../store/reducers/LabelFormSlice";
+import submitLabelForm from "../../../store/thunk/labelForm";
 
-import Input from "../UI/Input";
+import Input from "../../UI/Input";
 
 const LabelForm: React.FC = () => {
     const dispatch = useAppDispatch();

@@ -9,11 +9,11 @@ import { Statuses } from "../../interfaces/ITask";
 
 import Input from "../UI/Input";
 
-interface AddTaskProps {
+interface IAddTaskProps {
     listId: number;
 }
 
-const AddTask: React.FC<AddTaskProps> = ({ listId }) => {
+const AddTask: React.FC<IAddTaskProps> = ({ listId }) => {
     const dispatch = useAppDispatch();
     const { addTask } = TaskSlice.actions;
     const { addListTask } = ListSlice.actions;

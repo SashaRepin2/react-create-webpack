@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { IBoard } from "../../interfaces/IBoard";
 
-import getBoardsThunk from "../thunk/getBoards";
+import getBoardsThunk from "../thunk/boards";
 
 interface IBoardState {
     boards: IBoard[];

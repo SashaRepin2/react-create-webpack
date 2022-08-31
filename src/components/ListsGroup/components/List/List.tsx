@@ -11,7 +11,7 @@ import { DND_TYPES_TASKS } from "../../../../consts/dndTypes";
 import { IList } from "../../../../interfaces/IList";
 import { ITask } from "../../../../interfaces/ITask";
 
-import AddList from "../../../AddTask/AddTask";
+import AddList from "../../../AddTask";
 import Task from "../../../Task";
 import AlertDialog from "../../../UI/AlertDialog";
 

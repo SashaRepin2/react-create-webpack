@@ -11,9 +11,9 @@ import {
     Typography,
 } from "@mui/material";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
+import useAppDispatch from "../../../hooks/useAppDispatch";
 
-import { BoardSlice } from "../../store/reducers/BoardSlice";
+import { BoardSlice } from "../../../store/reducers/BoardSlice";
 
 import "./BoardForm.scss";
 
