@@ -28,19 +28,7 @@ const HomePage: React.FC = () => {
                     setIsExpanded={onChangeFormExpanded}
                 />
             </Container>
-            <Container
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    backgroundColor: "#D0BDF4",
-                    borderRadius: "10px",
-                    minWidth: "300px",
-                    boxShadow: 4,
-                }}
-            >
-                <BoardsGroup />
-            </Container>
+            <BoardsGroup />
         </Container>
     );
 };
