@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import {
@@ -25,7 +25,7 @@ interface IBoardFormProps {
 const BoardForm: React.FC<IBoardFormProps> = ({ isExpanded, setIsExpanded }) => {
     const dispatch = useAppDispatch();
     const { addBoard } = BoardSlice.actions;
-    const [inputValue, setInputValue] = React.useState<string>("");
+    const [inputValue, setInputValue] = useState<string>("");
 
     function onSubmitHanlder() {
         if (inputValue) {

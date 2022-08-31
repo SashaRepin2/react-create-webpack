@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { Container, Stack, Typography } from "@mui/material";
 
@@ -8,7 +8,7 @@ import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 import useDebounce from "../../hooks/useDebounce";
 
-import getBoardsThunk from "../../store/thunk/getBoards";
+import getBoardsThunk from "../../store/thunk/boards";
 
 import { IBoard } from "../../interfaces/IBoard";
 
@@ -19,19 +19,19 @@ const BoardsGroup: React.FC = () => {
     const dispatch = useAppDispatch();
     const { boards, status } = useAppSelector((state) => state.boardReducer);
 
-    const [filteredBoards, setFilteredBoards] = React.useState<IBoard[]>(boards);
-    const [filterValue, setFilterValue] = React.useState<string>("");
+    const [filteredBoards, setFilteredBoards] = useState<IBoard[]>(boards);
+    const [filterValue, setFilterValue] = useState<string>("");
     const debouncedValue = useDebounce(filterValue, 500);
 
-    const onChangeFilterValue = React.useCallback((value: string) => {
+    const onChangeFilterValue = useCallback((value: string) => {
         setFilterValue(value);
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(getBoardsThunk());
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         setFilteredBoards(
             boards.filter((board) => board.title.toLocaleLowerCase().includes(debouncedValue))
         );

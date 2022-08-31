@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import useAppDispatch from "../../hooks/useAppDispatch";
 
@@ -17,7 +17,7 @@ const AddTask: React.FC<IAddTaskProps> = ({ listId }) => {
     const dispatch = useAppDispatch();
     const { addTask } = TaskSlice.actions;
     const { addListTask } = ListSlice.actions;
-    const [inputValue, setInputValue] = React.useState<string>("");
+    const [inputValue, setInputValue] = useState<string>("");
 
     function onKeyDownHandler(event: React.KeyboardEvent<HTMLInputElement>) {
         if (event.code === "Enter") {

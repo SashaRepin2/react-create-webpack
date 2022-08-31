@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
@@ -15,13 +15,13 @@ import AddList from "../../../AddTask";
 import Task from "../../../Task";
 import AlertDialog from "../../../UI/AlertDialog";
 
-interface ListProps {
+interface IListProps {
     list: IList;
     index: number;
     onDelete: (list: IList) => void;
 }
 
-const List: React.FC<ListProps> = ({ list, index, onDelete }) => {
+const List: React.FC<IListProps> = ({ list, index, onDelete }) => {
     const tasks = useAppSelector((state) => {
         const listTasks = state.taskReducer.tasks.filter((task) =>
             list.sequenceTasks.includes(task.id)
@@ -33,7 +33,7 @@ const List: React.FC<ListProps> = ({ list, index, onDelete }) => {
         );
     });
 
-    const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false);
+    const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
     function onOpenDialogHandler() {
         setIsOpenDialog(true);
@@ -50,8 +50,8 @@ const List: React.FC<ListProps> = ({ list, index, onDelete }) => {
     return (
         <React.Fragment>
             <Draggable
-                draggableId={list.id.toString()}
                 index={index}
+                draggableId={list.id.toString()}
             >
                 {(provided) => (
                     <Box

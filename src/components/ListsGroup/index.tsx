@@ -3,7 +3,7 @@ import React from "react";
 import { Stack } from "@mui/material";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
-import List from "./components/List/List";
+import List from "./components/List";
 
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";

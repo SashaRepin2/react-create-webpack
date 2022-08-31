@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 import { Container } from "@mui/material";
 
@@ -6,9 +6,9 @@ import { BoardForm } from "../components";
 import BoardsGroup from "../components/BoardsGroup";
 
 const HomePage: React.FC = () => {
-    const [isExpanded, setIsExpanded] = React.useState<boolean>(false);
+    const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
-    const onChangeFormExpanded = React.useCallback(() => {
+    const onChangeFormExpanded = useCallback(() => {
         setIsExpanded(!isExpanded);
     }, [isExpanded]);
 
