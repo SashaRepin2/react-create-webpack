@@ -4,15 +4,21 @@ import { Container, Stack, Typography } from "@mui/material";
 
 import Board from "./components/Item";
 
+import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 import useDebounce from "../../hooks/useDebounce";
+
+import getBoardsThunk from "../../store/thunk/getBoards";
 
 import { IBoard } from "../../interfaces/IBoard";
 
 import Input from "../UI/Input";
+import Loader from "../UI/Loader";
 
 const BoardsGroup: React.FC = () => {
-    const boards = useAppSelector((state) => state.boardReducer.boards);
+    const dispatch = useAppDispatch();
+    const { boards, status } = useAppSelector((state) => state.boardReducer);
+
     const [filteredBoards, setFilteredBoards] = React.useState<IBoard[]>(boards);
     const [filterValue, setFilterValue] = React.useState<string>("");
     const debouncedValue = useDebounce(filterValue, 500);
@@ -22,13 +28,27 @@ const BoardsGroup: React.FC = () => {
     }, []);
 
     React.useEffect(() => {
+        dispatch(getBoardsThunk());
+    }, []);
+
+    React.useEffect(() => {
         setFilteredBoards(
             boards.filter((board) => board.title.toLocaleLowerCase().includes(debouncedValue))
         );
     }, [debouncedValue, boards]);
 
     return (
-        <React.Fragment>
+        <Container
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                backgroundColor: "#D0BDF4",
+                borderRadius: "10px",
+                minWidth: "300px",
+                boxShadow: 4,
+            }}
+        >
             <Container
                 sx={{
                     display: "flex",
@@ -50,7 +70,15 @@ const BoardsGroup: React.FC = () => {
                 spacing={2}
                 sx={{ padding: "15px 0" }}
             >
-                {filteredBoards.length ? (
+                {status === "loading" ? (
+                    <Container
+                        sx={{
+                            margin: "15px 0",
+                        }}
+                    >
+                        <Loader position={"relative"} />
+                    </Container>
+                ) : filteredBoards.length ? (
                     filteredBoards.map((board) => (
                         <Board
                             key={board.id}
@@ -70,7 +98,7 @@ const BoardsGroup: React.FC = () => {
                     </Typography>
                 )}
             </Stack>
-        </React.Fragment>
+        </Container>
     );
 };
 

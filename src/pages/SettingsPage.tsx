@@ -6,7 +6,17 @@ import { Box, Container, Divider, Typography } from "@mui/material";
 import LabelForm from "../components/LabelForm";
 import LabelsGroup from "../components/LabelsGroup";
 
+import useAppDispatch from "../hooks/useAppDispatch";
+
+import getBoardsThunk from "../store/thunk/getBoards";
+
 const SettingsPage: React.FC = () => {
+    const dispatch = useAppDispatch();
+
+    React.useEffect(() => {
+        dispatch(getBoardsThunk());
+    }, []);
+
     return (
         <Container
             sx={{
