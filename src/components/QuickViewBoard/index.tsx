@@ -4,34 +4,27 @@ import useAppDispatch from "../../hooks/useAppDispatch";
 
 import { IBoard } from "../../interfaces/IBoard";
 
+import ListsGroup from "../ListsGroup";
 import BaseModal from "../UI/BaseModal";
 
 interface IQuickViewBoardProps {
     board: IBoard;
+    isOpen: boolean;
+    onClose: () => void;
 }
 
-const QuickViewBoard: React.FC<IQuickViewBoardProps> = ({ board }) => {
+const QuickViewBoard: React.FC<IQuickViewBoardProps> = ({ board, isOpen, onClose }) => {
     const dispatch = useAppDispatch();
-
-    const [isShow, setIsShow] = React.useState<boolean>(false);
-
-    function onCloseHandler() {
-        setIsShow(false);
-    }
-
-    function onOpenHandler() {
-        setIsShow(true);
-    }
 
     return (
         <BaseModal
-            isShow={isShow}
+            isOpen={isOpen}
             title={"Быстрый просмотр"}
-            onClose={onCloseHandler}
+            onClose={onClose}
         >
-            quick view
+            <ListsGroup board={board} />
         </BaseModal>
     );
 };
 
-export default QuickViewBoard;
+export default React.memo(QuickViewBoard);

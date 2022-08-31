@@ -19,9 +19,10 @@ import { IList } from "../../interfaces/IList";
 
 interface IListsGroupProps {
     board: IBoard;
+    isEditMode?: boolean;
 }
 
-const ListsGroup: React.FC<IListsGroupProps> = ({ board }) => {
+const ListsGroup: React.FC<IListsGroupProps> = ({ board, isEditMode = false }) => {
     const dispatch = useAppDispatch();
     const { deleteListTasks } = TaskSlice.actions;
     const { moveTask, deleteList } = ListSlice.actions;
