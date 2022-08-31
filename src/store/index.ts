@@ -17,20 +17,27 @@ import labelReducer from "./reducers/LabelSlice";
 import listReducer from "./reducers/ListSlice";
 import taskReducer from "./reducers/TaskSlice";
 
+const rootPersistConfig = {
+    key: "root",
+    storage,
+    blacklist: ["boardReducer"],
+};
+
+const boardPersistConfig = {
+    key: "board",
+    storage,
+    blacklist: ["error", "status"],
+};
+
 const rootReducer = combineReducers({
-    boardReducer,
+    boardReducer: persistReducer(boardPersistConfig, boardReducer),
     listReducer,
     taskReducer,
     labelReducer,
     labelFormReducer,
 });
 
-const persistConfig = {
-    key: "root",
-    storage,
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 export const store = configureStore({
     reducer: persistedReducer,
