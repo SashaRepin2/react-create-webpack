@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 
 import { Box } from "@mui/system";
 import ReactDOM from "react-dom";
@@ -15,21 +15,27 @@ interface IBaseModalProps {
 }
 
 const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children }) => {
-    const modalRef = useRef<HTMLElement>(null);
+    // const modalRef = useRef<HTMLElement>(null);
 
-    useEffect(() => {
-        const onClickOutsideModal = (event: MouseEvent) => {
-            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-                onClose();
-            }
-        };
+    // useEffect(() => {
+    //     const onClickOutsideModal = (event: MouseEvent) => {
+    //         console.log(event.target);
 
-        document.addEventListener("click", onClickOutsideModal, true);
+    //         if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+    //             onClose();
+    //         }
+    //     };
 
-        return () => {
-            document.removeEventListener("click", onClickOutsideModal, true);
-        };
-    }, []);
+    //     document.addEventListener("click", onClickOutsideModal, true);
+
+    //     return () => {
+    //         document.removeEventListener("click", onClickOutsideModal, true);
+    //     };
+    // }, []);
+
+    function onClickInsideModal(event: React.MouseEvent<HTMLElement>) {
+        event.stopPropagation();
+    }
 
     useEffect(() => {
         document.body.style.paddingRight = isOpen ? getScrollbarWidth() + "px" : "";
@@ -43,11 +49,14 @@ const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children
 
     return ReactDOM.createPortal(
         isOpen && (
-            <Box className={"modal"}>
+            <Box
+                className={"modal"}
+                onClick={onClose}
+            >
                 <Box
+                    // ref={modalRef}
                     className={"modal__body"}
-                    onClick={(e) => e.stopPropagation()}
-                    ref={modalRef}
+                    onClick={onClickInsideModal}
                 >
                     {title && <Box className={"modal__body-title"}>{title}</Box>}
                     <Box className={"modal__body-content"}>{children}</Box>

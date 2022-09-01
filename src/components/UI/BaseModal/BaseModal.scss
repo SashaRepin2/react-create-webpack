@@ -10,7 +10,7 @@
 
     &__body {
         min-width: 300px;
-        max-width: 500px;
+        max-width: 900px;
 
         position: absolute;
         top: 50%;
@@ -25,11 +25,16 @@
         &-title {
             padding: 8px 10px;
             margin-bottom: 5px;
-            background-color: #57327e;
 
             color: #fff;
+            background-color: #57327e;
             font-size: 1.6rem;
             font-weight: bold;
+        }
+
+        &-content {
+            max-height: 80vh;
+            overflow-y: auto;
         }
     }
 }

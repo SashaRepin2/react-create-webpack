@@ -1,13 +1,13 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function useOutsideClick(initialOpenState: boolean) {
-    const [isOpen, setIsOpen] = React.useState<boolean>(initialOpenState);
-    const refNode = React.useRef<HTMLElement>(null);
-
-    React.useEffect(() => {
+    const [isOpen, setIsOpen] = useState<boolean>(initialOpenState);
+    const refNode = useRef<HTMLElement>(null);
+    useEffect(() => {
         const handleOutsideClick = (event: MouseEvent) => {
             if (refNode.current && !refNode.current.contains(event.target as Node)) {
                 setIsOpen(false);
+                console.log(event.target);
             }
         };
 

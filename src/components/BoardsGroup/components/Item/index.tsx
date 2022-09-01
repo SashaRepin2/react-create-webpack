@@ -1,6 +1,7 @@
 import React from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import PreviewIcon from "@mui/icons-material/Preview";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -13,6 +14,7 @@ import { BoardSlice } from "../../../../store/reducers/BoardSlice";
 
 import { IBoard } from "../../../../interfaces/IBoard";
 
+import QuickViewBoard from "../../../QuickViewBoard";
 import AlertDialog from "../../../UI/AlertDialog";
 
 interface IBoardsGroupItemProps {
@@ -24,9 +26,9 @@ const BoardsGroupItem: React.FC<IBoardsGroupItemProps> = ({ board }) => {
     const { deleteBoard } = BoardSlice.actions;
 
     const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false);
+    const [isOpenQuickView, setIsOpenQuickView] = React.useState<boolean>(false);
 
     function onOpenDialogHandler(event: React.MouseEvent<HTMLButtonElement>) {
-        event.preventDefault();
         setIsOpenDialog(true);
     }
 
@@ -36,6 +38,14 @@ const BoardsGroupItem: React.FC<IBoardsGroupItemProps> = ({ board }) => {
 
     function onSubmitDialogHandler() {
         dispatch(deleteBoard(board.id));
+    }
+
+    function onOpenQuickViewHandler() {
+        setIsOpenQuickView(true);
+    }
+
+    function onCloseQuickViewHandler() {
+        setIsOpenQuickView(false);
     }
 
     return (
@@ -64,13 +74,21 @@ const BoardsGroupItem: React.FC<IBoardsGroupItemProps> = ({ board }) => {
                             ? board.title.slice(0, TEXT_MAX_LENGTH) + "..."
                             : board.title}
                     </Typography>
-                    <Box>
+                    <Box onClick={(e) => e.preventDefault()}>
+                        <IconButton onClick={onOpenQuickViewHandler}>
+                            <PreviewIcon />
+                        </IconButton>
                         <IconButton onClick={onOpenDialogHandler}>
                             <DeleteIcon />
                         </IconButton>
                     </Box>
                 </Container>
             </Link>
+            <QuickViewBoard
+                board={board}
+                isOpen={isOpenQuickView}
+                onClose={onCloseQuickViewHandler}
+            />
             <AlertDialog
                 isOpen={isOpenDialog}
                 title={"Удаление доски"}

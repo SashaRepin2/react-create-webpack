@@ -16,12 +16,13 @@ import Task from "../../../Task";
 import AlertDialog from "../../../UI/AlertDialog";
 
 interface IListProps {
-    list: IList;
     index: number;
+    list: IList;
+    isOnlyView?: boolean;
     onDelete: (list: IList) => void;
 }
 
-const List: React.FC<IListProps> = ({ list, index, onDelete }) => {
+const List: React.FC<IListProps> = ({ list, index, isOnlyView = false, onDelete }) => {
     const tasks = useAppSelector((state) => {
         const listTasks = state.taskReducer.tasks.filter((task) =>
             list.sequenceTasks.includes(task.id)
@@ -52,6 +53,7 @@ const List: React.FC<IListProps> = ({ list, index, onDelete }) => {
             <Draggable
                 index={index}
                 draggableId={list.id.toString()}
+                isDragDisabled={isOnlyView}
             >
                 {(provided) => (
                     <Box
@@ -77,24 +79,26 @@ const List: React.FC<IListProps> = ({ list, index, onDelete }) => {
                                 borderRadius: "10px 10px 0 0",
                             }}
                         >
-                            <IconButton
-                                onClick={onOpenDialogHandler}
-                                sx={{
-                                    position: "absolute",
-                                    right: "5px",
-                                    top: "5px",
-                                    color: "red",
-                                }}
-                            >
-                                <DeleteIcon />
-                            </IconButton>
+                            {!isOnlyView && (
+                                <IconButton
+                                    onClick={onOpenDialogHandler}
+                                    sx={{
+                                        position: "absolute",
+                                        right: "5px",
+                                        top: "5px",
+                                        color: "red",
+                                    }}
+                                >
+                                    <DeleteIcon />
+                                </IconButton>
+                            )}
                             <Typography
                                 variant={"h6"}
                                 sx={{ color: "#fff", marginBottom: "10px" }}
                             >
                                 {list.title}
                             </Typography>
-                            <AddList listId={list.id} />
+                            {!isOnlyView && <AddList listId={list.id} />}
                         </Box>
                         <Droppable
                             droppableId={list.id.toString()}
@@ -117,6 +121,7 @@ const List: React.FC<IListProps> = ({ list, index, onDelete }) => {
                                             key={task.id}
                                             task={task}
                                             index={index}
+                                            isOnlyView={isOnlyView}
                                         />
                                     ))}
                                     {provided.placeholder}
