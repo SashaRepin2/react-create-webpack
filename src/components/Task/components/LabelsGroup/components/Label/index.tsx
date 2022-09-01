@@ -1,15 +1,14 @@
 import React from "react";
 
-import { Tooltip } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Tooltip } from "@mui/material";
 
-import { ILabel } from "../../../../interfaces/ILabel";
+import { ILabel } from "../../../../../../interfaces/ILabel";
 
-interface ITaskLabelProps {
+interface ILabelsGroupLabelProps {
     label: ILabel;
 }
 
-const TaskLabel: React.FC<ITaskLabelProps> = ({ label }) => {
+const LabelsGroupLabel: React.FC<ILabelsGroupLabelProps> = ({ label }) => {
     return (
         <Tooltip
             title={label.title}
@@ -17,16 +16,17 @@ const TaskLabel: React.FC<ITaskLabelProps> = ({ label }) => {
         >
             <Box
                 sx={{
+                    margin: "3px",
                     height: "16px",
                     width: "16px",
                     cursor: "default",
                     borderRadius: "50%",
                     bgcolor: label.hexColor,
-                    margin: "3px",
+                    boxShadow: 3,
                 }}
             />
         </Tooltip>
     );
 };
 
-export default TaskLabel;
+export default LabelsGroupLabel;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
+import { Box } from "@mui/material";
 
 import { IBoard } from "../../interfaces/IBoard";
 
@@ -14,15 +14,18 @@ interface IQuickViewBoardProps {
 }
 
 const QuickViewBoard: React.FC<IQuickViewBoardProps> = ({ board, isOpen, onClose }) => {
-    const dispatch = useAppDispatch();
-
     return (
         <BaseModal
             isOpen={isOpen}
             title={"Быстрый просмотр"}
             onClose={onClose}
         >
-            <ListsGroup board={board} />
+            <Box sx={{ margin: "5px 10px" }}>
+                <ListsGroup
+                    board={board}
+                    isOnlyView={true}
+                />
+            </Box>
         </BaseModal>
     );
 };

@@ -5,7 +5,7 @@ const getBoardsThunk = createAsyncThunk<{ message: string }, undefined, { reject
     async (_, { rejectWithValue }) => {
         try {
             const promise = new Promise((resolve) => {
-                setTimeout(() => resolve({ message: "okay" }), 5000);
+                setTimeout(() => resolve({ message: "okay" }), 500);
             });
 
             const data = (await promise.then((result) => result)) as { message: string };

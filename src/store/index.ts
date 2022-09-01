@@ -20,7 +20,7 @@ import taskReducer from "./reducers/TaskSlice";
 const rootPersistConfig = {
     key: "root",
     storage,
-    blacklist: ["boardReducer"],
+    // blacklist: ["boardReducer"],
 };
 
 const boardPersistConfig = {
@@ -30,7 +30,7 @@ const boardPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-    boardReducer: persistReducer(boardPersistConfig, boardReducer),
+    boardReducer,
     listReducer,
     taskReducer,
     labelReducer,

@@ -19,10 +19,10 @@ import { IList } from "../../interfaces/IList";
 
 interface IListsGroupProps {
     board: IBoard;
-    isEditMode?: boolean;
+    isOnlyView?: boolean;
 }
 
-const ListsGroup: React.FC<IListsGroupProps> = ({ board, isEditMode = false }) => {
+const ListsGroup: React.FC<IListsGroupProps> = ({ board, isOnlyView = false }) => {
     const dispatch = useAppDispatch();
     const { deleteListTasks } = TaskSlice.actions;
     const { moveTask, deleteList } = ListSlice.actions;
@@ -83,7 +83,6 @@ const ListsGroup: React.FC<IListsGroupProps> = ({ board, isEditMode = false }) =
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                         sx={{
-                            margin: "15px 0",
                             width: "100%",
                             minHeight: "500px",
                             overflowX: "auto",
@@ -96,6 +95,7 @@ const ListsGroup: React.FC<IListsGroupProps> = ({ board, isEditMode = false }) =
                                     index={index}
                                     list={list}
                                     key={list.id}
+                                    isOnlyView={isOnlyView}
                                     onDelete={onDeleteListHandler}
                                 />
                             ))}

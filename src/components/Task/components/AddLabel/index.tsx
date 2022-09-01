@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Container, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Container, Typography } from "@mui/material";
 
 import AddLabelList from "./components/List";
 
