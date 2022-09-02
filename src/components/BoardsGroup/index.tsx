@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { Container, Stack, Typography } from "@mui/material";
 
-import Board from "./components/Item";
+import BoardsGroupBoard from "./components/Board";
 
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
@@ -80,7 +80,7 @@ const BoardsGroup: React.FC = () => {
                     </Container>
                 ) : filteredBoards.length ? (
                     filteredBoards.map((board) => (
-                        <Board
+                        <BoardsGroupBoard
                             key={board.id}
                             board={board}
                         />

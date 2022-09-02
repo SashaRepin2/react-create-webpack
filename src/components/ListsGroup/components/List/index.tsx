@@ -15,13 +15,13 @@ import AddList from "../../../AddTask";
 import Task from "../../../Task";
 import AlertDialog from "../../../UI/AlertDialog";
 
-interface IListProps {
+interface IListsGroupListProps {
     list: IList;
     index: number;
     onDelete: (list: IList) => void;
 }
 
-const List: React.FC<IListProps> = ({ list, index, onDelete }) => {
+const ListsGroupList: React.FC<IListsGroupListProps> = ({ list, index, onDelete }) => {
     const tasks = useAppSelector((state) => {
         const listTasks = state.taskReducer.tasks.filter((task) =>
             list.sequenceTasks.includes(task.id)
@@ -138,4 +138,4 @@ const List: React.FC<IListProps> = ({ list, index, onDelete }) => {
     );
 };
 
-export default React.memo(List);
+export default React.memo(ListsGroupList);

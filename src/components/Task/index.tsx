@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { Draggable } from "react-beautiful-dnd";
 
 import TaskLabel from "./components/Label";
 import TaskSettingsMenu from "./components/SettingsMenu";
+import TaskTitle from "./components/Title";
 
 import useAppSelector from "../../hooks/useAppSelector";
 
@@ -51,7 +52,7 @@ const Task: React.FC<ITaskProps> = ({ index, task }) => {
                         bgcolor: task.status === Statuses.COMPLETE ? "green" : "#fff",
                     }}
                 >
-                    <Typography variant={"subtitle1"}>{task.title}</Typography>
+                    <TaskTitle title={task.title} />
                     <Box sx={{ display: "flex", flexWrap: "wrap", margin: "0 5px" }}>
                         {labels.map((label) => (
                             <TaskLabel

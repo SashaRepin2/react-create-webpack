@@ -3,12 +3,12 @@ import React from "react";
 import { Stack } from "@mui/material";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
-import List from "./components/List";
+import ListsGroupList from "./components/List";
 
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 
-import { DND_TYPES_LISTS } from "../../consts/dndTypes";
+import { DND_TYPES_LISTS, DND_TYPES_TASKS } from "../../consts/dndTypes";
 
 import { BoardSlice } from "../../store/reducers/BoardSlice";
 import { ListSlice } from "../../store/reducers/ListSlice";
@@ -50,13 +50,13 @@ const ListsGroup: React.FC<IListsGroupProps> = ({ board }) => {
         const fromListId = +source.droppableId;
         const toListId = +destination.droppableId;
 
-        if (type === "TASKS") {
+        if (type === DND_TYPES_TASKS) {
             if (newIndex !== oldIndex || fromListId !== toListId) {
                 dispatch(moveTask({ oldIndex, newIndex, fromListId, toListId }));
             }
         }
 
-        if (type === "LISTS") {
+        if (type === DND_TYPES_LISTS) {
             dispatch(moveList({ oldIndex, newIndex, boardId: board.id }));
         }
     }
@@ -70,9 +70,9 @@ const ListsGroup: React.FC<IListsGroupProps> = ({ board }) => {
     return (
         <DragDropContext onDragEnd={onDragEndHandler}>
             <Droppable
-                droppableId={board.id.toString()}
                 type={DND_TYPES_LISTS}
                 direction={"horizontal"}
+                droppableId={board.id.toString()}
             >
                 {(provided) => (
                     <Stack
@@ -91,7 +91,7 @@ const ListsGroup: React.FC<IListsGroupProps> = ({ board }) => {
                     >
                         {lists &&
                             lists.map((list, index) => (
-                                <List
+                                <ListsGroupList
                                     index={index}
                                     list={list}
                                     key={list.id}
