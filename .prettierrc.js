@@ -7,16 +7,22 @@ module.exports = {
     bracketSpacing: true,
     singleAttributePerLine: true,
     importOrder: [
-        "react$",
+        // react
+        "^react$",
         "<THIRD_PARTY_MODULES>",
-        "components",
-        "hooks",
+        // components
+        "(components)|(.tsx$)",
+        // hooks
+        "(hooks)|(^use)",
         "utils",
         "consts",
         "store",
         "api",
-        "(interfaces|types)",
+        // interfaces & types
+        "(interfaces|types)|((^I).)",
+        // styles
         ".(scss|css|sass)$",
+        // other files
         "^[./]",
     ],
     importOrderSeparation: true,

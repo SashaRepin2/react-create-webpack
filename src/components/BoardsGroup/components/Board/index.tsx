@@ -17,11 +17,11 @@ import { IBoard } from "../../../../interfaces/IBoard";
 import QuickViewBoard from "../../../QuickViewBoard";
 import AlertDialog from "../../../UI/AlertDialog";
 
-interface IBoardsGroupItemProps {
+interface IBoardsGroupBoardProps {
     board: IBoard;
 }
 
-const BoardsGroupItem: React.FC<IBoardsGroupItemProps> = ({ board }) => {
+const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
     const dispatch = useAppDispatch();
     const { deleteBoard } = BoardSlice.actions;
 
@@ -101,4 +101,4 @@ const BoardsGroupItem: React.FC<IBoardsGroupItemProps> = ({ board }) => {
     );
 };
 
-export default React.memo(BoardsGroupItem);
+export default React.memo(BoardsGroupBoard);

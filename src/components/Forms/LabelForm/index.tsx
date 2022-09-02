@@ -6,7 +6,7 @@ import { HexColorPicker } from "react-colorful";
 import useAppDispatch from "../../../hooks/useAppDispatch";
 import useAppSelector from "../../../hooks/useAppSelector";
 
-import store from "../../../store";
+import { store } from "../../../store";
 import { LabelFormSlice } from "../../../store/reducers/LabelFormSlice";
 import submitLabelForm from "../../../store/thunk/labelForm";
 
