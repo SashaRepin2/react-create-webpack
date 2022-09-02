@@ -2,11 +2,7 @@ import React, { useState } from "react";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import HeaderSideMenu from "./components/SideMenu";
