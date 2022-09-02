@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Container, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Container, Typography } from "@mui/material";
 
 import AddLabelList from "./components/List";
 
@@ -56,12 +55,6 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
                             alignItems: "center",
                         }}
                     >
-                        <Typography
-                            variant={"h5"}
-                            sx={{ color: "#fff", fontWeight: "bold", marginRight: "5px" }}
-                        >
-                            Задание:
-                        </Typography>
                         <Typography
                             variant={"h6"}
                             sx={{ color: "#fff", fontWeight: "bold" }}

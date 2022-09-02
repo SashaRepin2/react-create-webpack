@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { Draggable } from "react-beautiful-dnd";
 
-import TaskLabel from "./components/Label";
+import TaskLabelsGroup from "./components/LabelsGroup";
 import TaskSettingsMenu from "./components/SettingsMenu";
 import TaskTitle from "./components/Title";
 
@@ -14,9 +14,10 @@ import { ITask, Statuses } from "../../interfaces/ITask";
 interface ITaskProps {
     index: number;
     task: ITask;
+    isOnlyView?: boolean;
 }
 
-const Task: React.FC<ITaskProps> = ({ index, task }) => {
+const Task: React.FC<ITaskProps> = ({ index, task, isOnlyView = false }) => {
     const labels = useAppSelector((state) =>
         state.labelReducer.labels.filter((label) => task.labels.includes(label.id))
     );
@@ -36,6 +37,7 @@ const Task: React.FC<ITaskProps> = ({ index, task }) => {
         <Draggable
             index={index}
             draggableId={task.id.toString()}
+            isDragDisabled={isOnlyView}
         >
             {(provided) => (
                 <Box
@@ -53,29 +55,24 @@ const Task: React.FC<ITaskProps> = ({ index, task }) => {
                     }}
                 >
                     <TaskTitle title={task.title} />
-                    <Box sx={{ display: "flex", flexWrap: "wrap", margin: "0 5px" }}>
-                        {labels.map((label) => (
-                            <TaskLabel
-                                key={label.id}
-                                label={label}
+                    <TaskLabelsGroup labels={labels} />
+                    {!isOnlyView && (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <TaskSettingsMenu
+                                task={task}
+                                isOpen={isOpenSettingsMenu}
+                                anchorEl={anchorEl}
+                                onClickHanlder={onOpenMenuHandler}
+                                onCloseHanlder={onCloseMenuHandle}
                             />
-                        ))}
-                    </Box>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <TaskSettingsMenu
-                            task={task}
-                            isOpen={isOpenSettingsMenu}
-                            anchorEl={anchorEl}
-                            onClickHanlder={onOpenMenuHandler}
-                            onCloseHanlder={onCloseMenuHandle}
-                        />
-                    </Box>
+                        </Box>
+                    )}
                 </Box>
             )}
         </Draggable>

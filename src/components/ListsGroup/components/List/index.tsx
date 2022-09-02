@@ -18,10 +18,16 @@ import AlertDialog from "../../../UI/AlertDialog";
 interface IListsGroupListProps {
     list: IList;
     index: number;
+    isOnlyView?: boolean;
     onDelete: (list: IList) => void;
 }
 
-const ListsGroupList: React.FC<IListsGroupListProps> = ({ list, index, onDelete }) => {
+const ListsGroupList: React.FC<IListsGroupListProps> = ({
+    list,
+    index,
+    isOnlyView = false,
+    onDelete,
+}) => {
     const tasks = useAppSelector((state) => {
         const listTasks = state.taskReducer.tasks.filter((task) =>
             list.sequenceTasks.includes(task.id)
@@ -52,6 +58,7 @@ const ListsGroupList: React.FC<IListsGroupListProps> = ({ list, index, onDelete 
             <Draggable
                 index={index}
                 draggableId={list.id.toString()}
+                isDragDisabled={isOnlyView}
             >
                 {(provided) => (
                     <Box
@@ -77,24 +84,26 @@ const ListsGroupList: React.FC<IListsGroupListProps> = ({ list, index, onDelete 
                                 borderRadius: "10px 10px 0 0",
                             }}
                         >
-                            <IconButton
-                                onClick={onOpenDialogHandler}
-                                sx={{
-                                    position: "absolute",
-                                    right: "5px",
-                                    top: "5px",
-                                    color: "red",
-                                }}
-                            >
-                                <DeleteIcon />
-                            </IconButton>
+                            {!isOnlyView && (
+                                <IconButton
+                                    onClick={onOpenDialogHandler}
+                                    sx={{
+                                        position: "absolute",
+                                        right: "5px",
+                                        top: "5px",
+                                        color: "red",
+                                    }}
+                                >
+                                    <DeleteIcon />
+                                </IconButton>
+                            )}
                             <Typography
                                 variant={"h6"}
                                 sx={{ color: "#fff", marginBottom: "10px" }}
                             >
                                 {list.title}
                             </Typography>
-                            <AddList listId={list.id} />
+                            {!isOnlyView && <AddList listId={list.id} />}
                         </Box>
                         <Droppable
                             droppableId={list.id.toString()}
@@ -117,6 +126,7 @@ const ListsGroupList: React.FC<IListsGroupListProps> = ({ list, index, onDelete 
                                             key={task.id}
                                             task={task}
                                             index={index}
+                                            isOnlyView={isOnlyView}
                                         />
                                     ))}
                                     {provided.placeholder}
