@@ -7,12 +7,14 @@ import ListsGroupList from "./components/List";
 
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
+import useListsGroupMoveList from "./hooks/useListsGroupMoveList";
 
 import { DND_TYPES_LISTS, DND_TYPES_TASKS } from "../../consts/dndTypes";
 
 import { BoardSlice } from "../../store/reducers/BoardSlice";
 import { ListSlice } from "../../store/reducers/ListSlice";
 import { TaskSlice } from "../../store/reducers/TaskSlice";
+import { selectBoardSortedLists } from "../../store/selectors";
 
 import { IBoard } from "../../interfaces/IBoard";
 import { IList } from "../../interfaces/IList";
@@ -24,19 +26,11 @@ interface IListsGroupProps {
 
 const ListsGroup: React.FC<IListsGroupProps> = ({ board, isOnlyView = false }) => {
     const dispatch = useAppDispatch();
+    const { moveList } = useListsGroupMoveList(board);
     const { deleteListTasks } = TaskSlice.actions;
     const { moveTask, deleteList } = ListSlice.actions;
-    const { moveList, deleteListFromBoard } = BoardSlice.actions;
-    const lists = useAppSelector((state) => {
-        const boardLists = state.listReducer.lists.filter((list) =>
-            board.sequenceLists.includes(list.id)
-        );
-
-        return boardLists.sort(
-            (prevList: IList, nextList: IList) =>
-                board.sequenceLists.indexOf(prevList.id) - board.sequenceLists.indexOf(nextList.id)
-        );
-    });
+    const { deleteListFromBoard } = BoardSlice.actions;
+    const lists = useAppSelector((state) => selectBoardSortedLists(state, board));
 
     function onDragEndHandler(result: DropResult) {
         const { source, destination, type } = result;
@@ -58,7 +52,7 @@ const ListsGroup: React.FC<IListsGroupProps> = ({ board, isOnlyView = false }) =
         }
 
         if (type === DND_TYPES_LISTS) {
-            dispatch(moveList({ oldIndex, newIndex, boardId: board.id }));
+            moveList(oldIndex, newIndex);
         }
     }
 

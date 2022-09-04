@@ -2,18 +2,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const getBoardsThunk = createAsyncThunk<{ message: string }, undefined, { rejectValue: string }>(
     "board/fetchBoards",
-    async (_, { rejectWithValue }) => {
-        try {
-            const promise = new Promise((resolve) => {
-                setTimeout(() => resolve({ message: "okay" }), 500);
-            });
+    async () => {
+        const promise = new Promise((resolve) => {
+            setTimeout(() => resolve({ message: "okay" }), 500);
+        });
 
-            const data = (await promise.then((result) => result)) as { message: string };
+        const data = (await promise.then((result) => result)) as { message: string };
 
-            return data;
-        } catch (error) {
-            return rejectWithValue((error as Error).message);
-        }
+        return data;
     }
 );
 

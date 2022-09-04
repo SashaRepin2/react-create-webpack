@@ -4,6 +4,7 @@ import { REQUEST_STATUSES } from "../../consts/requestStatuses";
 
 import { IBoard } from "../../interfaces/IBoard";
 
+import { boardsAddBoardAction } from "../actions/boards";
 import getBoardsThunk from "../thunk/boards";
 
 interface IBoardState {
@@ -22,9 +23,9 @@ export const BoardSlice = createSlice({
     name: "boards",
     initialState,
     reducers: {
-        addBoard(state, action: PayloadAction<IBoard>) {
-            state.boards.push(action.payload);
-        },
+        // addBoard(state, action: PayloadAction<IBoard>) {
+        //     state.boards.push(action.payload);
+        // },
         updateBoardTitle(state, action: PayloadAction<{ idBoard: number; newTitle: string }>) {
             const { idBoard, newTitle } = action.payload;
             const board = state.boards.find((board) => board.id === idBoard);
@@ -44,17 +45,15 @@ export const BoardSlice = createSlice({
                 board.sequenceLists.push(listId);
             }
         },
-        moveList(
-            state,
-            action: PayloadAction<{ oldIndex: number; newIndex: number; boardId: number }>
-        ) {
-            const { oldIndex, newIndex, boardId } = action.payload;
-            const board = state.boards.find((board) => board.id === boardId);
+        boardMoveList(state, action: PayloadAction<IBoard>) {
+            // const { oldIndex, newIndex, boardId } = action.payload;
+            // const board = state.boards.find((board) => board.id === boardId);
+            state.boards;
 
-            if (board) {
-                const [movingList] = board.sequenceLists.splice(oldIndex, 1);
-                board.sequenceLists.splice(newIndex, 0, movingList);
-            }
+            // if (board) {
+            //     const [movingList] = board.sequenceLists.splice(oldIndex, 1);
+            //     board.sequenceLists.splice(newIndex, 0, movingList);
+            // }
         },
         deleteListFromBoard(state, action: PayloadAction<{ boardId: number; listId: number }>) {
             const { boardId, listId } = action.payload;
@@ -67,6 +66,9 @@ export const BoardSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
+        builder.addCase(boardsAddBoardAction, (state, action: PayloadAction<IBoard>) => {
+            state.boards.push(action.payload);
+        });
         builder.addCase(getBoardsThunk.pending, (state) => {
             state.status = REQUEST_STATUSES.LOADING;
             state.error = null;

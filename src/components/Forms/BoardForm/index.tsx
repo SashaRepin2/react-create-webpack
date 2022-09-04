@@ -13,7 +13,7 @@ import {
 
 import useAppDispatch from "../../../hooks/useAppDispatch";
 
-import { BoardSlice } from "../../../store/reducers/BoardSlice";
+import { boardsAddBoardAction } from "../../../store/actions/boards";
 
 import "./BoardForm.scss";
 
@@ -24,13 +24,12 @@ interface IBoardFormProps {
 
 const BoardForm: React.FC<IBoardFormProps> = ({ isExpanded, setIsExpanded }) => {
     const dispatch = useAppDispatch();
-    const { addBoard } = BoardSlice.actions;
     const [inputValue, setInputValue] = useState<string>("");
 
     function onSubmitHanlder() {
         if (inputValue) {
             dispatch(
-                addBoard({
+                boardsAddBoardAction({
                     id: Date.now(),
                     title: inputValue,
                     sequenceLists: [],

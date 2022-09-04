@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import {
     FLUSH,
     PAUSE,
@@ -11,31 +11,13 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import boardReducer from "./reducers/BoardSlice";
-import labelFormReducer from "./reducers/LabelFormSlice";
-import labelReducer from "./reducers/LabelSlice";
-import listReducer from "./reducers/ListSlice";
-import taskReducer from "./reducers/TaskSlice";
+import logger from "./middlewares/logger";
+import { rootReducer } from "./reducers";
 
 const rootPersistConfig = {
     key: "root",
     storage,
-    // blacklist: ["boardReducer"],
 };
-
-const boardPersistConfig = {
-    key: "board",
-    storage,
-    blacklist: ["error", "status"],
-};
-
-const rootReducer = combineReducers({
-    boardReducer,
-    listReducer,
-    taskReducer,
-    labelReducer,
-    labelFormReducer,
-});
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
@@ -46,7 +28,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }),
+        }).concat(logger),
 });
 
 export const persistor = persistStore(store);
