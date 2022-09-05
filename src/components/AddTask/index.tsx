@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import useAppDispatch from "../../hooks/useAppDispatch";
 
-import { ListSlice } from "../../store/reducers/ListSlice";
-import { TaskSlice } from "../../store/reducers/TaskSlice";
+import { ListSlice } from "../../store/reducers/listsReducer";
+import { TaskSlice } from "../../store/reducers/tasksReducer";
 
 import { Statuses } from "../../interfaces/ITask";
 
@@ -17,6 +17,7 @@ const AddTask: React.FC<IAddTaskProps> = ({ listId }) => {
     const dispatch = useAppDispatch();
     const { addTask } = TaskSlice.actions;
     const { addListTask } = ListSlice.actions;
+
     const [inputValue, setInputValue] = useState<string>("");
 
     function onKeyDownHandler(event: React.KeyboardEvent<HTMLInputElement>) {

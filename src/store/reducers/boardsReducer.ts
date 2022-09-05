@@ -23,9 +23,6 @@ export const BoardSlice = createSlice({
     name: "boards",
     initialState,
     reducers: {
-        // addBoard(state, action: PayloadAction<IBoard>) {
-        //     state.boards.push(action.payload);
-        // },
         updateBoardTitle(state, action: PayloadAction<{ idBoard: number; newTitle: string }>) {
             const { idBoard, newTitle } = action.payload;
             const board = state.boards.find((board) => board.id === idBoard);
@@ -45,15 +42,17 @@ export const BoardSlice = createSlice({
                 board.sequenceLists.push(listId);
             }
         },
-        boardMoveList(state, action: PayloadAction<IBoard>) {
-            // const { oldIndex, newIndex, boardId } = action.payload;
-            // const board = state.boards.find((board) => board.id === boardId);
-            state.boards;
+        moveList(
+            state,
+            action: PayloadAction<{ oldIndex: number; newIndex: number; boardId: number }>
+        ) {
+            const { oldIndex, newIndex, boardId } = action.payload;
+            const board = state.boards.find((board) => board.id === boardId);
 
-            // if (board) {
-            //     const [movingList] = board.sequenceLists.splice(oldIndex, 1);
-            //     board.sequenceLists.splice(newIndex, 0, movingList);
-            // }
+            if (board) {
+                const [movingList] = board.sequenceLists.splice(oldIndex, 1);
+                board.sequenceLists.splice(newIndex, 0, movingList);
+            }
         },
         deleteListFromBoard(state, action: PayloadAction<{ boardId: number; listId: number }>) {
             const { boardId, listId } = action.payload;

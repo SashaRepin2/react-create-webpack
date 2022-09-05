@@ -1,19 +1,19 @@
 import React from "react";
 
 import { Stack } from "@mui/material";
-import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 import ListsGroupList from "./components/List";
 
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
-import useListsGroupMoveList from "./hooks/useListsGroupMoveList";
+import useListsGroupMove from "./hooks/useListsGroupMove";
 
-import { DND_TYPES_LISTS, DND_TYPES_TASKS } from "../../consts/dndTypes";
+import { DND_TYPES_LISTS } from "../../consts/dndTypes";
 
-import { BoardSlice } from "../../store/reducers/BoardSlice";
-import { ListSlice } from "../../store/reducers/ListSlice";
-import { TaskSlice } from "../../store/reducers/TaskSlice";
+import { BoardSlice } from "../../store/reducers/boardsReducer";
+import { ListSlice } from "../../store/reducers/listsReducer";
+import { TaskSlice } from "../../store/reducers/tasksReducer";
 import { selectBoardSortedLists } from "../../store/selectors";
 
 import { IBoard } from "../../interfaces/IBoard";
@@ -26,35 +26,11 @@ interface IListsGroupProps {
 
 const ListsGroup: React.FC<IListsGroupProps> = ({ board, isOnlyView = false }) => {
     const dispatch = useAppDispatch();
-    const { moveList } = useListsGroupMoveList(board);
+    const { onDragEndHandler } = useListsGroupMove(board);
     const { deleteListTasks } = TaskSlice.actions;
-    const { moveTask, deleteList } = ListSlice.actions;
+    const { deleteList } = ListSlice.actions;
     const { deleteListFromBoard } = BoardSlice.actions;
     const lists = useAppSelector((state) => selectBoardSortedLists(state, board));
-
-    function onDragEndHandler(result: DropResult) {
-        const { source, destination, type } = result;
-
-        // dropped outside
-        if (!destination) {
-            return;
-        }
-
-        const oldIndex = source.index;
-        const newIndex = destination.index;
-        const fromListId = +source.droppableId;
-        const toListId = +destination.droppableId;
-
-        if (type === DND_TYPES_TASKS) {
-            if (newIndex !== oldIndex || fromListId !== toListId) {
-                dispatch(moveTask({ oldIndex, newIndex, fromListId, toListId }));
-            }
-        }
-
-        if (type === DND_TYPES_LISTS) {
-            moveList(oldIndex, newIndex);
-        }
-    }
 
     function onDeleteListHandler(list: IList) {
         dispatch(deleteListFromBoard({ boardId: board.id, listId: list.id }));

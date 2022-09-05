@@ -15,7 +15,7 @@ const BoardPage: React.FC = () => {
 
     const board = useAppSelector((state) => {
         if (boardId) {
-            return state.boardReducer.boards.find((board) => board.id === +boardId);
+            return state.boardsReducer.boards.find((board) => board.id === +boardId);
         }
     });
 

@@ -7,7 +7,7 @@ import AddLabelList from "./components/List";
 import useAppDispatch from "../../../../hooks/useAppDispatch";
 import useAppSelector from "../../../../hooks/useAppSelector";
 
-import { TaskSlice } from "../../../../store/reducers/TaskSlice";
+import { TaskSlice } from "../../../../store/reducers/tasksReducer";
 
 import { ILabel } from "../../../../interfaces/ILabel";
 import { ITask } from "../../../../interfaces/ITask";
@@ -25,11 +25,11 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
     const { addLabelToTask, deleteLabelFromTask } = TaskSlice.actions;
 
     const activeLabels = useAppSelector((state) =>
-        state.labelReducer.labels.filter((label) => task.labels.includes(label.id))
+        state.labelsReducer.labels.filter((label) => task.labels.includes(label.id))
     );
 
     const inactiveLabels = useAppSelector((state) =>
-        state.labelReducer.labels.filter((label) => !task.labels.includes(label.id))
+        state.labelsReducer.labels.filter((label) => !task.labels.includes(label.id))
     );
 
     function onAddHandler(label: ILabel) {

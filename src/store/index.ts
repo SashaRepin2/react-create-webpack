@@ -12,7 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import logger from "./middlewares/logger";
-import { rootReducer } from "./reducers";
+import rootReducer from "./reducers/rootReducer";
 
 const rootPersistConfig = {
     key: "root",

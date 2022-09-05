@@ -7,9 +7,9 @@ import { ITask } from "../../interfaces/ITask";
 
 import { RootState } from "..";
 
-export const selectAllLists = (state: RootState): IList[] => state.listReducer.lists;
-export const selectAllBoards = (state: RootState): IBoard[] => state.boardReducer.boards;
-export const selectAllLabel = (state: RootState): ILabel[] => state.labelReducer.labels;
+export const selectAllLists = (state: RootState): IList[] => state.listsReducer.lists;
+export const selectAllBoards = (state: RootState): IBoard[] => state.boardsReducer.boards;
+export const selectAllLabel = (state: RootState): ILabel[] => state.labelsReducer.labels;
 
 export const selectBoardSortedLists = createSelector(
     [selectAllLists, (state, board): IBoard => board],
