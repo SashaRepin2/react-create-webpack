@@ -8,6 +8,7 @@ import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 import useDebounce from "../../hooks/useDebounce";
 
+import { selectAllBoards } from "../../store/selectors";
 import getBoardsThunk from "../../store/thunk/boards";
 
 import { IBoard } from "../../interfaces/IBoard";
@@ -17,7 +18,8 @@ import Loader from "../UI/Loader";
 
 const BoardsGroup: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { boards, status } = useAppSelector((state) => state.boardReducer);
+    const boards = useAppSelector(selectAllBoards);
+    const { status } = useAppSelector((state) => state.boardsReducer);
 
     const [filteredBoards, setFilteredBoards] = useState<IBoard[]>(boards);
     const [filterValue, setFilterValue] = useState<string>("");

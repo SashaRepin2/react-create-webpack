@@ -9,6 +9,8 @@ import TaskTitle from "./components/Title";
 
 import useAppSelector from "../../hooks/useAppSelector";
 
+import { selectTaskLabels } from "../../store/selectors";
+
 import { ITask, Statuses } from "../../interfaces/ITask";
 
 interface ITaskProps {
@@ -18,9 +20,7 @@ interface ITaskProps {
 }
 
 const Task: React.FC<ITaskProps> = ({ index, task, isOnlyView = false }) => {
-    const labels = useAppSelector((state) =>
-        state.labelReducer.labels.filter((label) => task.labels.includes(label.id))
-    );
+    const labels = useAppSelector((state) => selectTaskLabels(state, task));
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const isOpenSettingsMenu = Boolean(anchorEl);

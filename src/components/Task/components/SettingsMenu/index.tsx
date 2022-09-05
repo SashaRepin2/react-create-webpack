@@ -5,7 +5,7 @@ import { IconButton, Menu, MenuItem } from "@mui/material";
 
 import useAppDispatch from "../../../../hooks/useAppDispatch";
 
-import { TaskSlice } from "../../../../store/reducers/TaskSlice";
+import { TaskSlice } from "../../../../store/reducers/tasksReducer";
 
 import { ITask } from "../../../../interfaces/ITask";
 
