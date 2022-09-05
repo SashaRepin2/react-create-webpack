@@ -29,7 +29,7 @@ const ListsGroupList: React.FC<IListsGroupListProps> = ({
     onDelete,
 }) => {
     const tasks = useAppSelector((state) => {
-        const listTasks = state.taskReducer.tasks.filter((task) =>
+        const listTasks = state.tasksReducer.tasks.filter((task) =>
             list.sequenceTasks.includes(task.id)
         );
 

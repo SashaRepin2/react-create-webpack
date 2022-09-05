@@ -4,6 +4,7 @@ import { REQUEST_STATUSES } from "../../consts/requestStatuses";
 
 import { IBoard } from "../../interfaces/IBoard";
 
+import { boardsAddBoardAction } from "../actions/boards";
 import getBoardsThunk from "../thunk/boards";
 
 interface IBoardState {
@@ -22,9 +23,6 @@ export const BoardSlice = createSlice({
     name: "boards",
     initialState,
     reducers: {
-        addBoard(state, action: PayloadAction<IBoard>) {
-            state.boards.push(action.payload);
-        },
         updateBoardTitle(state, action: PayloadAction<{ idBoard: number; newTitle: string }>) {
             const { idBoard, newTitle } = action.payload;
             const board = state.boards.find((board) => board.id === idBoard);
@@ -67,6 +65,9 @@ export const BoardSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
+        builder.addCase(boardsAddBoardAction, (state, action: PayloadAction<IBoard>) => {
+            state.boards.push(action.payload);
+        });
         builder.addCase(getBoardsThunk.pending, (state) => {
             state.status = REQUEST_STATUSES.LOADING;
             state.error = null;

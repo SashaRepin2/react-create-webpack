@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import PreviewIcon from "@mui/icons-material/Preview";
@@ -10,7 +10,7 @@ import useAppDispatch from "../../../../hooks/useAppDispatch";
 import { LINKS_BOARD_PAGE } from "../../../../consts/links";
 import { TEXT_MAX_LENGTH } from "../../../../consts/text";
 
-import { BoardSlice } from "../../../../store/reducers/BoardSlice";
+import { BoardSlice } from "../../../../store/reducers/boardsReducer";
 
 import { IBoard } from "../../../../interfaces/IBoard";
 
@@ -25,10 +25,10 @@ const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
     const dispatch = useAppDispatch();
     const { deleteBoard } = BoardSlice.actions;
 
-    const [isOpenDialog, setIsOpenDialog] = React.useState<boolean>(false);
-    const [isOpenQuickView, setIsOpenQuickView] = React.useState<boolean>(false);
+    const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
+    const [isOpenQuickView, setIsOpenQuickView] = useState<boolean>(false);
 
-    function onOpenDialogHandler(event: React.MouseEvent<HTMLButtonElement>) {
+    function onOpenDialogHandler() {
         setIsOpenDialog(true);
     }
 

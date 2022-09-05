@@ -7,7 +7,7 @@ import useAppDispatch from "../../../hooks/useAppDispatch";
 import useAppSelector from "../../../hooks/useAppSelector";
 
 import { store } from "../../../store";
-import { LabelFormSlice } from "../../../store/reducers/LabelFormSlice";
+import { LabelFormSlice } from "../../../store/reducers/labelFormReducer";
 import submitLabelForm from "../../../store/thunk/labelForm";
 
 import Input from "../../UI/Input";
