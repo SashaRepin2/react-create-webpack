@@ -1,23 +1,23 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { Stack } from "@mui/material";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 import ListsGroupList from "./components/List";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
-import useAppSelector from "../../hooks/useAppSelector";
 import useListsGroupMove from "./hooks/useListsGroupMove";
+import useAppDispatch from "@hooks/useAppDispatch";
+import useAppSelector from "@hooks/useAppSelector";
 
-import { DND_TYPES_LISTS } from "../../consts/dndTypes";
+import { DND_TYPES_LISTS } from "@consts/dndTypes";
 
-import { BoardSlice } from "../../store/reducers/boardsReducer";
-import { ListSlice } from "../../store/reducers/listsReducer";
-import { TaskSlice } from "../../store/reducers/tasksReducer";
-import { selectBoardSortedLists } from "../../store/selectors";
+import { BoardSlice } from "@store/reducers/boardsReducer";
+import { ListSlice } from "@store/reducers/listsReducer";
+import { TaskSlice } from "@store/reducers/tasksReducer";
+import { selectBoardSortedLists } from "@store/selectors";
 
-import { IBoard } from "../../interfaces/IBoard";
-import { IList } from "../../interfaces/IList";
+import { IBoard } from "@interfaces/IBoard";
+import { IList } from "@interfaces/IList";
 
 interface IListsGroupProps {
     board: IBoard;
@@ -77,4 +77,4 @@ const ListsGroup: React.FC<IListsGroupProps> = ({ board, isOnlyView = false }) =
     );
 };
 
-export default React.memo(ListsGroup);
+export default memo(ListsGroup);

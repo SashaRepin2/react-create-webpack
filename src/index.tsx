@@ -1,11 +1,10 @@
-import { PersistGate } from "redux-persist/integration/react";
-
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 import Loader from "./components/UI/Loader";
 
-import store, { persistor } from "./store";
+import store, { persistor } from "./store/store";
 
 import "./styles/index.scss";
 

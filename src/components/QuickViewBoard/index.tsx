@@ -1,11 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { Box } from "@mui/material";
 
-import { IBoard } from "../../interfaces/IBoard";
+import ListsGroup from "../../components/ListsGroup";
+import BaseModal from "@components/UI/BaseModal";
 
-import ListsGroup from "../ListsGroup";
-import BaseModal from "../UI/BaseModal";
+import { IBoard } from "@interfaces/IBoard";
 
 interface IQuickViewBoardProps {
     board: IBoard;
@@ -30,4 +30,4 @@ const QuickViewBoard: React.FC<IQuickViewBoardProps> = ({ board, isOpen, onClose
     );
 };
 
-export default React.memo(QuickViewBoard);
+export default memo(QuickViewBoard);

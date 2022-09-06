@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { REQUEST_STATUSES } from "../../consts/requestStatuses";
+import { REQUEST_STATUSES } from "@consts/requestStatuses";
 
-import { IBoard } from "../../interfaces/IBoard";
+import { boardsAddBoardAction } from "@store/actions/boards";
+import getBoardsThunk from "@store/thunk/boards";
 
-import { boardsAddBoardAction } from "../actions/boards";
-import getBoardsThunk from "../thunk/boards";
+import { IBoard } from "@interfaces/IBoard";
 
 interface IBoardState {
     boards: IBoard[];

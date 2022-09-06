@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { Box, InputBase } from "@mui/material";
 import { SxProps } from "@mui/system";
@@ -48,4 +48,4 @@ const Input: React.FC<IInput> = ({
     );
 };
 
-export default React.memo(Input);
+export default memo(Input);

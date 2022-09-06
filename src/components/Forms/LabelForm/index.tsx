@@ -1,16 +1,16 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { Box, Button, Container, Typography } from "@mui/material";
 import { HexColorPicker } from "react-colorful";
 
-import useAppDispatch from "../../../hooks/useAppDispatch";
-import useAppSelector from "../../../hooks/useAppSelector";
+import Input from "@components/UI/Input";
 
-import { store } from "../../../store";
-import { LabelFormSlice } from "../../../store/reducers/labelFormReducer";
-import submitLabelForm from "../../../store/thunk/labelForm";
+import useAppDispatch from "@hooks/useAppDispatch";
+import useAppSelector from "@hooks/useAppSelector";
 
-import Input from "../../UI/Input";
+import { LabelFormSlice } from "@store/reducers/labelFormReducer";
+import { store } from "@store/store";
+import submitLabelForm from "@store/thunk/labelForm";
 
 const LabelForm: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -109,4 +109,4 @@ const LabelForm: React.FC = () => {
     );
 };
 
-export default React.memo(LabelForm);
+export default memo(LabelForm);

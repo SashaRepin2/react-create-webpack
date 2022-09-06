@@ -1,11 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { IBoard } from "../../interfaces/IBoard";
-import { ILabel } from "../../interfaces/ILabel";
-import { IList } from "../../interfaces/IList";
-import { ITask } from "../../interfaces/ITask";
+import { RootState } from "@store/store";
 
-import { RootState } from "..";
+import { IBoard } from "@interfaces/IBoard";
+import { ILabel } from "@interfaces/ILabel";
+import { IList } from "@interfaces/IList";
+import { ITask } from "@interfaces/ITask";
 
 export const selectAllLists = (state: RootState): IList[] => state.listsReducer.lists;
 export const selectAllBoards = (state: RootState): IBoard[] => state.boardsReducer.boards;

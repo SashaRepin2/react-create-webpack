@@ -11,8 +11,8 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import logger from "./middlewares/logger";
-import rootReducer from "./reducers/rootReducer";
+import logger from "@store/middlewares/logger";
+import rootReducer from "@store/reducers/rootReducer";
 
 const rootPersistConfig = {
     key: "root",
@@ -34,4 +34,5 @@ export const store = configureStore({
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
+
 export default store;

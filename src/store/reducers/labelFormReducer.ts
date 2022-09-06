@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { ILabel } from "../../interfaces/ILabel";
-import ILabelForm from "../../interfaces/ILabelForm";
+import { ILabel } from "@interfaces/ILabel";
+import ILabelForm from "@interfaces/ILabelForm";
 
 interface ILabelFormState {
     editLabel: ILabel | null;

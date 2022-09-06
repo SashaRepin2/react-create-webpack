@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { Box, Typography } from "@mui/material";
 
-import { ILabel } from "../../../../../../interfaces/ILabel";
+import { ILabel } from "@interfaces/ILabel";
 
 interface IAddLabelListProps {
     title: string;
@@ -61,4 +61,4 @@ const AddLabelList: React.FC<IAddLabelListProps> = ({ title, labels, onClickLabe
     );
 };
 
-export default React.memo(AddLabelList);
+export default memo(AddLabelList);

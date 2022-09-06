@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 
-import useAppDispatch from "../../../../hooks/useAppDispatch";
+import TaskAddLabel from "../../components/AddLabel";
+import AlertDialog from "@components/UI/AlertDialog";
 
-import { TaskSlice } from "../../../../store/reducers/tasksReducer";
+import useAppDispatch from "@hooks/useAppDispatch";
 
-import { ITask } from "../../../../interfaces/ITask";
+import { TaskSlice } from "@store/reducers/tasksReducer";
 
-import AlertDialog from "../../../UI/AlertDialog";
-import TaskAddLabel from "../AddLabel";
+import { ITask } from "@interfaces/ITask";
 
 interface ITaskSettingsMenuProps {
     task: ITask;
@@ -94,4 +94,4 @@ const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
     );
 };
 
-export default React.memo(TaskSettingsMenu);
+export default memo(TaskSettingsMenu);
