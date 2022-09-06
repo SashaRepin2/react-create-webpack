@@ -1,8 +1,8 @@
-import { ILabel } from "../../interfaces/ILabel";
+import { LabelFormSlice } from "@store/reducers/labelFormReducer";
+import { LabelSlice } from "@store/reducers/labelsReducer";
+import { AppDispatch, RootState } from "@store/store";
 
-import { AppDispatch, RootState } from "..";
-import { LabelFormSlice } from "../reducers/labelFormReducer";
-import { LabelSlice } from "../reducers/labelsReducer";
+import { ILabel } from "@interfaces/ILabel";
 
 export default function submitLabelForm() {
     return (dispatch: AppDispatch, getState: RootState) => {

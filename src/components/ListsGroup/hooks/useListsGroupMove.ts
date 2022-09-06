@@ -1,13 +1,13 @@
 import { DropResult } from "react-beautiful-dnd";
 
-import useAppDispatch from "../../../hooks/useAppDispatch";
+import useAppDispatch from "@hooks/useAppDispatch";
 
-import { DND_TYPES_LISTS, DND_TYPES_TASKS } from "../../../consts/dndTypes";
+import { DND_TYPES_LISTS, DND_TYPES_TASKS } from "@consts/dndTypes";
 
-import { BoardSlice } from "../../../store/reducers/boardsReducer";
-import { ListSlice } from "../../../store/reducers/listsReducer";
+import { BoardSlice } from "@store/reducers/boardsReducer";
+import { ListSlice } from "@store/reducers/listsReducer";
 
-import { IBoard } from "../../../interfaces/IBoard";
+import { IBoard } from "@interfaces/IBoard";
 
 function useListsGroupMove(board: IBoard) {
     const dispatch = useAppDispatch();

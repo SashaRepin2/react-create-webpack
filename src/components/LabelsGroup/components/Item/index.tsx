@@ -1,10 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 
-import { ILabel } from "../../../../interfaces/ILabel";
+import { ILabel } from "@interfaces/ILabel";
 
 interface ILabelsGroupItemProps {
     label: ILabel;
@@ -80,4 +80,4 @@ const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDelete, onE
     );
 };
 
-export default React.memo(LabelsGroupItem);
+export default memo(LabelsGroupItem);

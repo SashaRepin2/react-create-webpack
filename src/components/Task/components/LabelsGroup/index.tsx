@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 
 import LabelsGroupLabel from "./components/Label";
 
-import { ILabel } from "../../../../interfaces/ILabel";
+import { ILabel } from "@interfaces/ILabel";
 
 interface ILabelsGroupProps {
     labels: ILabel[];

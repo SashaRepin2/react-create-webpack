@@ -4,13 +4,13 @@ import { Stack } from "@mui/material";
 
 import Label from "./components/Item";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
-import useAppSelector from "../../hooks/useAppSelector";
+import useAppDispatch from "@hooks/useAppDispatch";
+import useAppSelector from "@hooks/useAppSelector";
 
-import { LabelFormSlice } from "../../store/reducers/labelFormReducer";
-import { LabelSlice } from "../../store/reducers/labelsReducer";
+import { LabelFormSlice } from "@store/reducers/labelFormReducer";
+import { LabelSlice } from "@store/reducers/labelsReducer";
 
-import { ILabel } from "../../interfaces/ILabel";
+import { ILabel } from "@interfaces/ILabel";
 
 const LabelsGroup: React.FC = () => {
     const dispatch = useAppDispatch();

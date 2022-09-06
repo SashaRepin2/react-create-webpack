@@ -2,8 +2,8 @@ import React, { useCallback, useState } from "react";
 
 import { Container } from "@mui/material";
 
-import { BoardForm } from "../components";
 import BoardsGroup from "../components/BoardsGroup";
+import BoardForm from "../components/Forms/BoardForm";
 
 const HomePage: React.FC = () => {
     const [isExpanded, setIsExpanded] = useState<boolean>(false);

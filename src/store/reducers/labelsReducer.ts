@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { ILabel } from "../../interfaces/ILabel";
+import { ILabel } from "@interfaces/ILabel";
 
 interface ILabelState {
     labels: ILabel[];

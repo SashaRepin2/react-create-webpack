@@ -3,18 +3,17 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Container, Stack, Typography } from "@mui/material";
 
 import BoardsGroupBoard from "./components/Board";
+import Input from "@components/UI/Input";
+import Loader from "@components/UI/Loader";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
-import useAppSelector from "../../hooks/useAppSelector";
-import useDebounce from "../../hooks/useDebounce";
+import useAppDispatch from "@hooks/useAppDispatch";
+import useAppSelector from "@hooks/useAppSelector";
+import useDebounce from "@hooks/useDebounce";
 
-import { selectAllBoards } from "../../store/selectors";
-import getBoardsThunk from "../../store/thunk/boards";
+import { selectAllBoards } from "@store/selectors";
+import getBoardsThunk from "@store/thunk/boards";
 
-import { IBoard } from "../../interfaces/IBoard";
-
-import Input from "../UI/Input";
-import Loader from "../UI/Loader";
+import { IBoard } from "@interfaces/IBoard";
 
 const BoardsGroup: React.FC = () => {
     const dispatch = useAppDispatch();

@@ -1,11 +1,11 @@
-import * as React from "react";
+import React, { memo } from "react";
 
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 
-import "./AlertDialog.scss";
+import BaseModal from "@components/UI/BaseModal";
 
-import BaseModal from "../BaseModal";
+import "./AlertDialog.scss";
 
 interface IAlertDialogProps {
     isOpen: boolean;
@@ -55,4 +55,4 @@ const AlertDialog: React.FC<IAlertDialogProps> = ({
     );
 };
 
-export default React.memo(AlertDialog);
+export default memo(AlertDialog);

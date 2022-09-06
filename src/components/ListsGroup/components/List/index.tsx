@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
-import useAppSelector from "../../../../hooks/useAppSelector";
+import AddList from "../../../../components/AddTask";
+import Task from "../../../../components/Task";
+import AlertDialog from "@components/UI/AlertDialog";
 
-import { DND_TYPES_TASKS } from "../../../../consts/dndTypes";
+import useAppSelector from "@hooks/useAppSelector";
 
-import { IList } from "../../../../interfaces/IList";
-import { ITask } from "../../../../interfaces/ITask";
+import { DND_TYPES_TASKS } from "@consts/dndTypes";
 
-import AddList from "../../../AddTask";
-import Task from "../../../Task";
-import AlertDialog from "../../../UI/AlertDialog";
+import { IList } from "@interfaces/IList";
+import { ITask } from "@interfaces/ITask";
 
 interface IListsGroupListProps {
     list: IList;
@@ -148,4 +148,4 @@ const ListsGroupList: React.FC<IListsGroupListProps> = ({
     );
 };
 
-export default React.memo(ListsGroupList);
+export default memo(ListsGroupList);

@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import PreviewIcon from "@mui/icons-material/Preview";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import useAppDispatch from "../../../../hooks/useAppDispatch";
+import QuickViewBoard from "@components/QuickViewBoard";
+import AlertDialog from "@components/UI/AlertDialog";
 
-import { LINKS_BOARD_PAGE } from "../../../../consts/links";
-import { TEXT_MAX_LENGTH } from "../../../../consts/text";
+import useAppDispatch from "@hooks/useAppDispatch";
 
-import { BoardSlice } from "../../../../store/reducers/boardsReducer";
+import { LINKS_BOARD_PAGE } from "@consts/links";
+import { TEXT_MAX_LENGTH } from "@consts/text";
 
-import { IBoard } from "../../../../interfaces/IBoard";
+import { BoardSlice } from "@store/reducers/boardsReducer";
 
-import QuickViewBoard from "../../../QuickViewBoard";
-import AlertDialog from "../../../UI/AlertDialog";
+import { IBoard } from "@interfaces/IBoard";
 
 interface IBoardsGroupBoardProps {
     board: IBoard;
@@ -101,4 +101,4 @@ const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
     );
 };
 
-export default React.memo(BoardsGroupBoard);
+export default memo(BoardsGroupBoard);

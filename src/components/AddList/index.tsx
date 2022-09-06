@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
 import { Box, IconButton } from "@mui/material";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
+import Input from "@components/UI/Input";
 
-import { BoardSlice } from "../../store/reducers/boardsReducer";
-import { ListSlice } from "../../store/reducers/listsReducer";
+import useAppDispatch from "@hooks/useAppDispatch";
 
-import Input from "../UI/Input";
+import { BoardSlice } from "@store/reducers/boardsReducer";
+import { ListSlice } from "@store/reducers/listsReducer";
 
 interface IAddListProps {
     boardId: number;
@@ -67,4 +67,4 @@ const AddList: React.FC<IAddListProps> = ({ boardId }) => {
     );
 };
 
-export default React.memo(AddList);
+export default memo(AddList);
