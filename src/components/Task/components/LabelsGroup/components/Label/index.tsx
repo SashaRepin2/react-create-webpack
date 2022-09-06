@@ -2,7 +2,7 @@ import React from "react";
 
 import { Box, Tooltip } from "@mui/material";
 
-import { ILabel } from "../../../../../../interfaces/ILabel";
+import { ILabel } from "@interfaces/ILabel";
 
 interface ILabelsGroupLabelProps {
     label: ILabel;

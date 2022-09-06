@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
-import useAppDispatch from "../../hooks/useAppDispatch";
+import Input from "@components/UI/Input";
 
-import { ListSlice } from "../../store/reducers/listsReducer";
-import { TaskSlice } from "../../store/reducers/tasksReducer";
+import useAppDispatch from "@hooks/useAppDispatch";
 
-import { Statuses } from "../../interfaces/ITask";
+import { ListSlice } from "@store/reducers/listsReducer";
+import { TaskSlice } from "@store/reducers/tasksReducer";
 
-import Input from "../UI/Input";
+import { Statuses } from "@interfaces/ITask";
 
 interface IAddTaskProps {
     listId: number;
@@ -46,4 +46,4 @@ const AddTask: React.FC<IAddTaskProps> = ({ listId }) => {
     );
 };
 
-export default React.memo(AddTask);
+export default memo(AddTask);

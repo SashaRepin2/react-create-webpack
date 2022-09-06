@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import {
@@ -11,9 +11,9 @@ import {
     Typography,
 } from "@mui/material";
 
-import useAppDispatch from "../../../hooks/useAppDispatch";
+import useAppDispatch from "@hooks/useAppDispatch";
 
-import { boardsAddBoardAction } from "../../../store/actions/boards";
+import { boardsAddBoardAction } from "@store/actions/boards";
 
 import "./BoardForm.scss";
 
@@ -86,4 +86,4 @@ const BoardForm: React.FC<IBoardFormProps> = ({ isExpanded, setIsExpanded }) => 
     );
 };
 
-export default React.memo(BoardForm);
+export default memo(BoardForm);

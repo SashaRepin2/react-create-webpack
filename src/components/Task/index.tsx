@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 import { Box } from "@mui/material";
 import { Draggable } from "react-beautiful-dnd";
@@ -7,11 +7,11 @@ import TaskLabelsGroup from "./components/LabelsGroup";
 import TaskSettingsMenu from "./components/SettingsMenu";
 import TaskTitle from "./components/Title";
 
-import useAppSelector from "../../hooks/useAppSelector";
+import useAppSelector from "@hooks/useAppSelector";
 
-import { selectTaskLabels } from "../../store/selectors";
+import { selectTaskLabels } from "@store/selectors";
 
-import { ITask, Statuses } from "../../interfaces/ITask";
+import { ITask, Statuses } from "@interfaces/ITask";
 
 interface ITaskProps {
     index: number;
@@ -79,4 +79,4 @@ const Task: React.FC<ITaskProps> = ({ index, task, isOnlyView = false }) => {
     );
 };
 
-export default React.memo(Task);
+export default memo(Task);

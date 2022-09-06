@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { memo } from "react";
 
 import HomeIcon from "@mui/icons-material/Home";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -11,7 +11,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Link } from "react-router-dom";
 
-import { LINKS_HOME_PAGE, LINKS_SETTINGS_PAGE } from "../../../../consts/links";
+import { LINKS_HOME_PAGE, LINKS_SETTINGS_PAGE } from "@consts/links";
 
 interface IHeaderSideMenuProps {
     isOpen: boolean;
@@ -88,4 +88,4 @@ const HeaderSideMenu: React.FC<IHeaderSideMenuProps> = ({ isOpen, toggleDrawer }
     );
 };
 
-export default React.memo(HeaderSideMenu);
+export default memo(HeaderSideMenu);

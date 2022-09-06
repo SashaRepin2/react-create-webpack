@@ -2,6 +2,8 @@ const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+
 module.exports = {
     entry: [path.resolve(__dirname, "..", "./src/index.tsx")],
 
@@ -14,9 +16,11 @@ module.exports = {
     },
 
     resolve: {
-        alias: {
-            components: path.resolve(__dirname, "..", "src/components"),
-        },
+        plugins: [
+            new TsconfigPathsPlugin({
+                configFile: path.resolve(__dirname, "..", "tsconfig.json"),
+            }),
+        ],
         extensions: [".js", ".ts", ".tsx"],
     },
 
@@ -33,6 +37,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "[name].[contenthash].css",
         }),
+
         new CopyPlugin({
             patterns: [
                 {

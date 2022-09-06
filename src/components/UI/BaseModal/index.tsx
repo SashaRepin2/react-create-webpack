@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 
 import { Box } from "@mui/system";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 
-import getScrollbarWidth from "../../../utils/getScrollbarWidth";
+import getScrollbarWidth from "@utils/getScrollbarWidth";
 
 import "./BaseModal.scss";
 
@@ -15,24 +15,6 @@ interface IBaseModalProps {
 }
 
 const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children }) => {
-    // const modalRef = useRef<HTMLElement>(null);
-
-    // useEffect(() => {
-    //     const onClickOutsideModal = (event: MouseEvent) => {
-    //         console.log(event.target);
-
-    //         if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-    //             onClose();
-    //         }
-    //     };
-
-    //     document.addEventListener("click", onClickOutsideModal, true);
-
-    //     return () => {
-    //         document.removeEventListener("click", onClickOutsideModal, true);
-    //     };
-    // }, []);
-
     function onClickInsideModal(event: React.MouseEvent<HTMLElement>) {
         event.stopPropagation();
     }
@@ -47,7 +29,7 @@ const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children
         };
     }, [isOpen]);
 
-    return ReactDOM.createPortal(
+    return createPortal(
         isOpen && (
             <Box
                 className={"modal"}
@@ -67,4 +49,4 @@ const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children
     );
 };
 
-export default React.memo(BaseModal);
+export default memo(BaseModal);

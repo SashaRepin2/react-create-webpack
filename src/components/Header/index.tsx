@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 import HeaderSideMenu from "./components/SideMenu";
 
-import { LINKS_SETTINGS_PAGE } from "../../consts/links";
+import { LINKS_SETTINGS_PAGE } from "@consts/links";
 
 const Header: React.FC = () => {
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
@@ -65,4 +65,4 @@ const Header: React.FC = () => {
     );
 };
 
-export default React.memo(Header);
+export default memo(Header);

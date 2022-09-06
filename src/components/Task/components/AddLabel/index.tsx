@@ -1,18 +1,17 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { Box, Container, Typography } from "@mui/material";
 
 import AddLabelList from "./components/List";
+import BaseModal from "@components/UI/BaseModal";
 
-import useAppDispatch from "../../../../hooks/useAppDispatch";
-import useAppSelector from "../../../../hooks/useAppSelector";
+import useAppDispatch from "@hooks/useAppDispatch";
+import useAppSelector from "@hooks/useAppSelector";
 
-import { TaskSlice } from "../../../../store/reducers/tasksReducer";
+import { TaskSlice } from "@store/reducers/tasksReducer";
 
-import { ILabel } from "../../../../interfaces/ILabel";
-import { ITask } from "../../../../interfaces/ITask";
-
-import BaseModal from "../../../UI/BaseModal";
+import { ILabel } from "@interfaces/ILabel";
+import { ITask } from "@interfaces/ITask";
 
 interface ITaskAddLabelProps {
     task: ITask;
@@ -98,4 +97,4 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
     );
 };
 
-export default React.memo(TaskAddLabel);
+export default memo(TaskAddLabel);
