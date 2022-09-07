@@ -8,7 +8,7 @@ import AlertDialog from "@components/UI/AlertDialog";
 
 import useAppDispatch from "@hooks/useAppDispatch";
 
-import { TaskSlice } from "@store/reducers/tasksReducer";
+import { tasksDeleteTaskAction } from "@src/store/actions/tasks";
 
 import { ITask } from "@interfaces/ITask";
 
@@ -28,7 +28,6 @@ const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
     onCloseHanlder,
 }) => {
     const dispatch = useAppDispatch();
-    const { deleteTask } = TaskSlice.actions;
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
@@ -50,7 +49,7 @@ const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
     }
 
     function onSubmitDialogHandler() {
-        dispatch(deleteTask(task.id));
+        dispatch(tasksDeleteTaskAction(task.id));
     }
 
     return (

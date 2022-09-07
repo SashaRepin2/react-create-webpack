@@ -9,8 +9,8 @@ import tasksReducer from "./tasksReducer";
 const rootReducer = combineReducers({
     boardsReducer,
     listsReducer,
-    tasksReducer,
     labelsReducer,
+    tasksReducer,
     labelFormReducer,
 });
 

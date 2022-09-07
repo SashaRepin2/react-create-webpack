@@ -13,7 +13,7 @@ import useAppDispatch from "@hooks/useAppDispatch";
 import { LINKS_BOARD_PAGE } from "@consts/links";
 import { TEXT_MAX_LENGTH } from "@consts/text";
 
-import { BoardSlice } from "@store/reducers/boardsReducer";
+import { boardsDeleteBoardAction } from "@src/store/actions/boards";
 
 import { IBoard } from "@interfaces/IBoard";
 
@@ -23,7 +23,6 @@ interface IBoardsGroupBoardProps {
 
 const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
     const dispatch = useAppDispatch();
-    const { deleteBoard } = BoardSlice.actions;
 
     const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
     const [isOpenQuickView, setIsOpenQuickView] = useState<boolean>(false);
@@ -37,7 +36,7 @@ const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
     }
 
     function onSubmitDialogHandler() {
-        dispatch(deleteBoard(board.id));
+        dispatch(boardsDeleteBoardAction(board.id));
     }
 
     function onOpenQuickViewHandler() {

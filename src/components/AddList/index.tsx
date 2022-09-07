@@ -7,8 +7,8 @@ import Input from "@components/UI/Input";
 
 import useAppDispatch from "@hooks/useAppDispatch";
 
-import { BoardSlice } from "@store/reducers/boardsReducer";
-import { ListSlice } from "@store/reducers/listsReducer";
+import { boardsAddBoardListAction } from "@src/store/actions/boards";
+import { listsAddListAction } from "@src/store/actions/lists";
 
 interface IAddListProps {
     boardId: number;
@@ -16,8 +16,6 @@ interface IAddListProps {
 
 const AddList: React.FC<IAddListProps> = ({ boardId }) => {
     const dispatch = useAppDispatch();
-    const { addList } = ListSlice.actions;
-    const { addBoardList } = BoardSlice.actions;
 
     const [inputValue, setInputValue] = useState<string>("");
 
@@ -29,8 +27,8 @@ const AddList: React.FC<IAddListProps> = ({ boardId }) => {
                 sequenceTasks: [],
             };
 
-            dispatch(addList(list));
-            dispatch(addBoardList({ listId: list.id, boardId }));
+            dispatch(listsAddListAction(list));
+            dispatch(boardsAddBoardListAction({ listId: list.id, boardId }));
         }
         setInputValue("");
     }
