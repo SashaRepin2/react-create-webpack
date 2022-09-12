@@ -48,9 +48,7 @@ const SettingsPage: React.FC = () => {
             <Divider
                 variant={"fullWidth"}
                 sx={{
-                    "&::after, &::before": {
-                        borderWidth: "2px",
-                    },
+                    "&::after, &::before": { borderWidth: "2px" },
                     margin: "15px 0",
                 }}
             >

@@ -1,9 +1,8 @@
-import { LabelFormSlice } from "@store/reducers/labelForm";
+import { LabelFormSlice } from "@store/reducers/labelFormReducer";
+import { LabelSlice } from "@store/reducers/labelsReducer";
 import { AppDispatch, RootState } from "@store/store";
 
 import { ILabel } from "@interfaces/ILabel";
-
-import { labelsAddLabelAction, labelsEditLabelAction } from "../actions/labels";
 
 export default function submitLabelForm() {
     return (dispatch: AppDispatch, getState: RootState) => {
@@ -14,15 +13,10 @@ export default function submitLabelForm() {
         if (editLabel) {
             addLabel = Object.assign({}, editLabel, formFields);
             dispatch(LabelFormSlice.actions.changeEditLabel(null));
-            dispatch(labelsEditLabelAction(addLabel));
+            dispatch(LabelSlice.actions.editLabel(addLabel));
         } else {
-            addLabel = Object.assign(
-                {
-                    id: Date.now(),
-                },
-                formFields,
-            );
-            dispatch(labelsAddLabelAction(addLabel));
+            addLabel = Object.assign({ id: Date.now() }, formFields);
+            dispatch(LabelSlice.actions.addLabel(addLabel));
         }
 
         dispatch(LabelFormSlice.actions.resetForm());

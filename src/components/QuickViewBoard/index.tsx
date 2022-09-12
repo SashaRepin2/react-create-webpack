@@ -20,11 +20,7 @@ const QuickViewBoard: React.FC<IQuickViewBoardProps> = ({ board, isOpen, onClose
             title={"Быстрый просмотр"}
             onClose={onClose}
         >
-            <Box
-                sx={{
-                    margin: "5px 10px",
-                }}
-            >
+            <Box sx={{ margin: "5px 10px" }}>
                 <ListsGroup
                     board={board}
                     isOnlyView={true}

@@ -18,9 +18,5 @@ export default function useOutsideClick(initialOpenState: boolean) {
         };
     });
 
-    return {
-        refNode,
-        isOpen,
-        setIsOpen,
-    };
+    return { refNode, isOpen, setIsOpen };
 }

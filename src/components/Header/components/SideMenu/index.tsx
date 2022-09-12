@@ -24,16 +24,10 @@ const HeaderSideMenu: React.FC<IHeaderSideMenuProps> = ({ isOpen, toggleDrawer }
             anchor={"left"}
             open={isOpen}
             onClose={toggleDrawer(false)}
-            sx={{
-                paper: {
-                    bgcolor: "red",
-                },
-            }}
+            sx={{ paper: { bgcolor: "red" } }}
         >
             <Box
-                sx={{
-                    width: 250,
-                }}
+                sx={{ width: 250 }}
                 role="presentation"
                 onKeyDown={toggleDrawer(false)}
             >
@@ -52,31 +46,18 @@ const HeaderSideMenu: React.FC<IHeaderSideMenuProps> = ({ isOpen, toggleDrawer }
                     </ListItem>
 
                     <Link
-                        style={{
-                            textDecoration: "none",
-                        }}
+                        style={{ textDecoration: "none" }}
                         to={LINKS_HOME_PAGE}
                     >
                         <ListItem
                             disablePadding
-                            sx={{
-                                bgcolor: "#8458b3",
-                            }}
+                            sx={{ bgcolor: "#8458b3" }}
                         >
                             <ListItemButton>
-                                <ListItemIcon
-                                    sx={{
-                                        color: "#fff",
-                                    }}
-                                >
+                                <ListItemIcon sx={{ color: "#fff" }}>
                                     <HomeIcon />
                                 </ListItemIcon>
-                                <ListItemText
-                                    sx={{
-                                        color: "#fff",
-                                        fontWeight: "bold",
-                                    }}
-                                >
+                                <ListItemText sx={{ color: "#fff", fontWeight: "bold" }}>
                                     Главная
                                 </ListItemText>
                             </ListItemButton>
@@ -84,31 +65,18 @@ const HeaderSideMenu: React.FC<IHeaderSideMenuProps> = ({ isOpen, toggleDrawer }
                     </Link>
 
                     <Link
-                        style={{
-                            textDecoration: "none",
-                        }}
+                        style={{ textDecoration: "none" }}
                         to={LINKS_SETTINGS_PAGE}
                     >
                         <ListItem
                             disablePadding
-                            sx={{
-                                bgcolor: "#8458b3",
-                            }}
+                            sx={{ bgcolor: "#8458b3" }}
                         >
                             <ListItemButton>
-                                <ListItemIcon
-                                    sx={{
-                                        color: "#fff",
-                                    }}
-                                >
+                                <ListItemIcon sx={{ color: "#fff" }}>
                                     <SettingsIcon />
                                 </ListItemIcon>
-                                <ListItemText
-                                    sx={{
-                                        color: "#fff",
-                                        fontWeight: "bold",
-                                    }}
-                                >
+                                <ListItemText sx={{ color: "#fff", fontWeight: "bold" }}>
                                     Настройки
                                 </ListItemText>
                             </ListItemButton>

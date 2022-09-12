@@ -13,7 +13,7 @@ import useAppDispatch from "@hooks/useAppDispatch";
 import { LINKS_BOARD_PAGE } from "@consts/links";
 import { TEXT_MAX_LENGTH } from "@consts/text";
 
-import { boardsDeleteBoardAction } from "@src/store/actions/boards";
+import { BoardSlice } from "@store/reducers/boardsReducer";
 
 import { IBoard } from "@interfaces/IBoard";
 
@@ -23,6 +23,7 @@ interface IBoardsGroupBoardProps {
 
 const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
     const dispatch = useAppDispatch();
+    const { deleteBoard } = BoardSlice.actions;
 
     const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
     const [isOpenQuickView, setIsOpenQuickView] = useState<boolean>(false);
@@ -36,7 +37,7 @@ const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
     }
 
     function onSubmitDialogHandler() {
-        dispatch(boardsDeleteBoardAction(board.id));
+        dispatch(deleteBoard(board.id));
     }
 
     function onOpenQuickViewHandler() {
@@ -51,9 +52,7 @@ const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
         <React.Fragment>
             <Link
                 to={LINKS_BOARD_PAGE.replace(":boardId", board.id.toString())}
-                style={{
-                    textDecoration: "none",
-                }}
+                style={{ textDecoration: "none" }}
             >
                 <Container
                     sx={{
@@ -69,9 +68,7 @@ const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
                 >
                     <Typography
                         variant={"h6"}
-                        sx={{
-                            color: "#fff",
-                        }}
+                        sx={{ color: "#fff" }}
                     >
                         {board.title.length > TEXT_MAX_LENGTH
                             ? board.title.slice(0, TEXT_MAX_LENGTH) + "..."
