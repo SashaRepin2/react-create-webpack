@@ -1,6 +1,16 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createReducer } from "@reduxjs/toolkit";
 
 import { IList } from "@interfaces/IList";
+
+import {
+    listsAddListAction,
+    listsAddListTaskAction,
+    listsDeleteBoardListsAction,
+    listsDeleteListAction,
+    listsDeleteListTaskAction,
+    listsMoveTaskAction,
+    listsUpdateListAction,
+} from "../actions/lists";
 
 interface IListState {
     lists: IList[];
@@ -10,14 +20,20 @@ const initialState: IListState = {
     lists: [],
 };
 
-export const ListSlice = createSlice({
-    name: "lists",
-    initialState,
-    reducers: {
-        addList(state, action: PayloadAction<IList>) {
-            state.lists.push(action.payload);
-        },
-        updateListTitle(state, action: PayloadAction<{ idList: number; newTitle: string }>) {
+const listsReducer = createReducer(initialState, (builder) => {
+    builder.addCase(listsAddListAction, (state, action: PayloadAction<IList>) => {
+        state.lists.push(action.payload);
+    });
+
+    builder.addCase(
+        listsUpdateListAction,
+        (
+            state,
+            action: PayloadAction<{
+                idList: number;
+                newTitle: string;
+            }>,
+        ) => {
             const { idList, newTitle } = action.payload;
             const list = state.lists.find((list) => list.id === idList);
 
@@ -25,13 +41,21 @@ export const ListSlice = createSlice({
                 list.title = newTitle;
             }
         },
-        deleteList(state, action: PayloadAction<number>) {
-            state.lists = state.lists.filter((item) => item.id !== action.payload);
-        },
-        deleteBoardLists(state, action: PayloadAction<number[]>) {
-            state.lists = state.lists.filter((list) => action.payload.includes(list.id));
-        },
-        addListTask(state, action: PayloadAction<{ listId: number; taskId: number }>) {
+    );
+
+    builder.addCase(listsDeleteListAction, (state, action: PayloadAction<number>) => {
+        state.lists = state.lists.filter((item) => item.id !== action.payload);
+    });
+
+    builder.addCase(
+        listsAddListTaskAction,
+        (
+            state,
+            action: PayloadAction<{
+                listId: number;
+                taskId: number;
+            }>,
+        ) => {
             const { listId, taskId } = action.payload;
             const list = state.lists.find((list) => list.id === listId);
 
@@ -39,15 +63,19 @@ export const ListSlice = createSlice({
                 list.sequenceTasks.push(taskId);
             }
         },
-        moveTask(
+    );
+
+    builder.addCase(
+        listsMoveTaskAction,
+        (
             state,
             action: PayloadAction<{
                 oldIndex: number;
                 newIndex: number;
                 fromListId: number;
                 toListId: number;
-            }>
-        ) {
+            }>,
+        ) => {
             const { oldIndex, newIndex, fromListId, toListId } = action.payload;
 
             if (fromListId === toListId) {
@@ -66,7 +94,17 @@ export const ListSlice = createSlice({
                 }
             }
         },
-        deleteTask(state, action: PayloadAction<{ listId: number; taskId: number }>) {
+    );
+
+    builder.addCase(
+        listsDeleteListTaskAction,
+        (
+            state,
+            action: PayloadAction<{
+                listId: number;
+                taskId: number;
+            }>,
+        ) => {
             const { listId, taskId } = action.payload;
             const list = state.lists.find((list) => list.id === listId);
 
@@ -74,7 +112,11 @@ export const ListSlice = createSlice({
                 list.sequenceTasks = list.sequenceTasks.filter((id) => id === taskId);
             }
         },
-    },
+    );
+
+    builder.addCase(listsDeleteBoardListsAction, (state, action: PayloadAction<number[]>) => {
+        state.lists = state.lists.filter((list) => action.payload.includes(list.id));
+    });
 });
 
-export default ListSlice.reducer;
+export default listsReducer;

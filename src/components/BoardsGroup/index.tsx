@@ -1,42 +1,40 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Container, Stack, Typography } from "@mui/material";
 
 import BoardsGroupBoard from "./components/Board";
-import Input from "@components/UI/Input";
-import Loader from "@components/UI/Loader";
-
-import useAppDispatch from "@hooks/useAppDispatch";
-import useAppSelector from "@hooks/useAppSelector";
-import useDebounce from "@hooks/useDebounce";
-
-import { selectAllBoards } from "@store/selectors";
-import getBoardsThunk from "@store/thunk/boards";
+import Search from "@components/Search";
 
 import { IBoard } from "@interfaces/IBoard";
 
-const BoardsGroup: React.FC = () => {
-    const dispatch = useAppDispatch();
-    const boards = useAppSelector(selectAllBoards);
-    const { status } = useAppSelector((state) => state.boardsReducer);
+interface IBoardsGroupProps {
+    boards: IBoard[];
+}
 
+const BoardsGroup: React.FC<IBoardsGroupProps> = ({ boards }) => {
     const [filteredBoards, setFilteredBoards] = useState<IBoard[]>(boards);
     const [filterValue, setFilterValue] = useState<string>("");
-    const debouncedValue = useDebounce(filterValue, 500);
+
+    const filteredBoardsList = useMemo(
+        () =>
+            boards.map((board) => (
+                <BoardsGroupBoard
+                    key={board.id}
+                    board={board}
+                />
+            )),
+        [filteredBoards],
+    );
 
     const onChangeFilterValue = useCallback((value: string) => {
         setFilterValue(value);
     }, []);
 
     useEffect(() => {
-        dispatch(getBoardsThunk());
-    }, []);
-
-    useEffect(() => {
         setFilteredBoards(
-            boards.filter((board) => board.title.toLocaleLowerCase().includes(debouncedValue))
+            boards.filter((board) => board.title.toLocaleLowerCase().includes(filterValue)),
         );
-    }, [debouncedValue, boards]);
+    }, [filterValue, boards]);
 
     return (
         <Container
@@ -58,9 +56,8 @@ const BoardsGroup: React.FC = () => {
                     paddingTop: "15px",
                 }}
             >
-                <Input
-                    inputValue={filterValue}
-                    placeholderValue={"Введите название доски"}
+                <Search
+                    value={filterValue}
                     onChangeHandler={onChangeFilterValue}
                 />
             </Container>
@@ -69,23 +66,12 @@ const BoardsGroup: React.FC = () => {
                 justifyContent="flex-start"
                 alignItems="stretch"
                 spacing={2}
-                sx={{ padding: "15px 0" }}
+                sx={{
+                    padding: "15px 0",
+                }}
             >
-                {status === "loading" ? (
-                    <Container
-                        sx={{
-                            margin: "15px 0",
-                        }}
-                    >
-                        <Loader position={"relative"} />
-                    </Container>
-                ) : filteredBoards.length ? (
-                    filteredBoards.map((board) => (
-                        <BoardsGroupBoard
-                            key={board.id}
-                            board={board}
-                        />
-                    ))
+                {filteredBoards.length ? (
+                    filteredBoardsList
                 ) : (
                     <Typography
                         variant={"h5"}

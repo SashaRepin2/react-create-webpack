@@ -8,7 +8,7 @@ import BaseModal from "@components/UI/BaseModal";
 import useAppDispatch from "@hooks/useAppDispatch";
 import useAppSelector from "@hooks/useAppSelector";
 
-import { TaskSlice } from "@store/reducers/tasksReducer";
+import { tasksAddTaskLabelAction, tasksDeleteTaskLabelAction } from "@src/store/actions/tasks";
 
 import { ILabel } from "@interfaces/ILabel";
 import { ITask } from "@interfaces/ITask";
@@ -21,22 +21,31 @@ interface ITaskAddLabelProps {
 
 const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandler }) => {
     const dispatch = useAppDispatch();
-    const { addLabelToTask, deleteLabelFromTask } = TaskSlice.actions;
 
     const activeLabels = useAppSelector((state) =>
-        state.labelsReducer.labels.filter((label) => task.labels.includes(label.id))
+        state.labelsReducer.labels.filter((label) => task.labels.includes(label.id)),
     );
 
     const inactiveLabels = useAppSelector((state) =>
-        state.labelsReducer.labels.filter((label) => !task.labels.includes(label.id))
+        state.labelsReducer.labels.filter((label) => !task.labels.includes(label.id)),
     );
 
     function onAddHandler(label: ILabel) {
-        dispatch(addLabelToTask({ taskId: task.id, labelId: label.id }));
+        dispatch(
+            tasksAddTaskLabelAction({
+                taskId: task.id,
+                labelId: label.id,
+            }),
+        );
     }
 
     function onDeleteHandler(label: ILabel) {
-        dispatch(deleteLabelFromTask({ taskId: task.id, labelId: label.id }));
+        dispatch(
+            tasksDeleteTaskLabelAction({
+                taskId: task.id,
+                labelId: label.id,
+            }),
+        );
     }
 
     return (
@@ -56,7 +65,10 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
                     >
                         <Typography
                             variant={"h6"}
-                            sx={{ color: "#fff", fontWeight: "bold" }}
+                            sx={{
+                                color: "#fff",
+                                fontWeight: "bold",
+                            }}
                         >
                             {task.title}
                         </Typography>

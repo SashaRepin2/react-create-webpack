@@ -9,7 +9,9 @@ interface ILoaderProps {
 const Loader: React.FC<ILoaderProps> = ({ position = "absolute" }) => {
     return (
         <svg
-            style={{ position }}
+            style={{
+                position,
+            }}
             className={"spinner"}
             viewBox="0 0 50 50"
         >
