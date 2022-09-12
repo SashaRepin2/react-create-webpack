@@ -32,7 +32,7 @@ const listsReducer = createReducer(initialState, (builder) => {
             action: PayloadAction<{
                 idList: number;
                 newTitle: string;
-            }>
+            }>,
         ) => {
             const { idList, newTitle } = action.payload;
             const list = state.lists.find((list) => list.id === idList);
@@ -40,7 +40,7 @@ const listsReducer = createReducer(initialState, (builder) => {
             if (list) {
                 list.title = newTitle;
             }
-        }
+        },
     );
 
     builder.addCase(listsDeleteListAction, (state, action: PayloadAction<number>) => {
@@ -54,7 +54,7 @@ const listsReducer = createReducer(initialState, (builder) => {
             action: PayloadAction<{
                 listId: number;
                 taskId: number;
-            }>
+            }>,
         ) => {
             const { listId, taskId } = action.payload;
             const list = state.lists.find((list) => list.id === listId);
@@ -62,7 +62,7 @@ const listsReducer = createReducer(initialState, (builder) => {
             if (list) {
                 list.sequenceTasks.push(taskId);
             }
-        }
+        },
     );
 
     builder.addCase(
@@ -74,7 +74,7 @@ const listsReducer = createReducer(initialState, (builder) => {
                 newIndex: number;
                 fromListId: number;
                 toListId: number;
-            }>
+            }>,
         ) => {
             const { oldIndex, newIndex, fromListId, toListId } = action.payload;
 
@@ -93,7 +93,7 @@ const listsReducer = createReducer(initialState, (builder) => {
                     toList.sequenceTasks.splice(newIndex, 0, movingCard);
                 }
             }
-        }
+        },
     );
 
     builder.addCase(
@@ -103,7 +103,7 @@ const listsReducer = createReducer(initialState, (builder) => {
             action: PayloadAction<{
                 listId: number;
                 taskId: number;
-            }>
+            }>,
         ) => {
             const { listId, taskId } = action.payload;
             const list = state.lists.find((list) => list.id === listId);
@@ -111,7 +111,7 @@ const listsReducer = createReducer(initialState, (builder) => {
             if (list) {
                 list.sequenceTasks = list.sequenceTasks.filter((id) => id === taskId);
             }
-        }
+        },
     );
 
     builder.addCase(listsDeleteBoardListsAction, (state, action: PayloadAction<number[]>) => {

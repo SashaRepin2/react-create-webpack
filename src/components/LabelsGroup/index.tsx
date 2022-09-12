@@ -8,7 +8,7 @@ import useAppDispatch from "@hooks/useAppDispatch";
 import useAppSelector from "@hooks/useAppSelector";
 
 import { labelsDeleteLabelAction } from "@src/store/actions/labels";
-import { LabelFormSlice } from "@store/reducers/labelFormReducer";
+import { LabelFormSlice } from "@store/reducers/labelForm";
 
 import { ILabel } from "@interfaces/ILabel";
 

@@ -16,7 +16,6 @@ interface IAddListProps {
 
 const AddList: React.FC<IAddListProps> = ({ boardId }) => {
     const dispatch = useAppDispatch();
-
     const [inputValue, setInputValue] = useState<string>("");
 
     function onAddListHandler() {
@@ -28,7 +27,12 @@ const AddList: React.FC<IAddListProps> = ({ boardId }) => {
             };
 
             dispatch(listsAddListAction(list));
-            dispatch(boardsAddBoardListAction({ listId: list.id, boardId }));
+            dispatch(
+                boardsAddBoardListAction({
+                    listId: list.id,
+                    boardId,
+                }),
+            );
         }
         setInputValue("");
     }
@@ -56,7 +60,9 @@ const AddList: React.FC<IAddListProps> = ({ boardId }) => {
                 sx={{
                     color: "#8458b3",
                     bgcolor: "#D0BDF4",
-                    "&:hover": { bgcolor: "#6d28b8" },
+                    "&:hover": {
+                        bgcolor: "#6d28b8",
+                    },
                 }}
             >
                 <AddIcon />

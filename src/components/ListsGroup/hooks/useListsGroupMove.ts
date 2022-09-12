@@ -27,16 +27,31 @@ function useListsGroupMove(board: IBoard) {
 
         if (type === DND_TYPES_TASKS) {
             if (newIndex !== oldIndex || fromListId !== toListId) {
-                dispatch(listsMoveTaskAction({ oldIndex, newIndex, fromListId, toListId }));
+                dispatch(
+                    listsMoveTaskAction({
+                        oldIndex,
+                        newIndex,
+                        fromListId,
+                        toListId,
+                    }),
+                );
             }
         }
 
         if (type === DND_TYPES_LISTS) {
-            dispatch(boardsMoveListAction({ oldIndex, newIndex, boardId: board.id }));
+            dispatch(
+                boardsMoveListAction({
+                    oldIndex,
+                    newIndex,
+                    boardId: board.id,
+                }),
+            );
         }
     }
 
-    return { onDragEndHandler };
+    return {
+        onDragEndHandler,
+    };
 }
 
 export default useListsGroupMove;

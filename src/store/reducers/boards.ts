@@ -1,5 +1,4 @@
 import { PayloadAction, createReducer } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 
 import { REQUEST_STATUSES } from "@consts/requestStatuses";
 
@@ -43,7 +42,7 @@ const boardReducer = createReducer(initialState, (builder) => {
             action: PayloadAction<{
                 boardId: number;
                 listId: number;
-            }>
+            }>,
         ) => {
             const { boardId, listId } = action.payload;
             const board = state.boards.find((board) => board.id === boardId);
@@ -51,7 +50,7 @@ const boardReducer = createReducer(initialState, (builder) => {
             if (board) {
                 board.sequenceLists.push(listId);
             }
-        }
+        },
     );
 
     builder.addCase(
@@ -61,7 +60,7 @@ const boardReducer = createReducer(initialState, (builder) => {
             action: PayloadAction<{
                 boardId: number;
                 listId: number;
-            }>
+            }>,
         ) => {
             const { boardId, listId } = action.payload;
             const board = state.boards.find((board) => board.id === boardId);
@@ -69,7 +68,7 @@ const boardReducer = createReducer(initialState, (builder) => {
             if (board) {
                 board.sequenceLists = board.sequenceLists.filter((id) => id !== listId);
             }
-        }
+        },
     );
 
     builder.addCase(
@@ -80,7 +79,7 @@ const boardReducer = createReducer(initialState, (builder) => {
                 oldIndex: number;
                 newIndex: number;
                 boardId: number;
-            }>
+            }>,
         ) => {
             const { oldIndex, newIndex, boardId } = action.payload;
             const board = state.boards.find((board) => board.id === boardId);
@@ -89,7 +88,7 @@ const boardReducer = createReducer(initialState, (builder) => {
                 const [movingList] = board.sequenceLists.splice(oldIndex, 1);
                 board.sequenceLists.splice(newIndex, 0, movingList);
             }
-        }
+        },
     );
 
     builder.addCase(
@@ -99,7 +98,7 @@ const boardReducer = createReducer(initialState, (builder) => {
             action: PayloadAction<{
                 idBoard: number;
                 newTitle: string;
-            }>
+            }>,
         ) => {
             const { idBoard, newTitle } = action.payload;
             const board = state.boards.find((board) => board.id === idBoard);
@@ -107,7 +106,7 @@ const boardReducer = createReducer(initialState, (builder) => {
             if (board) {
                 board.title = newTitle;
             }
-        }
+        },
     );
 
     builder.addCase(getBoardsThunk.pending, (state) => {
@@ -115,7 +114,7 @@ const boardReducer = createReducer(initialState, (builder) => {
         state.error = null;
     });
 
-    builder.addCase(getBoardsThunk.fulfilled, (state, action) => {
+    builder.addCase(getBoardsThunk.fulfilled, (state) => {
         state.status = REQUEST_STATUSES.IDLE;
     });
 

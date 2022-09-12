@@ -15,7 +15,6 @@ interface IAddTaskProps {
 
 const AddTask: React.FC<IAddTaskProps> = ({ listId }) => {
     const dispatch = useAppDispatch();
-
     const [inputValue, setInputValue] = useState<string>("");
 
     function onKeyDownHandler(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -28,7 +27,12 @@ const AddTask: React.FC<IAddTaskProps> = ({ listId }) => {
                     labels: [],
                 };
                 dispatch(tasksAddTaskAction(task));
-                dispatch(listsAddListTaskAction({ listId, taskId: task.id }));
+                dispatch(
+                    listsAddListTaskAction({
+                        listId,
+                        taskId: task.id,
+                    }),
+                );
                 setInputValue("");
             }
         }

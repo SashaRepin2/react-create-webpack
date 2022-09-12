@@ -39,7 +39,7 @@ const tasksReducer = createReducer(initialState, (builder) => {
             action: PayloadAction<{
                 idTask: number;
                 newTitle: string;
-            }>
+            }>,
         ) => {
             const { idTask, newTitle } = action.payload;
             const task = state.tasks.find((task) => task.id === idTask);
@@ -47,7 +47,7 @@ const tasksReducer = createReducer(initialState, (builder) => {
             if (task) {
                 task.title = newTitle;
             }
-        }
+        },
     );
 
     builder.addCase(
@@ -59,7 +59,7 @@ const tasksReducer = createReducer(initialState, (builder) => {
             if (task) {
                 task.labels.push(labelId);
             }
-        }
+        },
     );
 
     builder.addCase(
@@ -69,7 +69,7 @@ const tasksReducer = createReducer(initialState, (builder) => {
             action: PayloadAction<{
                 taskId: number;
                 labelId: number;
-            }>
+            }>,
         ) => {
             const { taskId, labelId } = action.payload;
             const task = state.tasks.find((task) => task.id === taskId);
@@ -77,7 +77,7 @@ const tasksReducer = createReducer(initialState, (builder) => {
             if (task) {
                 task.labels = task.labels.filter((_labelId) => _labelId !== labelId);
             }
-        }
+        },
     );
 });
 

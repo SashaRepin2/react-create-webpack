@@ -31,7 +31,12 @@ const ListsGroup: React.FC<IListsGroupProps> = ({ board, isOnlyView = false }) =
     const lists = useAppSelector((state) => selectBoardSortedLists(state, board));
 
     function onDeleteListHandler(list: IList) {
-        dispatch(boardsDeleteBoardListAction({ boardId: board.id, listId: list.id }));
+        dispatch(
+            boardsDeleteBoardListAction({
+                boardId: board.id,
+                listId: list.id,
+            }),
+        );
         dispatch(tasksDeleteListTasksAction(list.sequenceTasks));
         dispatch(listsDeleteListAction(list.id));
     }

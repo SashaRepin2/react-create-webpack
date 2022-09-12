@@ -51,7 +51,9 @@ const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
         <React.Fragment>
             <Link
                 to={LINKS_BOARD_PAGE.replace(":boardId", board.id.toString())}
-                style={{ textDecoration: "none" }}
+                style={{
+                    textDecoration: "none",
+                }}
             >
                 <Container
                     sx={{
@@ -67,7 +69,9 @@ const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
                 >
                     <Typography
                         variant={"h6"}
-                        sx={{ color: "#fff" }}
+                        sx={{
+                            color: "#fff",
+                        }}
                     >
                         {board.title.length > TEXT_MAX_LENGTH
                             ? board.title.slice(0, TEXT_MAX_LENGTH) + "..."

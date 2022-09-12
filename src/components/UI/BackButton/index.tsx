@@ -24,10 +24,16 @@ const BackButton: React.FC = () => {
                 height: "64px",
                 width: "64px",
                 bgcolor: "#8458b3",
-                "&:hover": { bgcolor: "#5E229E" },
+                "&:hover": {
+                    bgcolor: "#5E229E",
+                },
             }}
         >
-            <ArrowBackIcon sx={{ fill: "#fff" }} />
+            <ArrowBackIcon
+                sx={{
+                    fill: "#fff",
+                }}
+            />
         </IconButton>
     );
 };

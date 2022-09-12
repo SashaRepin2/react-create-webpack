@@ -23,19 +23,29 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
     const dispatch = useAppDispatch();
 
     const activeLabels = useAppSelector((state) =>
-        state.labelsReducer.labels.filter((label) => task.labels.includes(label.id))
+        state.labelsReducer.labels.filter((label) => task.labels.includes(label.id)),
     );
 
     const inactiveLabels = useAppSelector((state) =>
-        state.labelsReducer.labels.filter((label) => !task.labels.includes(label.id))
+        state.labelsReducer.labels.filter((label) => !task.labels.includes(label.id)),
     );
 
     function onAddHandler(label: ILabel) {
-        dispatch(tasksAddTaskLabelAction({ taskId: task.id, labelId: label.id }));
+        dispatch(
+            tasksAddTaskLabelAction({
+                taskId: task.id,
+                labelId: label.id,
+            }),
+        );
     }
 
     function onDeleteHandler(label: ILabel) {
-        dispatch(tasksDeleteTaskLabelAction({ taskId: task.id, labelId: label.id }));
+        dispatch(
+            tasksDeleteTaskLabelAction({
+                taskId: task.id,
+                labelId: label.id,
+            }),
+        );
     }
 
     return (
@@ -55,7 +65,10 @@ const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandl
                     >
                         <Typography
                             variant={"h6"}
-                            sx={{ color: "#fff", fontWeight: "bold" }}
+                            sx={{
+                                color: "#fff",
+                                fontWeight: "bold",
+                            }}
                         >
                             {task.title}
                         </Typography>

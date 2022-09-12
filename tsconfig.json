@@ -1,37 +1,45 @@
 {
     "compilerOptions": {
-        "target": "es6",
         "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true,
         "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
+        "target": "es5",
+
+        "rootDir": "./src",
+        "outDir": "./build",
+
+        "allowJs": true,
+        "checkJs": true,
+
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
         "isolatedModules": true,
-        "noEmit": true,
-        "sourceMap": true,
         "jsx": "react-jsx",
-
-        "strict": true,
+        "moduleResolution": "node",
+        "noEmit": true,
+        "noFallthroughCasesInSwitch": true,
+        "resolveJsonModule": true,
         "skipLibCheck": true,
+        "strict": true,
 
-        "baseUrl": "./",
+        "types": [
+            "node"
+        ],
+
+        "baseUrl": "src",
         "paths": {
-            "@src/*": ["./src/*"],
-            "@store/*": ["./src/store/*"],
-            "@components/*": ["./src/components/*"],
-            "@interfaces/*": ["./src/interfaces/*"],
-            "@pages/*": ["./src/pages/*"],
-            "@hooks/*": ["./src/hooks/*"],
-            "@consts/*": ["./src/consts/*"],
-            "@utils/*": ["./src/utils/*"],
-            "@api/*": ["./src/api/*"]
+            "@src/*": ["*"],
+            "@store/*": ["store/*"],
+            "@components/*": ["components/*"],
+            "@interfaces/*": ["interfaces/*"],
+            "@pages/*": ["pages/*"],
+            "@hooks/*": ["hooks/*"],
+            "@consts/*": ["consts/*"],
+            "@utils/*": ["utils/*"],
+            "@api/*": ["api/*"]
         }
     },
+
     "include": ["src/**/*"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "build", "webpack"]
 }
