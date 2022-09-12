@@ -1,4 +1,4 @@
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
@@ -10,7 +10,7 @@ import "./styles/index.scss";
 
 import App from "./App";
 
-const root = createRoot(document.getElementById("root") as HTMLElement);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
     <Provider store={store}>
@@ -20,5 +20,5 @@ root.render(
         >
             <App />
         </PersistGate>
-    </Provider>,
+    </Provider>
 );

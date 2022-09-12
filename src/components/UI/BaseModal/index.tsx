@@ -36,6 +36,7 @@ const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children
                 onClick={onClose}
             >
                 <Box
+                    // ref={modalRef}
                     className={"modal__body"}
                     onClick={onClickInsideModal}
                 >
@@ -44,7 +45,7 @@ const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children
                 </Box>
             </Box>
         ),
-        document.body,
+        document.body
     );
 };
 

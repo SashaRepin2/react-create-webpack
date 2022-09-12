@@ -8,20 +8,20 @@ import Input from "@components/UI/Input";
 import useAppDispatch from "@hooks/useAppDispatch";
 import useAppSelector from "@hooks/useAppSelector";
 
-import { LabelFormSlice } from "@store/reducers/labelForm";
+import { LabelFormSlice } from "@store/reducers/labelFormReducer";
 import { store } from "@store/store";
 import submitLabelForm from "@store/thunk/labelForm";
 
 const LabelForm: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { changeHexColor, changeTitle, resetForm } = LabelFormSlice.actions;
-
     const { initLabel, editLabel } = useAppSelector((state) => {
         return {
             initLabel: state.labelFormReducer.fieldsValues,
             editLabel: state.labelFormReducer.editLabel,
         };
     });
+
+    const { changeHexColor, changeTitle, resetForm } = LabelFormSlice.actions;
 
     function onSubmitFormHandler() {
         submitLabelForm()(dispatch, store.getState());
@@ -76,12 +76,7 @@ const LabelForm: React.FC = () => {
                 }}
             />
 
-            <Box
-                sx={{
-                    display: "flex",
-                    columnGap: "10px",
-                }}
-            >
+            <Box sx={{ display: "flex", columnGap: "10px" }}>
                 {editLabel && (
                     <Button
                         variant={"contained"}
@@ -90,9 +85,7 @@ const LabelForm: React.FC = () => {
                             fontWeight: "bold",
                             color: "purple",
                             bgcolor: "#D0BDF4",
-                            "&:hover": {
-                                bgcolor: "#D0BDF4",
-                            },
+                            "&:hover": { bgcolor: "#D0BDF4" },
                         }}
                     >
                         Отмена
@@ -106,9 +99,7 @@ const LabelForm: React.FC = () => {
                         fontWeight: "bold",
                         color: "purple",
                         bgcolor: "#D0BDF4",
-                        "&:hover": {
-                            bgcolor: "#D0BDF4",
-                        },
+                        "&:hover": { bgcolor: "#D0BDF4" },
                     }}
                 >
                     {editLabel ? "Сохранить" : "Добавить"}

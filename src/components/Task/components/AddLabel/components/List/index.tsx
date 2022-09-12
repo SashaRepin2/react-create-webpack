@@ -12,27 +12,11 @@ interface IAddLabelListProps {
 
 const AddLabelList: React.FC<IAddLabelListProps> = ({ title, labels, onClickLabelHandler }) => {
     return (
-        <Box
-            sx={{
-                overflow: "hidden",
-                bgcolor: "#D0BDF4",
-                borderRadius: "5px",
-                padding: "5px",
-            }}
-        >
-            <Box
-                sx={{
-                    bgcolor: "#8458b3",
-                    borderRadius: "5px",
-                    padding: "5px",
-                }}
-            >
+        <Box sx={{ overflow: "hidden", bgcolor: "#D0BDF4", borderRadius: "5px", padding: "5px" }}>
+            <Box sx={{ bgcolor: "#8458b3", borderRadius: "5px", padding: "5px" }}>
                 <Typography
                     variant={"h6"}
-                    sx={{
-                        color: "#fff",
-                        fontWeight: "bold",
-                    }}
+                    sx={{ color: "#fff", fontWeight: "bold" }}
                 >
                     {title}
                 </Typography>
@@ -66,10 +50,7 @@ const AddLabelList: React.FC<IAddLabelListProps> = ({ title, labels, onClickLabe
                         />
                         <Typography
                             variant={"subtitle1"}
-                            sx={{
-                                color: "#fff",
-                                fontWeight: "bold",
-                            }}
+                            sx={{ color: "#fff", fontWeight: "bold" }}
                         >
                             {label.title}
                         </Typography>

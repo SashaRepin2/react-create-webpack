@@ -10,10 +10,7 @@ interface ILabelFormState {
 
 const initialState: ILabelFormState = {
     editLabel: null,
-    fieldsValues: {
-        title: "",
-        hexColor: "#fff",
-    },
+    fieldsValues: { title: "", hexColor: "#fff" },
 };
 
 export const LabelFormSlice = createSlice({
@@ -29,6 +26,7 @@ export const LabelFormSlice = createSlice({
                 state.fieldsValues.title = label.title;
                 state.fieldsValues.hexColor = label.hexColor;
             }
+            console.log({ ...state.fieldsValues });
         },
         changeFields(state, action: PayloadAction<ILabelForm>) {
             state.fieldsValues = Object.assign(state.fieldsValues, action.payload);
@@ -40,10 +38,7 @@ export const LabelFormSlice = createSlice({
             state.fieldsValues.hexColor = action.payload;
         },
         resetForm(state) {
-            state.fieldsValues = {
-                title: "",
-                hexColor: "#fff",
-            };
+            state.fieldsValues = { title: "", hexColor: "#fff" };
             state.editLabel = null;
         },
     },

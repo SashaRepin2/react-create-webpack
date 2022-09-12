@@ -8,11 +8,11 @@ module.exports = {
     entry: [path.resolve(__dirname, "..", "./src/index.tsx")],
 
     output: {
-        path: path.resolve(__dirname, "..", "./build"),
         publicPath: "/",
+        path: path.resolve(__dirname, "..", "./build"),
         filename: "[name].[contenthash].js",
-        sourceMapFilename: "[name].[contenthash].js.map",
         clean: true,
+        sourceMapFilename: "[name].[contenthash].js.map",
     },
 
     resolve: {

@@ -4,8 +4,8 @@ import Input from "@components/UI/Input";
 
 import useAppDispatch from "@hooks/useAppDispatch";
 
-import { listsAddListTaskAction } from "@src/store/actions/lists";
-import { tasksAddTaskAction } from "@src/store/actions/tasks";
+import { ListSlice } from "@store/reducers/listsReducer";
+import { TaskSlice } from "@store/reducers/tasksReducer";
 
 import { Statuses } from "@interfaces/ITask";
 
@@ -15,6 +15,9 @@ interface IAddTaskProps {
 
 const AddTask: React.FC<IAddTaskProps> = ({ listId }) => {
     const dispatch = useAppDispatch();
+    const { addTask } = TaskSlice.actions;
+    const { addListTask } = ListSlice.actions;
+
     const [inputValue, setInputValue] = useState<string>("");
 
     function onKeyDownHandler(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -26,13 +29,8 @@ const AddTask: React.FC<IAddTaskProps> = ({ listId }) => {
                     status: Statuses.UNCOMPLETE,
                     labels: [],
                 };
-                dispatch(tasksAddTaskAction(task));
-                dispatch(
-                    listsAddListTaskAction({
-                        listId,
-                        taskId: task.id,
-                    }),
-                );
+                dispatch(addTask(task));
+                dispatch(addListTask({ listId, taskId: task.id }));
                 setInputValue("");
             }
         }

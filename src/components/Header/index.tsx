@@ -26,19 +26,13 @@ const Header: React.FC = () => {
 
     return (
         <React.Fragment>
-            <Box
-                sx={{
-                    flexGrow: 1,
-                }}
-            >
+            <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="static">
                     <Toolbar>
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
-                            sx={{
-                                mr: 2,
-                            }}
+                            sx={{ mr: 2 }}
                             onClick={toggleDrawer(true)}
                         >
                             <MenuIcon />
@@ -47,9 +41,7 @@ const Header: React.FC = () => {
                             variant="h6"
                             noWrap
                             component="div"
-                            sx={{
-                                flexGrow: 1,
-                            }}
+                            sx={{ flexGrow: 1 }}
                         >
                             Trello Clone
                         </Typography>
@@ -57,11 +49,7 @@ const Header: React.FC = () => {
                             <Link to={LINKS_SETTINGS_PAGE}>
                                 <IconButton aria-label="back">
                                     <SettingsIcon
-                                        sx={{
-                                            fill: "#fff",
-                                            height: "32px",
-                                            width: "32px",
-                                        }}
+                                        sx={{ fill: "#fff", height: "32px", width: "32px" }}
                                     />
                                 </IconButton>
                             </Link>

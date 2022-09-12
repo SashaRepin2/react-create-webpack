@@ -4,13 +4,15 @@ import useAppDispatch from "@hooks/useAppDispatch";
 
 import { DND_TYPES_LISTS, DND_TYPES_TASKS } from "@consts/dndTypes";
 
-import { boardsMoveListAction } from "@src/store/actions/boards";
-import { listsMoveTaskAction } from "@src/store/actions/lists";
+import { BoardSlice } from "@store/reducers/boardsReducer";
+import { ListSlice } from "@store/reducers/listsReducer";
 
 import { IBoard } from "@interfaces/IBoard";
 
 function useListsGroupMove(board: IBoard) {
     const dispatch = useAppDispatch();
+    const { moveTask } = ListSlice.actions;
+    const { moveList } = BoardSlice.actions;
 
     function onDragEndHandler(result: DropResult) {
         const { source, destination, type } = result;
@@ -27,31 +29,16 @@ function useListsGroupMove(board: IBoard) {
 
         if (type === DND_TYPES_TASKS) {
             if (newIndex !== oldIndex || fromListId !== toListId) {
-                dispatch(
-                    listsMoveTaskAction({
-                        oldIndex,
-                        newIndex,
-                        fromListId,
-                        toListId,
-                    }),
-                );
+                dispatch(moveTask({ oldIndex, newIndex, fromListId, toListId }));
             }
         }
 
         if (type === DND_TYPES_LISTS) {
-            dispatch(
-                boardsMoveListAction({
-                    oldIndex,
-                    newIndex,
-                    boardId: board.id,
-                }),
-            );
+            dispatch(moveList({ oldIndex, newIndex, boardId: board.id }));
         }
     }
 
-    return {
-        onDragEndHandler,
-    };
+    return { onDragEndHandler };
 }
 
 export default useListsGroupMove;
