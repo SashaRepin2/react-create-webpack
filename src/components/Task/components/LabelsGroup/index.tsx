@@ -11,7 +11,13 @@ interface ILabelsGroupProps {
 }
 
 const TaskLabelsGroup: React.FC<ILabelsGroupProps> = ({ labels }) => (
-    <Box sx={{ display: "flex", flexWrap: "wrap", margin: "0 5px" }}>
+    <Box
+        sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            margin: "0 5px",
+        }}
+    >
         {labels.map((label) => (
             <LabelsGroupLabel
                 key={label.id}

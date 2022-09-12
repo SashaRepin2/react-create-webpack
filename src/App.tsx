@@ -1,10 +1,13 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import Header from "./components/Header";
 import BackButton from "./components/UI/BackButton";
 import Loader from "./components/UI/Loader";
+
+import SettingsPage from "./pages/SettingsPage";
 
 import {
     LINKS_BOARDS_PAGE,
@@ -14,11 +17,11 @@ import {
     LINKS_SETTINGS_PAGE,
 } from "./consts/links";
 
-import SettingsPage from "./pages/SettingsPage";
+import "react-toastify/dist/ReactToastify.css";
 
-const HomePage = React.lazy(() => import("./pages/HomePage"));
-const BoardPage = React.lazy(() => import("./pages/BoardPage"));
-const NotFoundPage = React.lazy(() => import("./pages/NotFoundPage"));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const BoardPage = lazy(() => import("./pages/BoardPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 function App() {
     return (
@@ -27,6 +30,7 @@ function App() {
             <div className="App">
                 <Suspense fallback={<Loader />}>
                     <BackButton />
+                    <ToastContainer />
                     <Routes>
                         <Route
                             path={LINKS_HOME_PAGE}
