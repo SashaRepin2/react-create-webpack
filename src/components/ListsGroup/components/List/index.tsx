@@ -30,12 +30,12 @@ const ListsGroupList: React.FC<IListsGroupListProps> = ({
 }) => {
     const tasks = useAppSelector((state) => {
         const listTasks = state.tasksReducer.tasks.filter((task) =>
-            list.sequenceTasks.includes(task.id)
+            list.sequenceTasks.includes(task.id),
         );
 
         return listTasks.sort(
             (prevTask: ITask, nextTask: ITask) =>
-                list.sequenceTasks.indexOf(prevTask.id) - list.sequenceTasks.indexOf(nextTask.id)
+                list.sequenceTasks.indexOf(prevTask.id) - list.sequenceTasks.indexOf(nextTask.id),
         );
     });
 
@@ -99,7 +99,10 @@ const ListsGroupList: React.FC<IListsGroupListProps> = ({
                             )}
                             <Typography
                                 variant={"h6"}
-                                sx={{ color: "#fff", marginBottom: "10px" }}
+                                sx={{
+                                    color: "#fff",
+                                    marginBottom: "10px",
+                                }}
                             >
                                 {list.title}
                             </Typography>

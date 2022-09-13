@@ -1,16 +1,33 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { Container } from "@mui/material";
 
 import BoardsGroup from "../components/BoardsGroup";
 import BoardForm from "../components/Forms/BoardForm";
+import Loader from "@components/UI/Loader";
+
+import useAppDispatch from "@hooks/useAppDispatch";
+import useAppSelector from "@hooks/useAppSelector";
+
+import { REQUEST_STATUSES } from "@consts/requestStatuses";
+
+import { selectBoards } from "@store/selectors/boards";
+import { getBoardsThunk } from "@store/thunk/boards";
 
 const HomePage: React.FC = () => {
-    const [isExpanded, setIsExpanded] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
+    const boards = useAppSelector(selectBoards);
+    const { status } = useAppSelector((state) => state.boardsReducer);
+
+    const [isExpandedForm, setIsExpandedForm] = useState<boolean>(false);
+
+    useEffect(() => {
+        dispatch(getBoardsThunk());
+    }, []);
 
     const onChangeFormExpanded = useCallback(() => {
-        setIsExpanded(!isExpanded);
-    }, [isExpanded]);
+        setIsExpandedForm(!isExpandedForm);
+    }, [isExpandedForm]);
 
     return (
         <Container
@@ -24,11 +41,21 @@ const HomePage: React.FC = () => {
         >
             <Container>
                 <BoardForm
-                    isExpanded={isExpanded}
+                    isExpanded={isExpandedForm}
                     setIsExpanded={onChangeFormExpanded}
                 />
             </Container>
-            <BoardsGroup />
+            {status === REQUEST_STATUSES.LOADING ? (
+                <Container
+                    sx={{
+                        margin: "15px 0",
+                    }}
+                >
+                    <Loader position={"relative"} />
+                </Container>
+            ) : (
+                <BoardsGroup boards={boards} />
+            )}
         </Container>
     );
 };

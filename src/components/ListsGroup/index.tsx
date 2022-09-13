@@ -11,9 +11,9 @@ import useAppSelector from "@hooks/useAppSelector";
 
 import { DND_TYPES_LISTS } from "@consts/dndTypes";
 
-import { BoardSlice } from "@store/reducers/boardsReducer";
-import { ListSlice } from "@store/reducers/listsReducer";
-import { TaskSlice } from "@store/reducers/tasksReducer";
+import { boardsDeleteBoardListAction } from "@src/store/actions/boards";
+import { listsDeleteListAction } from "@src/store/actions/lists";
+import { tasksDeleteListTasksAction } from "@src/store/actions/tasks";
 import { selectBoardSortedLists } from "@store/selectors";
 
 import { IBoard } from "@interfaces/IBoard";
@@ -27,15 +27,18 @@ interface IListsGroupProps {
 const ListsGroup: React.FC<IListsGroupProps> = ({ board, isOnlyView = false }) => {
     const dispatch = useAppDispatch();
     const { onDragEndHandler } = useListsGroupMove(board);
-    const { deleteListTasks } = TaskSlice.actions;
-    const { deleteList } = ListSlice.actions;
-    const { deleteListFromBoard } = BoardSlice.actions;
+
     const lists = useAppSelector((state) => selectBoardSortedLists(state, board));
 
     function onDeleteListHandler(list: IList) {
-        dispatch(deleteListFromBoard({ boardId: board.id, listId: list.id }));
-        dispatch(deleteListTasks(list.sequenceTasks));
-        dispatch(deleteList(list.id));
+        dispatch(
+            boardsDeleteBoardListAction({
+                boardId: board.id,
+                listId: list.id,
+            }),
+        );
+        dispatch(tasksDeleteListTasksAction(list.sequenceTasks));
+        dispatch(listsDeleteListAction(list.id));
     }
 
     return (

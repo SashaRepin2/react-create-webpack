@@ -33,7 +33,7 @@ const BoardForm: React.FC<IBoardFormProps> = ({ isExpanded, setIsExpanded }) => 
                     id: Date.now(),
                     title: inputValue,
                     sequenceLists: [],
-                })
+                }),
             );
             setInputValue("");
             setIsExpanded();
@@ -50,7 +50,9 @@ const BoardForm: React.FC<IBoardFormProps> = ({ isExpanded, setIsExpanded }) => 
             <Accordion
                 expanded={isExpanded}
                 onChange={setIsExpanded}
-                sx={{ boxShadow: 4 }}
+                sx={{
+                    boxShadow: 4,
+                }}
             >
                 <AccordionSummary className={"board-form__header"}>
                     <AddBoxIcon />
