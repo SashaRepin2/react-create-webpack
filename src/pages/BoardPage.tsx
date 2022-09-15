@@ -10,12 +10,14 @@ import NotFoundPage from "@pages/NotFoundPage";
 
 import useAppSelector from "@hooks/useAppSelector";
 
+import { selectBoardById } from "@store/selectors/boards";
+
 const BoardPage: React.FC = () => {
     const { boardId } = useParams<Params>();
 
     const board = useAppSelector((state) => {
         if (boardId) {
-            return state.boardsReducer.boards.find((board) => board.id === +boardId);
+            return selectBoardById(state, Number(boardId));
         }
     });
 

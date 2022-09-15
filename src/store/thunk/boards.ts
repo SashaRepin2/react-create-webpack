@@ -17,17 +17,16 @@ export const getBoardsThunk = createAsyncThunk<
             },
         });
 
-        if (!response.ok) {
-            throw new Error("Не удалось загрузить доски!");
-        }
+        const data = await response.json();
 
-        return await response.json();
+        return data;
     } catch (error) {
-        const errorMessage = (error as Error).message;
+        const { message } = error as Error;
 
-        toast.error(errorMessage, {
+        toast.error("Не удалось загрузить доски!", {
             position: toast.POSITION.BOTTOM_RIGHT,
         });
-        return rejectWithValue(errorMessage);
+
+        return rejectWithValue(message);
     }
 });
