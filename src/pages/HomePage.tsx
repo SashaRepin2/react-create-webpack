@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 
 import { Container } from "@mui/material";
 
@@ -14,7 +14,7 @@ import { REQUEST_STATUSES } from "@consts/requestStatuses";
 import { selectBoards } from "@store/selectors/boards";
 import { getBoardsThunk } from "@store/thunk/boards";
 
-const HomePage: React.FC = () => {
+const HomePage: FC = () => {
     const dispatch = useAppDispatch();
     const boards = useAppSelector(selectBoards);
     const { status } = useAppSelector((state) => state.boardsReducer);

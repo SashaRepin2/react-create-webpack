@@ -11,14 +11,15 @@ import { labelsDeleteLabelAction } from "@src/store/actions/labels";
 import { LabelFormSlice } from "@store/reducers/labelForm";
 
 import { ILabel } from "@interfaces/ILabel";
+import { selectLabels } from "@store/selectors/labels";
 
 const LabelsGroup: React.FC = () => {
     const dispatch = useAppDispatch();
     const { changeEditLabel } = LabelFormSlice.actions;
 
-    const labels = useAppSelector((state) => state.labelsReducer.labels);
+    const labels = useAppSelector(selectLabels);
 
-    function onDeleteLabelHanlder(labelId: number) {
+    function onDeleteLabelHandler(labelId: number) {
         dispatch(labelsDeleteLabelAction(labelId));
     }
 
@@ -44,7 +45,7 @@ const LabelsGroup: React.FC = () => {
                 <Label
                     key={label.id}
                     label={label}
-                    onDelete={onDeleteLabelHanlder}
+                    onDelete={onDeleteLabelHandler}
                     onEdit={onEditLabelHandler}
                 />
             ))}
