@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { FC, memo, useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
@@ -12,8 +12,9 @@ import useAppSelector from "@hooks/useAppSelector";
 
 import { DND_TYPES_TASKS } from "@consts/dndTypes";
 
+import { selectListSortedTasks } from "@store/selectors";
+
 import { IList } from "@interfaces/IList";
-import { ITask } from "@interfaces/ITask";
 
 interface IListsGroupListProps {
     list: IList;
@@ -22,22 +23,13 @@ interface IListsGroupListProps {
     onDelete: (list: IList) => void;
 }
 
-const ListsGroupList: React.FC<IListsGroupListProps> = ({
+const ListsGroupList: FC<IListsGroupListProps> = ({
     list,
     index,
     isOnlyView = false,
     onDelete,
 }) => {
-    const tasks = useAppSelector((state) => {
-        const listTasks = state.tasksReducer.tasks.filter((task) =>
-            list.sequenceTasks.includes(task.id),
-        );
-
-        return listTasks.sort(
-            (prevTask: ITask, nextTask: ITask) =>
-                list.sequenceTasks.indexOf(prevTask.id) - list.sequenceTasks.indexOf(nextTask.id),
-        );
-    });
+    const tasks = useAppSelector((state) => selectListSortedTasks(state, list));
 
     const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 

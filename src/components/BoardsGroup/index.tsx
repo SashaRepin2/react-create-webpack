@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 
 import { Container, Stack, Typography } from "@mui/material";
 
@@ -11,7 +11,7 @@ interface IBoardsGroupProps {
     boards: IBoard[];
 }
 
-const BoardsGroup: React.FC<IBoardsGroupProps> = ({ boards }) => {
+const BoardsGroup: FC<IBoardsGroupProps> = ({ boards }) => {
     const [filteredBoards, setFilteredBoards] = useState<IBoard[]>(boards);
     const [filterValue, setFilterValue] = useState<string>("");
 

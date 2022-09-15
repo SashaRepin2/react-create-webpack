@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 
 import { Box, Container, Typography } from "@mui/material";
 
@@ -9,6 +9,7 @@ import useAppDispatch from "@hooks/useAppDispatch";
 import useAppSelector from "@hooks/useAppSelector";
 
 import { tasksAddTaskLabelAction, tasksDeleteTaskLabelAction } from "@src/store/actions/tasks";
+import { selectNotTaskLabels, selectTaskLabels } from "@store/selectors";
 
 import { ILabel } from "@interfaces/ILabel";
 import { ITask } from "@interfaces/ITask";
@@ -19,16 +20,10 @@ interface ITaskAddLabelProps {
     onCloseHandler: () => void;
 }
 
-const TaskAddLabel: React.FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandler }) => {
+const TaskAddLabel: FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandler }) => {
     const dispatch = useAppDispatch();
-
-    const activeLabels = useAppSelector((state) =>
-        state.labelsReducer.labels.filter((label) => task.labels.includes(label.id)),
-    );
-
-    const inactiveLabels = useAppSelector((state) =>
-        state.labelsReducer.labels.filter((label) => !task.labels.includes(label.id)),
-    );
+    const activeLabels = useAppSelector((state) => selectTaskLabels(state, task));
+    const inactiveLabels = useAppSelector((state) => selectNotTaskLabels(state, task));
 
     function onAddHandler(label: ILabel) {
         dispatch(

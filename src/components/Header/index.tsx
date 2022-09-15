@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { FC, memo, useState } from "react";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -9,7 +9,7 @@ import HeaderSideMenu from "./components/SideMenu";
 
 import { LINKS_SETTINGS_PAGE } from "@consts/links";
 
-const Header: React.FC = () => {
+const Header: FC = () => {
     const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {

@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { FC, memo, useState } from "react";
 
 import AddIcon from "@mui/icons-material/Add";
 import { Box, IconButton } from "@mui/material";
@@ -14,7 +14,7 @@ interface IAddListProps {
     boardId: number;
 }
 
-const AddList: React.FC<IAddListProps> = ({ boardId }) => {
+const AddList: FC<IAddListProps> = ({ boardId }) => {
     const dispatch = useAppDispatch();
     const [inputValue, setInputValue] = useState<string>("");
 
