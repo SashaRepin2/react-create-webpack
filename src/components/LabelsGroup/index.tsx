@@ -9,15 +9,15 @@ import useAppSelector from "@hooks/useAppSelector";
 
 import { labelsDeleteLabelAction } from "@src/store/actions/labels";
 import { LabelFormSlice } from "@store/reducers/labelForm";
+import labelsSelector from "@store/selectors/labels";
 
 import { ILabel } from "@interfaces/ILabel";
-import { selectLabels } from "@store/selectors/labels";
 
 const LabelsGroup: React.FC = () => {
     const dispatch = useAppDispatch();
     const { changeEditLabel } = LabelFormSlice.actions;
 
-    const labels = useAppSelector(selectLabels);
+    const labels = useAppSelector(labelsSelector.selectLabels);
 
     function onDeleteLabelHandler(labelId: number) {
         dispatch(labelsDeleteLabelAction(labelId));

@@ -11,13 +11,13 @@ import useAppSelector from "@hooks/useAppSelector";
 
 import { REQUEST_STATUSES } from "@consts/requestStatuses";
 
-import { selectBoards } from "@store/selectors/boards";
+import boardsSelector from "@store/selectors/boards";
 import { getBoardsThunk } from "@store/thunk/boards";
 
 const HomePage: FC = () => {
     const dispatch = useAppDispatch();
-    const boards = useAppSelector(selectBoards);
-    const { status } = useAppSelector((state) => state.boardsReducer);
+    const boards = useAppSelector(boardsSelector.selectBoards);
+    const status = useAppSelector(boardsSelector.selectStatus);
 
     const [isExpandedForm, setIsExpandedForm] = useState<boolean>(false);
 
