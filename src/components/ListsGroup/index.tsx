@@ -17,7 +17,7 @@ import { tasksDeleteListTasksAction } from "@src/store/actions/tasks";
 import { selectBoardSortedLists } from "@store/selectors";
 
 import { IBoard } from "@interfaces/IBoard";
-import { IList } from "@src/interfaces/ILists";
+import { IList } from "@src/interfaces/IList";
 
 interface IListsGroupProps {
     board: IBoard;

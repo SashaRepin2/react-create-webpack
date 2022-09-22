@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 
-import { IList } from "@src/interfaces/ILists";
+import { IList } from "@src/interfaces/IList";
 
 const LISTS_ADD_LIST = "LISTS/ADD_LIST";
 const LISTS_UPDATE_LIST = "LISTS/UPDATE_LIST";

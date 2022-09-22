@@ -7,7 +7,7 @@ import tasksSelector, { selectTasks } from "@store/selectors/tasks";
 
 import { IBoard } from "@interfaces/IBoard";
 import { ITask } from "@interfaces/ITask";
-import { IList } from "@src/interfaces/ILists";
+import { IList } from "@src/interfaces/IList";
 
 export const selectBoardSortedLists = createSelector(
     [selectLists, (state, board: IBoard) => board],

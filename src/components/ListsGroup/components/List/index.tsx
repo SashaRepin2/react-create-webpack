@@ -14,7 +14,7 @@ import { DND_TYPES_TASKS } from "@consts/dndTypes";
 
 import { selectListSortedTasks } from "@store/selectors";
 
-import { IList } from "@src/interfaces/ILists";
+import { IList } from "@src/interfaces/IList";
 
 interface IListsGroupListProps {
     list: IList;

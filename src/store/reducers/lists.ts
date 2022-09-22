@@ -1,6 +1,6 @@
 import { PayloadAction, createReducer } from "@reduxjs/toolkit";
 
-import { IList } from "@src/interfaces/ILists";
+import { IList } from "@src/interfaces/IList";
 
 import {
     listsAddListAction,
