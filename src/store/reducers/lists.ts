@@ -1,4 +1,4 @@
-import { PayloadAction, createReducer } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
 
 import { IList } from "@src/interfaces/IList";
 
@@ -9,7 +9,6 @@ import {
     listsDeleteListAction,
     listsDeleteListTaskAction,
     listsMoveTaskAction,
-    listsUpdateListAction,
 } from "../actions/lists";
 
 interface IListState {
@@ -21,101 +20,66 @@ const initialState: IListState = {
 };
 
 const listsReducer = createReducer(initialState, (builder) => {
-    builder.addCase(listsAddListAction, (state, action: PayloadAction<IList>) => {
-        state.lists.push(action.payload);
+    builder.addCase(listsAddListAction, (state, action) => {
+        return {
+            ...state,
+            lists: [...state.lists, action.payload],
+        };
     });
 
-    builder.addCase(
-        listsUpdateListAction,
-        (
-            state,
-            action: PayloadAction<{
-                idList: number;
-                newTitle: string;
-            }>,
-        ) => {
-            const { idList, newTitle } = action.payload;
-            const list = state.lists.find((list) => list.id === idList);
-
-            if (list) {
-                list.title = newTitle;
-            }
-        },
-    );
-
-    builder.addCase(listsDeleteListAction, (state, action: PayloadAction<number>) => {
-        state.lists = state.lists.filter((item) => item.id !== action.payload);
+    builder.addCase(listsDeleteListAction, (state, action) => {
+        return {
+            ...state,
+            lists: state.lists.filter((item) => item.id !== action.payload),
+        };
     });
 
-    builder.addCase(
-        listsAddListTaskAction,
-        (
-            state,
-            action: PayloadAction<{
-                listId: number;
-                taskId: number;
-            }>,
-        ) => {
-            const { listId, taskId } = action.payload;
-            const list = state.lists.find((list) => list.id === listId);
+    builder.addCase(listsAddListTaskAction, (state, action) => {
+        const { list, sequenceTasks } = action.payload;
 
-            if (list) {
-                list.sequenceTasks.push(taskId);
-            }
-        },
-    );
+        return {
+            ...state,
+            lists: state.lists.map((_list) =>
+                _list.id === list.id
+                    ? {
+                          ..._list,
+                          sequenceTasks,
+                      }
+                    : _list,
+            ),
+        };
+    });
 
-    builder.addCase(
-        listsMoveTaskAction,
-        (
-            state,
-            action: PayloadAction<{
-                oldIndex: number;
-                newIndex: number;
-                fromListId: number;
-                toListId: number;
-            }>,
-        ) => {
-            const { oldIndex, newIndex, fromListId, toListId } = action.payload;
+    builder.addCase(listsDeleteListTaskAction, (state, action) => {
+        const { list, sequenceTasks } = action.payload;
 
-            if (fromListId === toListId) {
-                const fromList = state.lists.find((list) => list.id === fromListId);
-                if (fromList) {
-                    const [movingCard] = fromList.sequenceTasks.splice(oldIndex, 1);
-                    fromList.sequenceTasks.splice(newIndex, 0, movingCard);
-                }
-            } else {
-                const fromList = state.lists.find((list) => list.id === fromListId);
-                const toList = state.lists.find((list) => list.id === toListId);
+        return {
+            ...state,
+            lists: state.lists.map((_list) =>
+                _list.id === list.id
+                    ? {
+                          ..._list,
+                          sequenceTasks,
+                      }
+                    : _list,
+            ),
+        };
+    });
 
-                if (fromList && toList) {
-                    const [movingCard] = fromList.sequenceTasks.splice(oldIndex, 1);
-                    toList.sequenceTasks.splice(newIndex, 0, movingCard);
-                }
-            }
-        },
-    );
+    builder.addCase(listsMoveTaskAction, (state, action) => {
+        const { oldIndex, newIndex, fromList, toList } = action.payload;
 
-    builder.addCase(
-        listsDeleteListTaskAction,
-        (
-            state,
-            action: PayloadAction<{
-                listId: number;
-                taskId: number;
-            }>,
-        ) => {
-            const { listId, taskId } = action.payload;
-            const list = state.lists.find((list) => list.id === listId);
+        const [movingCard] = fromList.sequenceTasks.splice(oldIndex, 1);
+        fromList.sequenceTasks.splice(newIndex, 0, movingCard);
 
-            if (list) {
-                list.sequenceTasks = list.sequenceTasks.filter((id) => id === taskId);
-            }
-        },
-    );
+        toList.sequenceTasks.splice(newIndex, 0, movingCard);
+    });
 
-    builder.addCase(listsDeleteBoardListsAction, (state, action: PayloadAction<number[]>) => {
-        state.lists = state.lists.filter((list) => action.payload.includes(list.id));
+    builder.addCase(listsDeleteBoardListsAction, (state, action) => {
+        return {
+            ...state,
+            lists: state.lists.filter((list) => action.payload.includes(list.id)),
+        };
     });
 });
 

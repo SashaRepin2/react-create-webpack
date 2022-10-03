@@ -1,18 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { Box, Container, Typography } from "@mui/material";
-import { Params, useParams } from "react-router-dom";
+import { Navigate, Params, useParams } from "react-router-dom";
 
 import AddList from "@components/AddList";
 import ListsGroup from "@components/ListsGroup";
 
-import NotFoundPage from "@pages/NotFoundPage";
-
 import useAppSelector from "@hooks/useAppSelector";
+
+import { LINKS_NOT_FOUND_PAGE } from "@src/consts/links";
 
 import { selectBoardById } from "@store/selectors/boards";
 
-const BoardPage: React.FC = () => {
+const BoardPage: FC = () => {
     const { boardId } = useParams<Params>();
 
     const board = useAppSelector((state) => {
@@ -22,7 +22,7 @@ const BoardPage: React.FC = () => {
     });
 
     return !board ? (
-        <NotFoundPage />
+        <Navigate to={LINKS_NOT_FOUND_PAGE} />
     ) : (
         <Container
             sx={{
@@ -54,7 +54,7 @@ const BoardPage: React.FC = () => {
                 >
                     {`Доска: ${board.title}`}
                 </Typography>
-                <AddList boardId={board.id} />
+                <AddList board={board} />
             </Box>
             <Container
                 sx={{

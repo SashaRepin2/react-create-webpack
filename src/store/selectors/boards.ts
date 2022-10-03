@@ -6,8 +6,7 @@ const selectBoardId = (state: RootState, boardId: number) => boardId;
 
 export const selectAll = (state: RootState) => state.boardsReducer;
 export const selectBoards = (state: RootState) => state.boardsReducer.boards;
-export const selectStatus = (state: RootState) => state.boardsReducer.status;
-export const selectError = (state: RootState) => state.boardsReducer.error;
+export const selectIsLoading = (state: RootState) => state.boardsReducer.isLoading;
 
 export const selectBoardById = createSelector([selectBoards, selectBoardId], (boards, boardId) => {
     return boards.find((board) => board.id === boardId);
@@ -16,8 +15,7 @@ export const selectBoardById = createSelector([selectBoards, selectBoardId], (bo
 const boardsSelector = {
     selectAll,
     selectBoards,
-    selectStatus,
-    selectError,
+    selectIsLoading,
     selectBoardById,
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { Stack } from "@mui/material";
 
@@ -8,23 +8,20 @@ import useAppDispatch from "@hooks/useAppDispatch";
 import useAppSelector from "@hooks/useAppSelector";
 
 import { labelsDeleteLabelAction } from "@src/store/actions/labels";
-import { LabelFormSlice } from "@store/reducers/labelForm";
 import labelsSelector from "@store/selectors/labels";
 
 import { ILabel } from "@interfaces/ILabel";
 
-const LabelsGroup: React.FC = () => {
-    const dispatch = useAppDispatch();
-    const { changeEditLabel } = LabelFormSlice.actions;
+interface ILabelGroupProps {
+    onEditLabel: (editLabel: ILabel) => void;
+}
 
+const LabelsGroup: FC<ILabelGroupProps> = ({ onEditLabel }) => {
+    const dispatch = useAppDispatch();
     const labels = useAppSelector(labelsSelector.selectLabels);
 
     function onDeleteLabelHandler(labelId: number) {
         dispatch(labelsDeleteLabelAction(labelId));
-    }
-
-    function onEditLabelHandler(label: ILabel) {
-        dispatch(changeEditLabel(label));
     }
 
     return (
@@ -46,7 +43,7 @@ const LabelsGroup: React.FC = () => {
                     key={label.id}
                     label={label}
                     onDelete={onDeleteLabelHandler}
-                    onEdit={onEditLabelHandler}
+                    onEdit={onEditLabel}
                 />
             ))}
         </Stack>

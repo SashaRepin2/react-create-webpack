@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -17,7 +17,7 @@ interface IAlertDialogProps {
     onSubmit: () => void;
 }
 
-const AlertDialog: React.FC<IAlertDialogProps> = ({
+const AlertDialog: FC<IAlertDialogProps> = ({
     isOpen,
     title,
     description,

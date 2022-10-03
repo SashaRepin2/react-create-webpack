@@ -26,19 +26,23 @@ const TaskAddLabel: FC<ITaskAddLabelProps> = ({ task, isShow, onCloseHandler }) 
     const inactiveLabels = useAppSelector((state) => selectNotTaskLabels(state, task));
 
     function onAddHandler(label: ILabel) {
+        const newTaskLabels = [...task.labels, label.id];
+
         dispatch(
             tasksAddTaskLabelAction({
-                taskId: task.id,
-                labelId: label.id,
+                task,
+                newTaskLabels,
             }),
         );
     }
 
     function onDeleteHandler(label: ILabel) {
+        const newTaskLabels = task.labels.filter((labelId) => labelId !== label.id);
+
         dispatch(
             tasksDeleteTaskLabelAction({
-                taskId: task.id,
-                labelId: label.id,
+                task,
+                newTaskLabels,
             }),
         );
     }

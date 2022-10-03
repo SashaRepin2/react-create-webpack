@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import "./Loader.scss";
 
@@ -6,7 +6,7 @@ interface ILoaderProps {
     position?: "absolute" | "fixed" | "relative";
 }
 
-const Loader: React.FC<ILoaderProps> = ({ position = "absolute" }) => {
+const Loader: FC<ILoaderProps> = ({ position = "absolute" }) => {
     return (
         <svg
             style={{

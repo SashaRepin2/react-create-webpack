@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { FC, memo, useState } from "react";
 
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import {
@@ -22,7 +22,7 @@ interface IBoardFormProps {
     setIsExpanded: () => void;
 }
 
-const BoardForm: React.FC<IBoardFormProps> = ({ isExpanded, setIsExpanded }) => {
+const BoardForm: FC<IBoardFormProps> = ({ isExpanded, setIsExpanded }) => {
     const dispatch = useAppDispatch();
     const [inputValue, setInputValue] = useState<string>("");
 

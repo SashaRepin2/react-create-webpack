@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 
 import { Box } from "@mui/material";
 
@@ -13,7 +13,7 @@ interface IQuickViewBoardProps {
     onClose: () => void;
 }
 
-const QuickViewBoard: React.FC<IQuickViewBoardProps> = ({ board, isOpen, onClose }) => {
+const QuickViewBoard: FC<IQuickViewBoardProps> = ({ board, isOpen, onClose }) => {
     return (
         <BaseModal
             isOpen={isOpen}

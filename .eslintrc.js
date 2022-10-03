@@ -45,6 +45,7 @@ module.exports = {
     ],
 
     rules: {
+        "import/no-named-as-default-member": "off",
         "function-call-argument-newline": ["error", "consistent"],
         "@typescript-eslint/no-explicit-any": "off",
         "import/no-named-as-default": "off",

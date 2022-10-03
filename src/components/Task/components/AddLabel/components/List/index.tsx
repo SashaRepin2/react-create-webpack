@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 
 import { Box, Typography } from "@mui/material";
 
@@ -10,7 +10,7 @@ interface IAddLabelListProps {
     onClickLabelHandler: (label: ILabel) => void;
 }
 
-const AddLabelList: React.FC<IAddLabelListProps> = ({ title, labels, onClickLabelHandler }) => {
+const AddLabelList: FC<IAddLabelListProps> = ({ title, labels, onClickLabelHandler }) => {
     return (
         <Box
             sx={{

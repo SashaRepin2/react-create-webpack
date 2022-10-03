@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { FC, memo, useState } from "react";
 
 import Input from "@components/UI/Input";
 
@@ -8,12 +8,13 @@ import { listsAddListTaskAction } from "@src/store/actions/lists";
 import { tasksAddTaskAction } from "@src/store/actions/tasks";
 
 import { Statuses } from "@interfaces/ITask";
+import { IList } from "@src/interfaces/IList";
 
 interface IAddTaskProps {
-    listId: number;
+    list: IList;
 }
 
-const AddTask: React.FC<IAddTaskProps> = ({ listId }) => {
+const AddTask: FC<IAddTaskProps> = ({ list }) => {
     const dispatch = useAppDispatch();
     const [inputValue, setInputValue] = useState<string>("");
 
@@ -26,13 +27,17 @@ const AddTask: React.FC<IAddTaskProps> = ({ listId }) => {
                     status: Statuses.UNCOMPLETE,
                     labels: [],
                 };
+
+                const sequenceTasks = [...list.sequenceTasks, task.id];
+
                 dispatch(tasksAddTaskAction(task));
                 dispatch(
                     listsAddListTaskAction({
-                        listId,
-                        taskId: task.id,
+                        list,
+                        sequenceTasks,
                     }),
                 );
+
                 setInputValue("");
             }
         }

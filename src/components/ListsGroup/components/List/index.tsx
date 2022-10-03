@@ -98,7 +98,7 @@ const ListsGroupList: FC<IListsGroupListProps> = ({
                             >
                                 {list.title}
                             </Typography>
-                            {!isOnlyView && <AddList listId={list.id} />}
+                            {!isOnlyView && <AddList list={list} />}
                         </Box>
                         <Droppable
                             droppableId={list.id.toString()}

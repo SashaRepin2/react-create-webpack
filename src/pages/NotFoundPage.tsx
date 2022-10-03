@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { Container, Typography } from "@mui/material";
 
-const NotFoundPage: React.FC = () => {
+const NotFoundPage: FC = () => {
     return (
         <Container
             sx={{

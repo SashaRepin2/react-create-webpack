@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { Typography } from "@mui/material";
 
@@ -6,7 +6,7 @@ interface ITaskTitleProps {
     title: string | React.ReactNode;
 }
 
-const TaskTitle: React.FC<ITaskTitleProps> = ({ title }) => {
+const TaskTitle: FC<ITaskTitleProps> = ({ title }) => {
     return <Typography variant={"subtitle1"}>{title}</Typography>;
 };
 
