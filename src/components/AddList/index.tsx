@@ -10,11 +10,13 @@ import useAppDispatch from "@hooks/useAppDispatch";
 import { boardsAddBoardListAction } from "@src/store/actions/boards";
 import { listsAddListAction } from "@src/store/actions/lists";
 
+import { IBoard } from "@src/interfaces/IBoard";
+
 interface IAddListProps {
-    boardId: number;
+    board: IBoard;
 }
 
-const AddList: FC<IAddListProps> = ({ boardId }) => {
+const AddList: FC<IAddListProps> = ({ board }) => {
     const dispatch = useAppDispatch();
     const [inputValue, setInputValue] = useState<string>("");
 
@@ -26,11 +28,13 @@ const AddList: FC<IAddListProps> = ({ boardId }) => {
                 sequenceTasks: [],
             };
 
+            const sequenceLists = [...board.sequenceLists, list.id];
+
             dispatch(listsAddListAction(list));
             dispatch(
                 boardsAddBoardListAction({
-                    listId: list.id,
-                    boardId,
+                    board,
+                    sequenceLists,
                 }),
             );
         }

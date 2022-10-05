@@ -1,4 +1,4 @@
-import { PayloadAction, createReducer } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
 
 import { ILabel } from "@interfaces/ILabel";
 
@@ -18,26 +18,36 @@ const initialState: ILabelState = {
 };
 
 export const labelReducer = createReducer(initialState, (builder) => {
-    builder.addCase(labelsAddLabelAction, (state, action: PayloadAction<ILabel>) => {
-        state.labels.push(action.payload);
+    builder.addCase(labelsAddLabelAction, (state, action) => {
+        return {
+            ...state,
+            labels: [...state.labels, action.payload],
+        };
     });
 
-    builder.addCase(labelsEditLabelAction, (state, action: PayloadAction<ILabel>) => {
-        const newLabel = action.payload;
-        const label = state.labels.find((label) => label.id === newLabel.id);
-
-        if (label) {
-            label.hexColor = newLabel.hexColor;
-            label.title = newLabel.title;
-        }
-    });
-
-    builder.addCase(labelsDeleteLabelAction, (state, action: PayloadAction<number>) => {
-        state.labels = state.labels.filter((label) => action.payload !== label.id);
+    builder.addCase(labelsDeleteLabelAction, (state, action) => {
+        return {
+            ...state,
+            labels: state.labels.filter((label) => action.payload !== label.id),
+        };
     });
 
     builder.addCase(labelsDeleteLabelsAction, (state) => {
-        state.labels = [];
+        return {
+            ...state,
+            labels: [],
+        };
+    });
+
+    builder.addCase(labelsEditLabelAction, (state, action) => {
+        const editableLabel = action.payload;
+
+        return {
+            ...state,
+            labels: state.labels.map((_label) =>
+                _label.id === editableLabel.id ? editableLabel : _label,
+            ),
+        };
     });
 });
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { Box, Tooltip } from "@mui/material";
 
@@ -8,7 +8,7 @@ interface ILabelsGroupLabelProps {
     label: ILabel;
 }
 
-const LabelsGroupLabel: React.FC<ILabelsGroupLabelProps> = ({ label }) => {
+const LabelsGroupLabel: FC<ILabelsGroupLabelProps> = ({ label }) => {
     return (
         <Tooltip
             title={label.title}

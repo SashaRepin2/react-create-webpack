@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 
 import { Box, InputBase } from "@mui/material";
 import { SxProps } from "@mui/system";
@@ -12,7 +12,7 @@ interface IInput {
     onKeyDownHandler?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<IInput> = ({
+const Input: FC<IInput> = ({
     inputValue,
     placeholderValue = "Введите название",
     onChangeHandler,
