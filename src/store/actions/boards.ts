@@ -31,9 +31,8 @@ export const boardsAddBoardAction = createAction<IBoard>(BOARDS_ADD_BOARD);
  * Change list position in board
  */
 export const boardsMoveListAction = createAction<{
-    oldIndex: number;
-    newIndex: number;
     board: IBoard;
+    sequenceLists: number[];
 }>(BOARDS_MOVE_LIST);
 
 /**

@@ -26,8 +26,8 @@ export const listsDeleteListTaskAction = createAction<{
 export const listsMoveTaskAction = createAction<{
     oldIndex: number;
     newIndex: number;
-    fromList: IList;
-    toList: IList;
+    fromListId: number;
+    toListId: number;
 }>(LISTS_MOVE_LIST_TASK);
 
 export const listsDeleteBoardListsAction = createAction<number[]>(LISTS_DELETE_BOARD_LISTS);
