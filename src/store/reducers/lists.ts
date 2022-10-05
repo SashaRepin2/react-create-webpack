@@ -67,12 +67,23 @@ const listsReducer = createReducer(initialState, (builder) => {
     });
 
     builder.addCase(listsMoveTaskAction, (state, action) => {
-        const { oldIndex, newIndex, fromList, toList } = action.payload;
+        const { oldIndex, newIndex, fromListId, toListId } = action.payload;
 
-        const [movingCard] = fromList.sequenceTasks.splice(oldIndex, 1);
-        fromList.sequenceTasks.splice(newIndex, 0, movingCard);
+        if (fromListId === toListId) {
+            const fromList = state.lists.find((list) => list.id === fromListId);
+            if (fromList) {
+                const [movingCard] = fromList.sequenceTasks.splice(oldIndex, 1);
+                fromList.sequenceTasks.splice(newIndex, 0, movingCard);
+            }
+        } else {
+            const fromList = state.lists.find((list) => list.id === fromListId);
+            const toList = state.lists.find((list) => list.id === toListId);
 
-        toList.sequenceTasks.splice(newIndex, 0, movingCard);
+            if (fromList && toList) {
+                const [movingCard] = fromList.sequenceTasks.splice(oldIndex, 1);
+                toList.sequenceTasks.splice(newIndex, 0, movingCard);
+            }
+        }
     });
 
     builder.addCase(listsDeleteBoardListsAction, (state, action) => {

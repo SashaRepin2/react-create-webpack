@@ -59,7 +59,7 @@ const boardReducer = createReducer(initialState, (builder) => {
         return {
             ...state,
             boards: state.boards.map((_board) =>
-                _board.id !== board.id
+                _board.id === board.id
                     ? {
                           ...board,
                           sequenceLists,
@@ -70,10 +70,19 @@ const boardReducer = createReducer(initialState, (builder) => {
     });
 
     builder.addCase(boardsMoveListAction, (state, action) => {
-        const { oldIndex, newIndex, board } = action.payload;
-        const [movingList] = board.sequenceLists.splice(oldIndex, 1);
+        const { board, sequenceLists } = action.payload;
 
-        board.sequenceLists.splice(newIndex, 0, movingList);
+        return {
+            ...state,
+            boards: state.boards.map((_board) =>
+                _board.id === board.id
+                    ? {
+                          ...board,
+                          sequenceLists,
+                      }
+                    : _board,
+            ),
+        };
     });
 
     builder.addCase(getBoardsThunk.fulfilled, (state) => {
