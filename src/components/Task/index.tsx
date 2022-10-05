@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { FC, memo, useState } from "react";
 
 import { Box } from "@mui/material";
 import { Draggable } from "react-beautiful-dnd";
@@ -19,7 +19,7 @@ interface ITaskProps {
     isOnlyView?: boolean;
 }
 
-const Task: React.FC<ITaskProps> = ({ index, task, isOnlyView = false }) => {
+const Task: FC<ITaskProps> = ({ index, task, isOnlyView = false }) => {
     const labels = useAppSelector((state) => selectTaskLabels(state, task));
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

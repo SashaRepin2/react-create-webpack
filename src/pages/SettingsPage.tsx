@@ -1,12 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Box, Container, Divider, Typography } from "@mui/material";
 
-import LabelForm from "../components/Forms/LabelForm";
-import LabelsGroup from "../components/LabelsGroup";
+import SettingsLabel from "@src/components/SettingsLabel";
 
-const SettingsPage: React.FC = () => {
+const SettingsPage: FC = () => {
     return (
         <Container
             sx={{
@@ -68,18 +67,8 @@ const SettingsPage: React.FC = () => {
                     Метки
                 </Typography>
             </Divider>
-            <Container
-                sx={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr min-content",
-                    justifyContent: "flex-start",
-                    columnGap: "10px",
-                    padding: "5px",
-                }}
-            >
-                <LabelsGroup />
-                <LabelForm />
-            </Container>
+
+            <SettingsLabel />
         </Container>
     );
 };

@@ -1,6 +1,4 @@
-import { PayloadAction, createReducer } from "@reduxjs/toolkit";
-
-import { REQUEST_STATUSES } from "@consts/requestStatuses";
+import { createReducer } from "@reduxjs/toolkit";
 
 import {
     boardsAddBoardAction,
@@ -8,7 +6,7 @@ import {
     boardsDeleteBoardAction,
     boardsDeleteBoardListAction,
     boardsMoveListAction,
-    boardsUpdateBoardTitleAction,
+    boardsUpdateStoreAction,
 } from "@store/actions/boards";
 import { getBoardsThunk } from "@store/thunk/boards";
 
@@ -16,116 +14,83 @@ import { IBoard } from "@interfaces/IBoard";
 
 interface IBoardState {
     boards: IBoard[];
-    status: string;
-    error: string | null;
+    isLoading: boolean;
 }
 
 const initialState: IBoardState = {
     boards: [],
-    status: REQUEST_STATUSES.IDLE,
-    error: null,
+    isLoading: false,
 };
 
 const boardReducer = createReducer(initialState, (builder) => {
-    builder.addCase(boardsAddBoardAction, (state, action: PayloadAction<IBoard>) => {
-        state.boards.push(action.payload);
+    builder.addCase(boardsAddBoardAction, (state, action) => {
+        return {
+            ...state,
+            boards: [...state.boards, action.payload],
+        };
     });
 
-    builder.addCase(boardsDeleteBoardAction, (state, action: PayloadAction<number>) => {
-        state.boards = state.boards.filter((board) => board.id !== action.payload);
+    builder.addCase(boardsDeleteBoardAction, (state, action) => {
+        return {
+            ...state,
+            boards: state.boards.filter((board) => board.id !== action.payload),
+        };
     });
 
-    builder.addCase(
-        boardsAddBoardListAction,
-        (
-            state,
-            action: PayloadAction<{
-                boardId: number;
-                listId: number;
-            }>,
-        ) => {
-            const { boardId, listId } = action.payload;
-            const board = state.boards.find((board) => board.id === boardId);
+    builder.addCase(boardsAddBoardListAction, (state, action) => {
+        const { board, sequenceLists } = action.payload;
 
-            if (board) {
-                board.sequenceLists.push(listId);
-            }
-        },
-    );
+        return {
+            ...state,
+            boards: state.boards.map((_board) =>
+                _board.id === board.id
+                    ? {
+                          ...board,
+                          sequenceLists,
+                      }
+                    : _board,
+            ),
+        };
+    });
 
-    builder.addCase(
-        boardsDeleteBoardListAction,
-        (
-            state,
-            action: PayloadAction<{
-                boardId: number;
-                listId: number;
-            }>,
-        ) => {
-            const { boardId, listId } = action.payload;
-            const board = state.boards.find((board) => board.id === boardId);
+    builder.addCase(boardsDeleteBoardListAction, (state, action) => {
+        const { board, sequenceLists } = action.payload;
 
-            if (board) {
-                board.sequenceLists = board.sequenceLists.filter((id) => id !== listId);
-            }
-        },
-    );
+        return {
+            ...state,
+            boards: state.boards.map((_board) =>
+                _board.id === board.id
+                    ? {
+                          ...board,
+                          sequenceLists,
+                      }
+                    : _board,
+            ),
+        };
+    });
 
-    builder.addCase(
-        boardsMoveListAction,
-        (
-            state,
-            action: PayloadAction<{
-                oldIndex: number;
-                newIndex: number;
-                boardId: number;
-            }>,
-        ) => {
-            const { oldIndex, newIndex, boardId } = action.payload;
-            const board = state.boards.find((board) => board.id === boardId);
+    builder.addCase(boardsMoveListAction, (state, action) => {
+        const { board, sequenceLists } = action.payload;
 
-            if (board) {
-                const [movingList] = board.sequenceLists.splice(oldIndex, 1);
-                board.sequenceLists.splice(newIndex, 0, movingList);
-            }
-        },
-    );
-
-    builder.addCase(
-        boardsUpdateBoardTitleAction,
-        (
-            state,
-            action: PayloadAction<{
-                idBoard: number;
-                newTitle: string;
-            }>,
-        ) => {
-            const { idBoard, newTitle } = action.payload;
-            const board = state.boards.find((board) => board.id === idBoard);
-
-            if (board) {
-                board.title = newTitle;
-            }
-        },
-    );
-
-    builder.addCase(getBoardsThunk.pending, (state) => {
-        state.status = REQUEST_STATUSES.LOADING;
-        state.error = null;
+        return {
+            ...state,
+            boards: state.boards.map((_board) =>
+                _board.id === board.id
+                    ? {
+                          ...board,
+                          sequenceLists,
+                      }
+                    : _board,
+            ),
+        };
     });
 
     builder.addCase(getBoardsThunk.fulfilled, (state) => {
-        state.status = REQUEST_STATUSES.IDLE;
+        // state.isLoading = true;
     });
 
-    builder.addCase(getBoardsThunk.rejected, (state, action) => {
-        if (action.payload) {
-            state.error = action.payload;
-        } else {
-            state.error = null;
-        }
-
-        state.status = REQUEST_STATUSES.REJECTED;
+    builder.addCase(boardsUpdateStoreAction, (state, action) => {
+        state.isLoading = action.payload;
     });
 });
 

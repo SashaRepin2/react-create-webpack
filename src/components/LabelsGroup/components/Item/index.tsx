@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -12,7 +12,7 @@ interface ILabelsGroupItemProps {
     onEdit: (label: ILabel) => void;
 }
 
-const LabelsGroupItem: React.FC<ILabelsGroupItemProps> = ({ label, onDelete, onEdit }) => {
+const LabelsGroupItem: FC<ILabelsGroupItemProps> = ({ label, onDelete, onEdit }) => {
     return (
         <React.Fragment>
             <Container

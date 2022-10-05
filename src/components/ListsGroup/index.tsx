@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 
 import { Stack } from "@mui/material";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -17,24 +17,26 @@ import { tasksDeleteListTasksAction } from "@src/store/actions/tasks";
 import { selectBoardSortedLists } from "@store/selectors";
 
 import { IBoard } from "@interfaces/IBoard";
-import { IList } from "@interfaces/IList";
+import { IList } from "@src/interfaces/IList";
 
 interface IListsGroupProps {
     board: IBoard;
     isOnlyView?: boolean;
 }
 
-const ListsGroup: React.FC<IListsGroupProps> = ({ board, isOnlyView = false }) => {
+const ListsGroup: FC<IListsGroupProps> = ({ board, isOnlyView = false }) => {
     const dispatch = useAppDispatch();
-    const { onDragEndHandler } = useListsGroupMove(board);
-
     const lists = useAppSelector((state) => selectBoardSortedLists(state, board));
 
+    const { onDragEndHandler } = useListsGroupMove(board, lists);
+
     function onDeleteListHandler(list: IList) {
+        const sequenceLists = board.sequenceLists.filter((listId) => listId !== list.id);
+
         dispatch(
             boardsDeleteBoardListAction({
-                boardId: board.id,
-                listId: list.id,
+                board,
+                sequenceLists,
             }),
         );
         dispatch(tasksDeleteListTasksAction(list.sequenceTasks));

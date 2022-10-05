@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { FC, memo, useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import PreviewIcon from "@mui/icons-material/Preview";
@@ -21,7 +21,7 @@ interface IBoardsGroupBoardProps {
     board: IBoard;
 }
 
-const BoardsGroupBoard: React.FC<IBoardsGroupBoardProps> = ({ board }) => {
+const BoardsGroupBoard: FC<IBoardsGroupBoardProps> = ({ board }) => {
     const dispatch = useAppDispatch();
 
     const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);

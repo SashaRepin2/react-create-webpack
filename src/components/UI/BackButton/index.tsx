@@ -1,10 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const BackButton: React.FC = () => {
+const BackButton: FC = () => {
     const navigate = useNavigate();
 
     function onClickHandler() {

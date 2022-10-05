@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { Box } from "@mui/material";
 
@@ -10,7 +10,7 @@ interface ILabelsGroupProps {
     labels: ILabel[];
 }
 
-const TaskLabelsGroup: React.FC<ILabelsGroupProps> = ({ labels }) => (
+const TaskLabelsGroup: FC<ILabelsGroupProps> = ({ labels }) => (
     <Box
         sx={{
             display: "flex",

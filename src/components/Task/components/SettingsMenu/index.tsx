@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { FC, memo, useState } from "react";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { IconButton, Menu, MenuItem } from "@mui/material";
@@ -20,7 +20,7 @@ interface ITaskSettingsMenuProps {
     onCloseHanlder: () => void;
 }
 
-const TaskSettingsMenu: React.FC<ITaskSettingsMenuProps> = ({
+const TaskSettingsMenu: FC<ITaskSettingsMenuProps> = ({
     task,
     anchorEl,
     isOpen,

@@ -1,34 +1,67 @@
-import React, { memo } from "react";
+import React, { FC, memo, useEffect, useState } from "react";
 
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { HexColorPicker } from "react-colorful";
 
+import LabelFormButtons from "./components/Buttons";
 import Input from "@components/UI/Input";
 
 import useAppDispatch from "@hooks/useAppDispatch";
-import useAppSelector from "@hooks/useAppSelector";
 
-import { LabelFormSlice } from "@store/reducers/labelForm";
-import { store } from "@store/store";
-import submitLabelForm from "@store/thunk/labelForm";
+import { labelsAddLabelAction, labelsEditLabelAction } from "@src/store/actions/labels";
 
-const LabelForm: React.FC = () => {
+import { ILabel } from "@src/interfaces/ILabel";
+import ILabelForm from "@src/interfaces/ILabelForm";
+
+const initLabel = {
+    title: "",
+    hexColor: "#fff",
+};
+
+interface ILabelFormProps {
+    editableLabel: ILabel | null;
+    onCloseEditForm: () => void;
+}
+
+const LabelForm: FC<ILabelFormProps> = ({ editableLabel, onCloseEditForm }) => {
     const dispatch = useAppDispatch();
-    const { changeHexColor, changeTitle, resetForm } = LabelFormSlice.actions;
 
-    const { initLabel, editLabel } = useAppSelector((state) => {
-        return {
-            initLabel: state.labelFormReducer.fieldsValues,
-            editLabel: state.labelFormReducer.editLabel,
-        };
-    });
+    const [label, setLabel] = useState<ILabelForm>(editableLabel || initLabel);
+
+    useEffect(() => {
+        setLabel(
+            editableLabel
+                ? {
+                      title: editableLabel.title,
+                      hexColor: editableLabel.hexColor,
+                  }
+                : initLabel,
+        );
+    }, [editableLabel]);
 
     function onSubmitFormHandler() {
-        submitLabelForm()(dispatch, store.getState());
+        if (editableLabel) {
+            dispatch(
+                labelsEditLabelAction({
+                    ...editableLabel,
+                    ...label,
+                }),
+            );
+            onCloseEditForm();
+        } else {
+            dispatch(
+                labelsAddLabelAction({
+                    id: Date.now(),
+                    ...label,
+                }),
+            );
+        }
+
+        setLabel(initLabel);
     }
 
     function onCloseFormHandler() {
-        dispatch(resetForm());
+        setLabel(initLabel);
     }
 
     return (
@@ -44,7 +77,7 @@ const LabelForm: React.FC = () => {
                 padding: "10px",
             }}
         >
-            {editLabel && (
+            {editableLabel && (
                 <Container
                     sx={{
                         display: "flex",
@@ -63,57 +96,29 @@ const LabelForm: React.FC = () => {
                 </Container>
             )}
             <Input
-                inputValue={initLabel.title}
+                inputValue={label.title}
                 placeholderValue={"Title"}
                 onChangeHandler={(value) => {
-                    dispatch(changeTitle(value));
+                    setLabel({
+                        ...label,
+                        title: value,
+                    });
                 }}
             />
             <HexColorPicker
-                color={initLabel.hexColor}
+                color={label.hexColor}
                 onChange={(value) => {
-                    dispatch(changeHexColor(value));
+                    setLabel({
+                        ...label,
+                        hexColor: value,
+                    });
                 }}
             />
-
-            <Box
-                sx={{
-                    display: "flex",
-                    columnGap: "10px",
-                }}
-            >
-                {editLabel && (
-                    <Button
-                        variant={"contained"}
-                        onClick={onCloseFormHandler}
-                        sx={{
-                            fontWeight: "bold",
-                            color: "purple",
-                            bgcolor: "#D0BDF4",
-                            "&:hover": {
-                                bgcolor: "#D0BDF4",
-                            },
-                        }}
-                    >
-                        Отмена
-                    </Button>
-                )}
-
-                <Button
-                    variant={"contained"}
-                    onClick={onSubmitFormHandler}
-                    sx={{
-                        fontWeight: "bold",
-                        color: "purple",
-                        bgcolor: "#D0BDF4",
-                        "&:hover": {
-                            bgcolor: "#D0BDF4",
-                        },
-                    }}
-                >
-                    {editLabel ? "Сохранить" : "Добавить"}
-                </Button>
-            </Box>
+            <LabelFormButtons
+                isEdit={Boolean(editableLabel)}
+                onSubmit={onSubmitFormHandler}
+                onClose={onCloseFormHandler}
+            />
         </Container>
     );
 };

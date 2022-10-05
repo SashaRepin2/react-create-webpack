@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { FC, memo, useEffect } from "react";
 
 import { Box } from "@mui/system";
 import { createPortal } from "react-dom";
@@ -14,7 +14,7 @@ interface IBaseModalProps {
     onClose: () => void;
 }
 
-const BaseModal: React.FC<IBaseModalProps> = ({ isOpen, title, onClose, children }) => {
+const BaseModal: FC<IBaseModalProps> = ({ isOpen, title, onClose, children }) => {
     function onClickInsideModal(event: React.MouseEvent<HTMLElement>) {
         event.stopPropagation();
     }

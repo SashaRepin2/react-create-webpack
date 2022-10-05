@@ -1,7 +1,6 @@
 import React, { Suspense, lazy } from "react";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 
 import Header from "./components/Header";
 import BackButton from "./components/UI/BackButton";
@@ -30,7 +29,6 @@ function App() {
             <div className="App">
                 <Suspense fallback={<Loader />}>
                     <BackButton />
-                    <ToastContainer />
                     <Routes>
                         <Route
                             path={LINKS_HOME_PAGE}

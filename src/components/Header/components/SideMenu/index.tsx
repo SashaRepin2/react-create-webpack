@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
 
 import HomeIcon from "@mui/icons-material/Home";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -18,7 +18,7 @@ interface IHeaderSideMenuProps {
     toggleDrawer: (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => void;
 }
 
-const HeaderSideMenu: React.FC<IHeaderSideMenuProps> = ({ isOpen, toggleDrawer }) => {
+const HeaderSideMenu: FC<IHeaderSideMenuProps> = ({ isOpen, toggleDrawer }) => {
     return (
         <Drawer
             anchor={"left"}

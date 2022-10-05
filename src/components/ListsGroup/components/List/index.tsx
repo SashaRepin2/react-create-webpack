@@ -14,7 +14,7 @@ import { DND_TYPES_TASKS } from "@consts/dndTypes";
 
 import { selectListSortedTasks } from "@store/selectors";
 
-import { IList } from "@interfaces/IList";
+import { IList } from "@src/interfaces/IList";
 
 interface IListsGroupListProps {
     list: IList;
@@ -98,7 +98,7 @@ const ListsGroupList: FC<IListsGroupListProps> = ({
                             >
                                 {list.title}
                             </Typography>
-                            {!isOnlyView && <AddList listId={list.id} />}
+                            {!isOnlyView && <AddList list={list} />}
                         </Box>
                         <Droppable
                             droppableId={list.id.toString()}

@@ -1,4 +1,4 @@
-import { PayloadAction, createReducer } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
 
 import { ITask } from "@interfaces/ITask";
 
@@ -8,7 +8,6 @@ import {
     tasksDeleteListTasksAction,
     tasksDeleteTaskAction,
     tasksDeleteTaskLabelAction,
-    tasksUpdateTaskTitleAction,
 } from "../actions/tasks";
 
 interface ITasksState {
@@ -20,65 +19,58 @@ const initialState: ITasksState = {
 };
 
 const tasksReducer = createReducer(initialState, (builder) => {
-    builder.addCase(tasksAddTaskAction, (state, action: PayloadAction<ITask>) => {
-        state.tasks.push(action.payload);
+    builder.addCase(tasksAddTaskAction, (state, action) => {
+        return {
+            ...state,
+            tasks: [...state.tasks, action.payload],
+        };
     });
 
-    builder.addCase(tasksDeleteTaskAction, (state, action: PayloadAction<number>) => {
-        state.tasks = state.tasks.filter((task) => task.id !== action.payload);
+    builder.addCase(tasksDeleteTaskAction, (state, action) => {
+        return {
+            ...state,
+            tasks: state.tasks.filter((task) => task.id !== action.payload),
+        };
     });
 
-    builder.addCase(tasksDeleteListTasksAction, (state, action: PayloadAction<number[]>) => {
-        state.tasks = state.tasks.filter((task) => !action.payload.includes(task.id));
+    builder.addCase(tasksDeleteListTasksAction, (state, action) => {
+        return {
+            ...state,
+            tasks: state.tasks.filter((task) => !action.payload.includes(task.id)),
+        };
     });
 
-    builder.addCase(
-        tasksUpdateTaskTitleAction,
-        (
-            state,
-            action: PayloadAction<{
-                idTask: number;
-                newTitle: string;
-            }>,
-        ) => {
-            const { idTask, newTitle } = action.payload;
-            const task = state.tasks.find((task) => task.id === idTask);
+    builder.addCase(tasksAddTaskLabelAction, (state, action) => {
+        const { task, newTaskLabels } = action.payload;
 
-            if (task) {
-                task.title = newTitle;
-            }
-        },
-    );
+        return {
+            ...state,
+            tasks: state.tasks.map((_task) =>
+                _task.id === task.id
+                    ? {
+                          ..._task,
+                          labels: newTaskLabels,
+                      }
+                    : _task,
+            ),
+        };
+    });
 
-    builder.addCase(
-        tasksAddTaskLabelAction,
-        (state, action: PayloadAction<{ taskId: number; labelId: number }>) => {
-            const { taskId, labelId } = action.payload;
-            const task = state.tasks.find((task) => taskId === task.id);
+    builder.addCase(tasksDeleteTaskLabelAction, (state, action) => {
+        const { task, newTaskLabels } = action.payload;
 
-            if (task) {
-                task.labels.push(labelId);
-            }
-        },
-    );
-
-    builder.addCase(
-        tasksDeleteTaskLabelAction,
-        (
-            state,
-            action: PayloadAction<{
-                taskId: number;
-                labelId: number;
-            }>,
-        ) => {
-            const { taskId, labelId } = action.payload;
-            const task = state.tasks.find((task) => task.id === taskId);
-
-            if (task) {
-                task.labels = task.labels.filter((_labelId) => _labelId !== labelId);
-            }
-        },
-    );
+        return {
+            ...state,
+            tasks: state.tasks.map((_task) =>
+                _task.id === task.id
+                    ? {
+                          ..._task,
+                          labels: newTaskLabels,
+                      }
+                    : _task,
+            ),
+        };
+    });
 });
 
 export default tasksReducer;
