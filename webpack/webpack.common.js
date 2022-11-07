@@ -56,7 +56,21 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    "sass-loader",
+                    {
+                        loader: "sass-resources-loader",
+                        options: {
+                            resources: path.resolve(
+                                __dirname,
+                                "..",
+                                "./src/styles/common/_variables.scss",
+                            ),
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
